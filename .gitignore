@@ -23,3 +23,5 @@ config/initializers/secret_token.rb
 
 /config/application.yml
 /config/database.yml
+
+*.un~
