@@ -1,0 +1,16 @@
+
+<div class="profile">
+  <div class="pull-left profile-text">
+    <h2 class="title"><i><%= @profile.try(:title) %></i></h2>
+    <blockquote class="row description"><i><%= @profile.try(:description) %></i></blockquote>
+    <div class="row power"> <%= "Powered BY: "%><%= @profile.try(:sponsor) %></div>
+  </div>
+  <div class="pull-left profile-video"><%= raw(@profile.try(:video)) %></div>
+</div>
+
+<div class="clearfix"></div>
+<div class="link">
+  <div class="dx-container">
+    <%= link_to "查看更多...", profiles_path %>
+  </div>
+</div>
