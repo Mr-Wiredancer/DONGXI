@@ -18,10 +18,9 @@ pickle-email-*.html
 .project
 config/initializers/secret_token.rb
 
+*.yml
+
 .DS_Store
 **.swp
-
-/config/application.yml
-/config/database.yml
 
 *.un~
