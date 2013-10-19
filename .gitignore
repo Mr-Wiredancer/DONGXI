@@ -17,8 +17,6 @@ rerun.txt
 pickle-email-*.html
 .project
 
-*.yml
-
 .DS_Store
 **.swp
 
