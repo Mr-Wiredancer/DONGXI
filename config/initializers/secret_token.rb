@@ -1,0 +1,2 @@
+Website::Application.config.secret_token = "294e372d678cae5614089c16ea424cbee992804b32e968c9a456c4256176f869c932272c1f677caee6904b6d39fb4c5bcca3a6f25d635e54aea6d224a"
+
