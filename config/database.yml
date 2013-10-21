@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
   database: dongxi_<%= Rails.env %>
-  username: wuzeqiu
+  username: postgres
   password:
   host: 127.0.0.1
 

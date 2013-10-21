@@ -20,7 +20,4 @@ pickle-email-*.html
 .DS_Store
 **.swp
 
-/config/application.yml
-/config/database.yml
-
 *.un~
