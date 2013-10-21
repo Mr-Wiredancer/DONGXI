@@ -3,6 +3,20 @@
   <div class="pull-left profile-text">
     <h2 class="title"><i><%= @profile.try(:title) %></i></h2>
     <blockquote class="row description"><i><%= @profile.try(:description) %></i></blockquote>
+    <div class="weibo-user">
+      <% if @weibo_user %>
+        <div class="clearfix"></div>
+        <div class="pull-left">
+          <p>已连接新浪微博</p>
+          <%= link_to image_tag(@weibo_user['profile_image_url']), "http://weibo.com/#{@weibo_user['id']}" %>
+          <%= link_to @weibo_user['screen_name'], "http://weibo.com/#{@weibo_user['id']}" %>
+          关注: <%= @weibo_user['followers_count'] %>
+          粉丝: <%= @weibo_user['friends_count'] %>
+          微博: <%= @weibo_user['statuses_count'] %>
+          收藏: <%= @weibo_user['favourites_count'] %>
+        </div>
+      <% end -%>
+    </div>
     <div class="row power"> <%= "Powered BY: "%><%= @profile.try(:sponsor) %></div>
   </div>
   <div class="pull-left profile-video"><%= raw(@profile.try(:video)) %></div>

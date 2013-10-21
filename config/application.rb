@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'omniauth'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -32,6 +33,7 @@ module Website
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.middleware.use OmniAuth::Strategies::Weibo, '2267569622', 'ebc1f1cdae0ae6f17f85908ccc871edb'
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

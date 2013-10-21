@@ -9,10 +9,22 @@
 <body>
 
 <div class="navbar">
-  <div class="slogan dx-container">
-    <h1><%= "欢迎来到DONGXI TECH!" %><h1>
+  <div class="slogan dx-container pull-left" style="width: 600px;">
+    <h1><%= link_to "欢迎来到DONGXI TECH!", root_path %><h1>
+  </div>
+  <div class="pull-right" style="margin-right: 20px;">
+  <% if user_signed_in? -%>
+    <%= link_to '用户信息', edit_user_registration_path %> |
+    <%= link_to '退出登录', destroy_user_session_path, :method => :delete %> |
+    <%= link_to '微博登录', '/auth/weibo' %> |
+  <% else %>
+    <%= link_to '注册', new_user_registration_path %> |
+    <%= link_to '登录', new_user_session_path %>
+  </div>
+  <% end -%>
   </div>
 </div>
+<div class="clearfix"></div>
 <div class="flash">
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>

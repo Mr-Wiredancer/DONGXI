@@ -1,4 +1,9 @@
 Website::Application.routes.draw do
+  get "authorization/oauth_create"
+  get "authorization/oauth_destroy"
+
+  match "/auth/:provider/callback" => "authorization#oauth_create"
+
   devise_for :users
 
   resources :profiles
