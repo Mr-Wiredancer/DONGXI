@@ -4,6 +4,7 @@ gem 'rails', '3.2.14'
 
 gem 'pg'
 gem 'devise'
+gem 'figaro'
 
 gem 'omniauth'
 gem 'omniauth-weibo-oauth2'

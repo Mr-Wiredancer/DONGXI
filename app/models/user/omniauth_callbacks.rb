@@ -4,14 +4,13 @@ class User < ActiveRecord::Base
     define_method "find_or_create_for_weibo" do |response|
       uid = response["uid"].to_s
       data = response["info"]
-      access_token = response["credentials"]["token"]
 
       if user = Authorization.find_by_provider_and_uid('weibo', uid).try(:user)
         user
       else
         user = User.new_from_provider_data('weibo', uid, data)
         if user.save(:validate => false)
-          user.authorizations << Authorization.new(provider: 'weibo', uid: uid, access_token: access_token)
+          user.authorizations << Authorization.new(provider: 'weibo', uid: uid)
           return user
         else
           Rails.logger.warn("User.create_from_hash 失败, #{user.errors.inspect}")

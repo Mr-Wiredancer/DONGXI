@@ -17,10 +17,8 @@ ActiveRecord::Schema.define(:version => 20131021065640) do
     t.string   "provider"
     t.string   "uid"
     t.integer  "user_id"
-    t.string   "access_token"
-    t.string   "access_token_secret"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "profiles", :force => true do |t|

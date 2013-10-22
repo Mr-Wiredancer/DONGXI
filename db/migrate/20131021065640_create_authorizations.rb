@@ -4,8 +4,6 @@ class CreateAuthorizations < ActiveRecord::Migration
       t.string :provider
       t.string :uid
       t.integer :user_id
-      t.string :access_token
-      t.string :access_token_secret
 
       t.timestamps
     end

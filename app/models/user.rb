@@ -11,10 +11,7 @@ class User < ActiveRecord::Base
   has_many :authorizations do
     def find_or_create_by_params(params)
       provider,uid = params[:provider],params[:uid].to_s
-      access_token,access_token_secret = params[:access_token],params[:access_token_secret]
-
       authorization = find_or_create_by_provider_and_uid(provider, uid)
-      authorization.update_attributes!(params.except(:provider, :uid))
     end
   end
 
@@ -22,7 +19,6 @@ class User < ActiveRecord::Base
     auth_params = {
       provider: response["provider"],
       uid: response["uid"].to_s,
-      access_token: response["credentials"]["token"]
     }
     authorizations.find_or_create_by_params(auth_params)
   end
