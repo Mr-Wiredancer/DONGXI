@@ -13,7 +13,8 @@
     <h1><%= link_to "欢迎来到DONGXI TECH!", root_path %><h1>
   </div>
   <div class="pull-right" style="margin-right: 20px;">
-  <% if user_signed_in? -%>
+  <% if user_signed_in? %>
+    <%= yield :weibo_user if content_for?(:weibo_user) %>
     <%= link_to '用户信息', edit_user_registration_path %> |
     <%= link_to '退出登录', destroy_user_session_path, :method => :delete %>
   <% else %>
