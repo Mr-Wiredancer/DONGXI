@@ -15,8 +15,7 @@
   <div class="pull-right" style="margin-right: 20px;">
   <% if user_signed_in? -%>
     <%= link_to '用户信息', edit_user_registration_path %> |
-    <%= link_to '退出登录', destroy_user_session_path, :method => :delete %> |
-    <%= link_to '微博登录', '/auth/weibo' %> |
+    <%= link_to '退出登录', destroy_user_session_path, :method => :delete %>
   <% else %>
     <%= link_to '注册', new_user_registration_path %> |
     <%= link_to '登录', new_user_session_path %>
@@ -26,8 +25,9 @@
 </div>
 <div class="clearfix"></div>
 <div class="flash">
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <% flash.each do |type, message| %>
+    <%= content_tag(:div, message, :class => "alert-#{type}") %>
+  <% end %>
 </div>
 
 <%= yield %>
