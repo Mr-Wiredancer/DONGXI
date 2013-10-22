@@ -24,3 +24,13 @@
     <%= link_to "查看更多...", profiles_path %>
   </div>
 </div>
+
+<!-- mock status -->
+<div style="margin-top: 20px;">
+  <div style="border: 1px solid #000; width: 600px;">
+    <p><%= @status["user"]["screen_name"] %></p>
+    <p><%= @status["text"] %></p>
+    <span><%= "转发(#{@status["reposts_count"]})" %></span>
+    <span><%= "评论(#{@status["comments_count"]})" %></span>
+  </div>
+</div>

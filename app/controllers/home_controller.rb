@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   def index
     @profile = Profile.first
     oauth_retrieve
+    status_retrieve("3635973692630941") # add real sid later
   end
 
   private
@@ -16,5 +17,11 @@ class HomeController < ApplicationController
         @weibo_user = JSON.parse(response.body)
       end
     end
+  end
+
+  def status_retrieve(sid)
+    client = OAuth2::Client.new("2267569622", "ebc1f1cdae0ae6f17f85908ccc871edb", :site => 'http://api.weibo.com')
+    response = client.request(:get, "https://api.weibo.com/2/statuses/show.json", :params => { id: sid, :access_token => ENV["WEIBO_ACCESS_TOKEN"] })
+    @status = JSON.parse(response.body)
   end
 end
