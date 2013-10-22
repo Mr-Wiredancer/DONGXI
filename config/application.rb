@@ -32,7 +32,9 @@ module Website
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    config.i18n.default_locale = :"zh-CN"
+    config.i18n.locale = :"zh-CN"
+
     #config.middleware.use OmniAuth::Strategies::Weibo, '2267569622', 'ebc1f1cdae0ae6f17f85908ccc871edb'
 
     # Configure the default encoding used in templates for Ruby 1.9.

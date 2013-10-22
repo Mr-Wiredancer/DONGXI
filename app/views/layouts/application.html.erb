@@ -18,7 +18,10 @@
     <%= link_to '退出登录', destroy_user_session_path, :method => :delete %>
   <% else %>
     <%= link_to '注册', new_user_registration_path %> |
-    <%= link_to '登录', new_user_session_path %>
+    <%= link_to '登录', new_user_session_path %> |
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <%= link_to t(".login_with_#{provider.to_s}"), omniauth_authorize_path(resource_name, provider) %><br />
+    <% end -%>
   </div>
   <% end -%>
   </div>
