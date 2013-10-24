@@ -1,21 +1,36 @@
+# coding: utf-8
 source 'http://ruby.taobao.org' #rubygems mirror. check ruby.taobao.org
 
 gem 'rails', '3.2.14'
+gem 'sass-rails',   '~> 3.2.3'
+gem 'coffee-rails', '~> 3.2.1'
+gem 'uglifier', '>= 1.0.3'
+gem 'jquery-rails'
 
+# Postgres
 gem 'pg'
+
+# 用户系统
 gem 'devise'
+
+# 系统配置
 gem 'figaro'
 
+# 第三方 OAuth 登录
 gem 'omniauth'
 gem 'omniauth-weibo-oauth2'
 
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+group :development, :test do
+  gem 'better_errors'
+  gem 'capybara'
+  gem 'rspec-rails'
+  gem 'pry-rails'
 end
 
-gem 'jquery-rails'
+group :production do
+  gem 'rails_12factor'
+end
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -31,7 +46,5 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
-
-gem 'rails_12factor', group: :production
 
 ruby '1.9.3'
