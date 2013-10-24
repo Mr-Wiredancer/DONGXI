@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131021065640) do
+ActiveRecord::Schema.define(:version => 20131024023343) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -21,11 +21,34 @@ ActiveRecord::Schema.define(:version => 20131021065640) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "profiles", :force => true do |t|
-    t.string   "title"
+  create_table "master_data", :force => true do |t|
+    t.string   "name"
     t.text     "description"
-    t.string   "sponsor"
-    t.text     "video"
+    t.string   "type"
+    t.integer  "parent_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "slogan"
+    t.text     "introduction"
+    t.text     "note"
+    t.integer  "category_id"
+    t.integer  "region_id"
+    t.integer  "user_id"
+    t.integer  "video_id"
+    t.integer  "sponsor_id"
+    t.datetime "end_time"
+    t.integer  "amount"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "sponsors", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @profile = Profile.first
+    @project = Project.first
     oauth_retrieve
     status_retrieve("3635973692630941") # add real sid later
   end

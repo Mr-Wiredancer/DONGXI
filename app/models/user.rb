@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name
 
+  has_many :projects
+
   has_many :authorizations do
     def find_or_create_by_params(params)
       provider,uid = params[:provider],params[:uid].to_s
