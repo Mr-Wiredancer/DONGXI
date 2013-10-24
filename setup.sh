@@ -3,6 +3,7 @@ DB_EXIST=`psql -l | grep dongxi_development | wc -l`
 RAILS_ROOT=`pwd`
 
 cp -a $RAILS_ROOT/config/application.example.yml $RAILS_ROOT/config/application.yml
+cp -a $RAILS_ROOT/config/database.example.yml $RAILS_ROOT/config/database.yml
 
 bundle install
 
