@@ -1,0 +1,50 @@
+<div class="dx-container">
+  <div class="project-title story">
+    <h1>这不仅仅是一个项目，而是一个故事</h1>
+    <p>通过一个视频来讲述吧。它不需要很高端大气上档次，只要是真实的你</p>
+  </div>
+</div>
+<div class="dx-container">
+  <%= form_for @project, :method => :put do |f| %>
+    <% if @project.errors.any? %>
+      <fieldset id="error_explanation">
+        <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+        <ul>
+        <% @project.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </fieldset>
+    <% end %>
+
+    <fieldset class="field">
+      <div class="fieldset-inner">
+        <%= f.label :video_url, '项目视频' %>
+        <%= f.text_field :video_url %>
+      </div>
+    </fieldset>
+    <fieldset class="field">
+      <div class="fieldset-inner">
+        <%= f.label :introduction, '项目介绍' %>
+        <!-- add rich-text editor here -->
+        <%= f.text_area :introduction, rows: 5 %>
+      </div>
+    </fieldset>
+    <fieldset class="field">
+      <div class="fieldset-inner">
+        <%= f.label :risk, '风险与挑战' %>
+        <%= f.text_area :risk, rows: 5 %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>项目FAQ</legend>
+      <p>项目发布之后你可以添加FAQ</p>
+    </fieldset>
+    <div class="actions">
+      <%= submit_tag '保存' %>
+    </div>
+    <%= hidden_field_tag "step", "story" %>
+  <% end %>
+</div>
+
+<%= link_to "上一步", edit_project_path(@project, { step: 'info' }) %>

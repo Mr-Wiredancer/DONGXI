@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  include ProjectHelper
+
   def index
     @projects = Project.all
 
@@ -35,7 +37,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'project was successfully created.' }
+        format.html { redirect_to edit_project_url(@project, { step: 'story' }), notice: 'project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
         format.html { render action: "new" }
@@ -49,13 +51,22 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to @project, notice: 'project was successfully updated.' }
-        format.json { head :no_content }
+        params[:step] ||= 'info'
+        step = next_step_of(params[:step]) # in ProjectHelper
+        if step == 'final'
+          format.html { redirect_to preview_project_url(@project), notice: 'project was successfully updated.' }
+        else
+          format.html { redirect_to edit_project_url(@project, { step: step }) }
+        end
       else
         format.html { render action: "edit" }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def preview
+    @project = Project.find(params[:id])
   end
 
   def destroy

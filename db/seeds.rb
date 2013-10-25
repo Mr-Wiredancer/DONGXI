@@ -2,6 +2,7 @@
 Project.delete_all
 Category.delete_all
 Sponsor.delete_all
+Region.delete_all
 
 
 %w(慈善 体育 艺术).each do |cat_name|
@@ -17,3 +18,7 @@ profile = Project.create(name: "DongXi Tech",
                          category_id: Category.first.id,
                          sponsor_id: Sponsor.first.id
                         )
+
+%w(广州 上海 北京).each do |name|
+  Region.create(name: name, description: name)
+end

@@ -5,7 +5,7 @@
     <th>Name</th>
     <th>Slogan</th>
     <th>Introduction</th>
-    <th>Note</th>
+    <th>Risk</th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,7 +16,7 @@
     <td><%= project.name %></td>
     <td><%= project.slogan %></td>
     <td><%= project.introduction %></td>
-    <td><%= project.note %></td>
+    <td><%= project.risk %></td>
     <td><%= link_to 'Show', project %></td>
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
     <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -25,6 +25,7 @@
 </table>
 
 <br />
+
 
 <%= link_to 'New project', new_project_path %>
 <%= link_to "Back To Home", root_path %>

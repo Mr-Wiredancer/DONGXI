@@ -1,5 +1,9 @@
-<h1>New project</h1>
+<% if not params[:step].present? %>
+  <%= render 'info_edit' %>
+<% else %>
+  <%= render "#{params[:step]}_edit" %>
+<% end %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', projects_path %>
+<div class="dx-container">
+  <%= link_to '查看所有项目', projects_path %>
+</div>

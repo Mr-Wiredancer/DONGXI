@@ -1,0 +1,51 @@
+<div class="dx-container">
+  <div class="project-title user">
+    <h1>现在让我们来认识一下你</h1>
+    <p>告诉大家你是谁！关于你的网页链接也是很有用的。</p>
+  </div>
+</div>
+<div class="dx-container">
+  <%= form_for @project, :method => :put do |f| %>
+    <% if @project.errors.any? %>
+      <fieldset id="error_explanation">
+        <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+        <ul>
+        <% @project.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </fieldset>
+    <% end %>
+
+    <fieldset class="field">
+      <div class="fieldset-inner">
+        <%= f.label :owner_avatar_url, '个人照片' %>
+        <%= f.text_field :owner_avatar_url %>
+      </div>
+    </fieldset>
+    <fieldset class="field">
+      <div class="fieldset-inner">
+        <%= f.label :owner_name, '姓名' %>
+        <%= f.text_field :owner_name %>
+        <button>实名认证</button>
+      </div>
+    </fieldset>
+    <fieldset class="field">
+      <div class="fieldset-inner">
+        <%= f.label :owner_introduction, '个人介绍' %>
+        <%= f.text_area :owner_introduction, rows: 5 %>
+      </div>
+    </fieldset>
+    <fieldset class="field">
+        <%= f.label :owner_website_url, '个人网页' %>
+        <%= f.text_field :owner_website_url %>
+      <p>这些网页应该有助于支持者和商家更好的了解你，明白你为什么有能力来完成你的这个项目。你的个人主页，微博，以前做过的工作都会有帮助哦~</p>
+    </fieldset>
+    <div class="actions">
+      <%= submit_tag '保存' %>
+    </div>
+    <%= hidden_field_tag "step", "owner" %>
+  <% end %>
+</div>
+
+<%= link_to "上一步", edit_project_path(@project, { step: 'story' })  %>
