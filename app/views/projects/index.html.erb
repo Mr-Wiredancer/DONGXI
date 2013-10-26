@@ -13,10 +13,10 @@
 
 <% @projects.each do |project| %>
   <tr>
-    <td><%= project.name %></td>
-    <td><%= project.slogan %></td>
-    <td><%= project.introduction %></td>
-    <td><%= project.risk %></td>
+    <td><%= project.try(:basic_info).try(:name) %></td>
+    <td><%= project.try(:basic_info).try(:slogan) %></td>
+    <td><%= project.try(:story).try(:introduction) %></td>
+    <td><%= project.try(:story).try(:risk) %></td>
     <td><%= link_to 'Show', project %></td>
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
     <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
