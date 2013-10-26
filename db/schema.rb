@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131026015334) do
+ActiveRecord::Schema.define(:version => 20131026043011) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -28,6 +28,45 @@ ActiveRecord::Schema.define(:version => 20131026015334) do
     t.integer  "parent_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "project_basic_infos", :force => true do |t|
+    t.string   "name"
+    t.integer  "category_id"
+    t.string   "slogan"
+    t.integer  "region_id"
+    t.integer  "amount"
+    t.integer  "project_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "project_owners", :force => true do |t|
+    t.string   "name"
+    t.string   "website_url"
+    t.text     "introduction"
+    t.integer  "project_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  create_table "project_stories", :force => true do |t|
+    t.string   "video_url"
+    t.text     "introduction"
+    t.text     "risk"
+    t.integer  "project_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "projects", :force => true do |t|
@@ -50,10 +89,6 @@ ActiveRecord::Schema.define(:version => 20131026015334) do
     t.string   "owner_website_url"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
   end
 
   create_table "sponsors", :force => true do |t|

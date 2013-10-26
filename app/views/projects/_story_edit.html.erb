@@ -17,33 +17,37 @@
       </fieldset>
     <% end %>
 
-    <fieldset class="field">
-      <div class="fieldset-inner">
-        <%= f.label :video_url, '项目视频' %>
-        <%= f.text_field :video_url %>
-      </div>
-    </fieldset>
-    <fieldset class="field">
-      <div class="fieldset-inner">
-        <%= f.label :introduction, '项目介绍' %>
-        <!-- add rich-text editor here -->
-        <%= f.text_area :introduction, rows: 5 %>
-      </div>
-    </fieldset>
-    <fieldset class="field">
-      <div class="fieldset-inner">
-        <%= f.label :risk, '风险与挑战' %>
-        <%= f.text_area :risk, rows: 5 %>
-      </div>
-    </fieldset>
-    <fieldset>
-      <legend>项目FAQ</legend>
-      <p>项目发布之后你可以添加FAQ</p>
-    </fieldset>
+    <%= f.fields_for :story do |story| %>
+      <fieldset class="field">
+        <div class="fieldset-inner">
+          <%= story.label :video_url, '项目视频' %>
+          <%= story.text_field :video_url %>
+        </div>
+      </fieldset>
+      <fieldset class="field">
+        <div class="fieldset-inner">
+          <%= story.label :introduction, '项目介绍' %>
+          <!-- add rich-text editor here -->
+          <%= story.text_area :introduction, rows: 5 %>
+        </div>
+      </fieldset>
+      <fieldset class="field">
+        <div class="fieldset-inner">
+          <%= story.label :risk, '风险与挑战' %>
+          <%= story.text_area :risk, rows: 5 %>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>项目FAQ</legend>
+        <p>项目发布之后你可以添加FAQ</p>
+      </fieldset>
+    <% end %>
+
     <div class="actions">
       <%= submit_tag '保存' %>
     </div>
     <%= hidden_field_tag "step", "story" %>
+    <%= hidden_field_tag "next", "owner" %>
   <% end %>
 </div>
 

@@ -17,34 +17,37 @@
       </fieldset>
     <% end %>
 
-    <fieldset class="field">
-      <div class="fieldset-inner">
-        <%= f.label :owner_avatar_url, '个人照片' %>
-        <%= f.text_field :owner_avatar_url %>
-      </div>
-    </fieldset>
-    <fieldset class="field">
-      <div class="fieldset-inner">
-        <%= f.label :owner_name, '姓名' %>
-        <%= f.text_field :owner_name %>
-        <button>实名认证</button>
-      </div>
-    </fieldset>
-    <fieldset class="field">
-      <div class="fieldset-inner">
-        <%= f.label :owner_introduction, '个人介绍' %>
-        <%= f.text_area :owner_introduction, rows: 5 %>
-      </div>
-    </fieldset>
-    <fieldset class="field">
-        <%= f.label :owner_website_url, '个人网页' %>
-        <%= f.text_field :owner_website_url %>
-      <p>这些网页应该有助于支持者和商家更好的了解你，明白你为什么有能力来完成你的这个项目。你的个人主页，微博，以前做过的工作都会有帮助哦~</p>
-    </fieldset>
+    <%= f.fields_for :owner do |owner| %>
+      <fieldset class="field">
+        <div class="fieldset-inner">
+          <%= owner.label :avatar, '个人照片' %>
+          <%= owner.file_field :avatar %>
+        </div>
+      </fieldset>
+      <fieldset class="field">
+        <div class="fieldset-inner">
+          <%= owner.label :name, '姓名' %>
+          <%= owner.text_field :name %>
+          <button>实名认证</button>
+        </div>
+      </fieldset>
+      <fieldset class="field">
+        <div class="fieldset-inner">
+          <%= owner.label :introduction, '个人介绍' %>
+          <%= owner.text_area :introduction, rows: 5 %>
+        </div>
+      </fieldset>
+      <fieldset class="field">
+          <%= owner.label :website_url, '个人网页' %>
+          <%= owner.text_field :website_url %>
+        <p>这些网页应该有助于支持者和商家更好的了解你，明白你为什么有能力来完成你的这个项目。你的个人主页，微博，以前做过的工作都会有帮助哦~</p>
+      </fieldset>
+    <% end %>
     <div class="actions">
       <%= submit_tag '保存' %>
     </div>
     <%= hidden_field_tag "step", "owner" %>
+    <%= hidden_field_tag "next", "preview" %>
   <% end %>
 </div>
 
