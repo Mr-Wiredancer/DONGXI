@@ -1,11 +1,4 @@
-<ul>
-  <% for step in %w(info reward story owner account) %>
-    <li><%= link_to t(".#{step}"), "##{step}"%>
-  <% end %>
-  <% if @project.persisted? %>
-    <li><%= link_to 'Preview', priview_project_path(@project) %>
-  <% end %>
-</ul>
+<% render "banner" %>
 <% if not params[:step].present? %>
   <%= render 'info_edit' %>
 <% else %>

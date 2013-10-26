@@ -1,0 +1,10 @@
+<div class="dx-container" style="text-align:center; margin-bottom: 20px;">
+  <ul class="banner">
+    <% for step in %w(info reward story owner account) %>
+      <li style="display:inline-block; margin-right: 20px;"><%= link_to t(".#{step}"), "##{step}"%>
+    <% end %>
+    <% unless @project.new_record? %>
+      <li style="display:inline-block;"><%= link_to 'Preview', preview_project_path(@project) %>
+    <% end %>
+  </ul>
+</div>

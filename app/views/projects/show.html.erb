@@ -1,24 +1,27 @@
 <p>
   <b>Name:</b>
-  <%= @project.name %>
+  <%= @project.basic_info.name %>
 </p>
 
 <p>
   <b>Slogan:</b>
-  <%= @project.slogan %>
+  <%= @project.basic_info.slogan %>
 </p>
 
 <p>
   <b>Introduction:</b>
-  <%= @project.introduction %>
+  <%= @project.story.introduction %>
 </p>
 
 <p>
   <b>Risk:</b>
-  <%= @project.risk %>
+  <%= @project.story.risk %>
 </p>
 <div>
-  <%= image_tag @project.photo.url(:normal) %>
+  <%= image_tag @project.basic_info.photo.url(:normal) %>
+</div>
+<div>
+  <%= image_tag @project.owner.avatar.url(:normal) %>
 </div>
 
 
