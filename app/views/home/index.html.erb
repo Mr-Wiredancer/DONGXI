@@ -1,8 +1,8 @@
 
 <div class="project">
   <div class="pull-left project-text">
-    <h2 class="title"><i><%= @project.try(:basic_info).(:name) %></i></h2>
-    <blockquote class="row description"><%= @project.try(:story).(:introduction) %></blockquote>
+    <h2 class="title"><i><%= @project.try(:basic_info).try(:name) %></i></h2>
+    <blockquote class="row description"><%= @project.try(:story).try(:introduction) %></blockquote>
     <div class="weibo-user">
       <% if @weibo_user %>
         <% content_for :weibo_user do %>
