@@ -22,6 +22,9 @@ pickle-email-*.html
 
 *.un~
 
-# Ignore application configuration
+# configuration
 /config/application.yml
 /config/database.yml
+
+# public photos
+/public/content

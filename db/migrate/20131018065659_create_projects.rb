@@ -19,9 +19,6 @@ class CreateProjects < ActiveRecord::Migration
       t.string    :owner_introduction
       t.string    :owner_website_url
 
-      #t.string :sponsor
-      #t.text :video
-
       t.timestamps
     end
   end

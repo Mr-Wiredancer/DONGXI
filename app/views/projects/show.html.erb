@@ -17,6 +17,9 @@
   <b>Risk:</b>
   <%= @project.risk %>
 </p>
+<div>
+  <%= image_tag @project.photo.url(:normal) %>
+</div>
 
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

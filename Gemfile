@@ -20,6 +20,9 @@ gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-weibo-oauth2'
 
+# 图片上传
+gem 'paperclip', '~> 3.0'
+
 group :development, :test do
   gem 'better_errors'
   gem 'capybara'
