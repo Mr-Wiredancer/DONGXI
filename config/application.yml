@@ -1,0 +1,14 @@
+# only used in local machine
+development:
+  WEIBO_APPKEY:         "541199209"
+  WEIBO_APPSECRET:      "29de0fa5dff6e080ecd6fa5350ba6221"
+  WEIBO_ACCESS_TOKEN:   "2.00RgzAzB0Vdocaf4cd9d5ad8Mlu8RD"
+test:
+  WEIBO_APPKEY:         "541199209"
+  WEIBO_APPSECRET:      "29de0fa5dff6e080ecd6fa5350ba6221"
+  WEIBO_ACCESS_TOKEN:   "2.00RgzAzB0Vdocaf4cd9d5ad8Mlu8RD"
+# only used in staging/testing machine and production machine
+production:
+  WEIBO_APPKEY:         "2267569622"
+  WEIBO_APPSECRET:      "ebc1f1cdae0ae6f17f85908ccc871edb"
+  WEIBO_ACCESS_TOKEN:   "2.00RgzAzBa8U9TC5d5b5c8a7543IGsC"
