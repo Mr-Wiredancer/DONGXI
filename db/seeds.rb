@@ -5,6 +5,8 @@ ProjectStory.delete_all
 Category.delete_all
 Sponsor.delete_all
 Region.delete_all
+User.delete_all
+Authorization.delete_all
 
 %w(慈善 体育 艺术).each do |cat_name|
   Category.create(name: cat_name, description: "#{cat_name}的描述")
