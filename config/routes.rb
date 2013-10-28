@@ -1,4 +1,5 @@
 Website::Application.routes.draw do
+
   get "authorization/oauth_create"
   get "authorization/oauth_destroy"
 
@@ -15,6 +16,9 @@ Website::Application.routes.draw do
     end
   end
 
+  scope "/admin" do
+    resources :users
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
