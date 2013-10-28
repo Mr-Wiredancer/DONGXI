@@ -12,7 +12,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         flash[:notice] = "微博账号登录成功!"
         sign_in_and_redirect @user, :event => :authentication, :notice => "登录成功!"
       else
-        redirect_to new_user_registration_url, :notice => "FUCK"
+        redirect_to new_user_registration_url, :notice => "登录失败！"
       end
     end
   end

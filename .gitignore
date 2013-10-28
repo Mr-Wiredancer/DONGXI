@@ -23,7 +23,6 @@ pickle-email-*.html
 *.un~
 
 # configuration
-/config/application.yml
 /config/database.yml
 
 # public photos
