@@ -2,6 +2,12 @@ zh-CN:
   activerecord:
     models:
       project: '项目'
+      user: '用户'
     attributes:
       project:
         photo_url: '项目图片'
+      user:
+        name: '姓名'
+        email: '邮箱'
+        password: '密码'
+        password_confirmation: '确认密码'

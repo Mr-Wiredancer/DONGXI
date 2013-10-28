@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :authorizations do
     def find_or_create_by_params(params)
       provider,uid = params[:provider],params[:uid].to_s
-      authorization = find_or_create_by_provider_and_uid(provider, uid)
+      find_or_create_by_provider_and_uid(provider, uid)
     end
   end
 

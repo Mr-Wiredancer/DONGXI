@@ -100,3 +100,35 @@ zh-CN:
       project:
         photo_url: '项目图片'
         name: '项目名称'
+  common:
+    provider:
+      weibo: '新浪微博'
+  errors: &errors
+    format: ! "%{message}"
+    messages:
+      accepted: "%{attribute} 必须是可被接受的"
+      blank: "%{attribute} 不能为空"
+      confirmation: "%{attribute} 与确认值不匹配"
+      empty: "%{attribute} 不能留空"
+      equal_to: "%{attribute} 必须等于 %{count}"
+      even: "%{attribute} 必须为双数"
+      exclusion: "%{attribute} 是保留关键字"
+      greater_than: "%{attribute} 必须大于 %{count}"
+      greater_than_or_equal_to: "%{attribute} 必须大于或等于 %{count}"
+      inclusion: "%{attribute} 不包含于列表中"
+      invalid: "%{attribute} 是无效的"
+      less_than: "%{attribute} 必须小于 %{count}"
+      less_than_or_equal_to: "%{attribute} 必须小于或等于 %{count}"
+      not_a_number: "%{attribute} 不是数字"
+      not_an_integer: "%{attribute} 必须是整数"
+      odd: "%{attribute} 必须为单数"
+      record_invalid: "验证失败: %{errors}"
+      taken: "%{attribute} 已经被使用"
+      too_long: "%{attribute} 过长（最长为 %{count} 个字符）"
+      too_short: "%{attribute} 过短（最短为 %{count} 个字符）"
+      wrong_length: "%{attribute} 长度非法（必须为 %{count} 个字符）"
+    template:
+      body: "如下字段出现错误："
+      header:
+        one: "有 1 个错误发生导致「%{model}」无法被保存。"
+        other: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
