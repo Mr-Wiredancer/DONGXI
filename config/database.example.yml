@@ -1,15 +1,18 @@
-default: &default
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+production:
   adapter: postgresql
-  database: dongxi_<%= Rails.env %>
+  database: dongxi_production
   username: postgres
   password:
   host: 127.0.0.1
-
-development:
-  <<: *default
-
-test:
-  <<: *default
-
-production:
-  <<: *default

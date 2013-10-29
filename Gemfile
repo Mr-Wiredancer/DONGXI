@@ -7,8 +7,9 @@ gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 
-# Postgres
-gem 'pg'
+# databases
+gem 'sqlite3', :group => [:development, :test]
+gem 'pg', :group => :production
 
 # 用户系统
 gem 'devise'
@@ -25,6 +26,7 @@ gem 'paperclip', '~> 3.0'
 
 group :development, :test do
   gem 'better_errors'
+  gem 'binding_of_caller', :platform => [:mri_19, :rbx]
   gem 'capybara'
   gem 'rspec-rails'
   gem 'pry-rails'
