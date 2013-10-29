@@ -9,23 +9,46 @@
 </head>
 <body class="<%= "#{controller_name} #{action_name}" %>">
 
-<div class="navbar dx-wrapper">
-  <div class="slogan pull-left" style="width: 600px;">
-    <h1><%= link_to "首页", root_path %><h1>
-  </div>
-  <div class="pull-right" style="margin-right: 20px;">
-  <% if user_signed_in? %>
-    <%= yield :weibo_user if content_for?(:weibo_user) %>
-    <%= link_to '用户信息', edit_user_registration_path %> |
-    <%= link_to '退出登录', destroy_user_session_path, :method => :delete %>
-  <% else %>
-    <%= link_to '注册', new_user_registration_path %> |
-    <%= link_to '登录', new_user_session_path %> |
-    <%- resource_class.omniauth_providers.each do |provider| %>
-      <%= link_to t(".login_with_#{provider.to_s}"), omniauth_authorize_path(resource_name, provider) %><br />
+<div class="dx-wrapper">
+  <div class="navbar dx-container">
+    <div class="slogan pull-left" style="width: 100px;">
+      <h1><%= link_to "梦享", root_path %></h1>
+    </div>
+    <div class="pull-left project">
+      <div class="item">
+        <%= link_to projects_path do %>
+          <div>
+            <p style="font-size: 20px; line-height: 25px;">发现</p>
+            <span>感兴趣的项目</span>
+          </div>
+        <% end %>
+      </div>
+      <div class="item">
+      <%= link_to new_project_path do %>
+        <div>
+          <p style="font-size: 20px; line-height: 25px;">创建</p>
+          <span>一个新项目</span>
+        </div>
+      <% end %>
+      </div>
+      <div class="item">
+        <%= text_field_tag 'q', nil, size: 40, placeholder: '搜索项目' %>
+      </div>
+    </div>
+    <div class="pull-right" style="margin-right: 20px;">
+    <% if user_signed_in? %>
+      <%= yield :weibo_user if content_for?(:weibo_user) %>
+      <%= link_to '用户信息', edit_user_registration_path %> |
+      <%= link_to '退出登录', destroy_user_session_path, :method => :delete %>
+    <% else %>
+      <%= link_to '注册', new_user_registration_path %> |
+      <%= link_to '登录', new_user_session_path %> |
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= link_to t(".login_with_#{provider.to_s}"), omniauth_authorize_path(resource_name, provider) %><br />
+      <% end -%>
+    </div>
     <% end -%>
-  </div>
-  <% end -%>
+    </div>
   </div>
 </div>
 <div class="clearfix"></div>

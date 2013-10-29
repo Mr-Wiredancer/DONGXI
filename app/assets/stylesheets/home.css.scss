@@ -1,3 +1,57 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.home.index {
+  .hottest {
+    border-top: 1px solid #000;
+    padding-top: 20px;
+  }
+  .recommand {
+    padding-top: 20px;
+    border-top: 1px solid #000;
+    .project {
+      .detail {
+        width: 600px;
+        margin-left: 20px;
+      }
+      margin-right: 20px;
+      padding-right: 10px;
+      border-right: 1px solid #bbb;
+    }
+    .category {
+      margin-top: 50px;
+      padding-left: 20px;
+      width: 200px;
+      ul {
+        li {
+          padding: 10px 0;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  .projects {
+    padding-top: 30px;
+    margin-top: 10px;
+    border-top: 1px solid #bbb;
+    .region {
+      font-size: 22px;
+      margin-left: 10px;
+    }
+    .project-item {
+      display: inline-block;
+      width: 250px;
+      height: 400px;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #bbb;
+      .title {
+        font-size: 20px;
+        margin: 0 10px 10px;
+        padding: 15px;
+        border: 2px solid #000;
+        width: 120px;
+      }
+    }
+  }
+}
