@@ -6,10 +6,10 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="#{controller_name} #{action_name}">
 
-<div class="navbar">
-  <div class="slogan dx-container pull-left" style="width: 600px;">
+<div class="navbar dx-wrapper">
+  <div class="slogan pull-left" style="width: 600px;">
     <h1><%= link_to "首页", root_path %><h1>
   </div>
   <div class="pull-right" style="margin-right: 20px;">
