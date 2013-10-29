@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  include ApplicationHelper
   include ProjectHelper
 
   def index
@@ -12,6 +13,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    status_retrieve("3637946596783717")
 
     respond_to do |format|
       format.html # show.html.erb

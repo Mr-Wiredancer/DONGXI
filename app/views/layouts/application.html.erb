@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:wb=“http://open.weibo.com/wb”>
 <head>
   <title>Website</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body class="#{controller_name} #{action_name}">
+<body class="<%= "#{controller_name} #{action_name}" %>">
 
 <div class="navbar dx-wrapper">
   <div class="slogan pull-left" style="width: 600px;">

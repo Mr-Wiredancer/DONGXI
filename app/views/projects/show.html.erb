@@ -1,3 +1,4 @@
+<div class="dx-container">
 <p>
   <b>Name:</b>
   <%= @project.basic_info.name %>
@@ -27,3 +28,24 @@
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+
+<% if @status %>
+<div style="margin-top: 20px;">
+  <div style="border: 1px solid #000; width: 600px;">
+    <p><%= @status["user"]["screen_name"] %></p>
+    <p><%= @status["text"] %></p>
+    <span><%= "转发(#{@status["reposts_count"]})" %></span>
+    <span><%= "评论(#{@status["comments_count"]})" %></span>
+  </div>
+</div>
+<!--<div>
+  <%= text_area_tag "status", nil, size: '70x3' %>
+  <%= hidden_field_tag "access_token", ENV["WEIBO_ACCESS_TOKEN"] %>--><!-- token这么写好像不行.. -->
+  <!--<%= hidden_field_tag "uid", @status["mid"] %>
+  <%= button_tag "转发此微博", type: 'button', id: 'repost' %>
+  <%= check_box_tag 'is_comment', true %>评论给当前微博
+</div>-->
+<% end %>
+<wb:share-button appkey="S51Y5" addition="number" type="button" ralateUid="3876426391"></wb:share-button>
+
+</div>
