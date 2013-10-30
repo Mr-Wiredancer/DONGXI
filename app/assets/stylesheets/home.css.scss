@@ -11,7 +11,7 @@
     border-top: 1px solid #000;
     .project {
       .detail {
-        width: 600px;
+        width: 540px;
         margin-left: 20px;
       }
       margin-right: 20px;
@@ -21,7 +21,7 @@
     .category {
       margin-top: 50px;
       padding-left: 20px;
-      width: 200px;
+      width: 180px;
       ul {
         li {
           padding: 10px 0;
@@ -39,10 +39,11 @@
       margin-left: 10px;
     }
     .project-item {
-      display: inline-block;
-      width: 250px;
+      /*display: inline-block;*/
+      float: left;
+      width: 240px;
       height: 400px;
-      margin: 10px;
+      margin: 5px;
       padding: 10px;
       border: 1px solid #bbb;
       .title {
@@ -51,6 +52,9 @@
         padding: 15px;
         border: 2px solid #000;
         width: 120px;
+      }
+      .creator {
+        margin: 10px 0;
       }
     }
   }

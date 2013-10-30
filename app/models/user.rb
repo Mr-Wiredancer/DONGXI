@@ -26,8 +26,24 @@ class User < ActiveRecord::Base
     authorizations.find_or_create_by_params(auth_params)
   end
 
-  def is_admin?
+  def admin?
     %w(tkd泽秋_吃饭团小短腿 利嘉豪Wiredancer dxtechnology).include?(self.name)
+  end
+
+  def has_role?(role)
+    case role
+    when :admin then admin?
+    when :member then valid?
+    else false
+    end
+  end
+
+  def weibo
+    self.authorizations(provider: 'weibo').first
+  end
+
+  def weibo_id
+    self.weibo.uid
   end
 
 end

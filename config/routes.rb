@@ -19,6 +19,8 @@ Website::Application.routes.draw do
   scope "/admin" do
     resources :users
   end
+
+  get '/my_projects' => "users#projects"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

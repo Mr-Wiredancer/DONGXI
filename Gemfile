@@ -13,6 +13,7 @@ gem 'pg', :group => :production
 
 # 用户系统
 gem 'devise'
+gem 'cancan'
 
 # 系统配置
 gem 'figaro'

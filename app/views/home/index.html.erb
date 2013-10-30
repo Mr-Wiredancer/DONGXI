@@ -52,32 +52,14 @@
     <div class="region" style="font-size: 22px;">
       广州，广东
     </div>
-    <% 4.times do |i| %>
+    <% Project.first(4).each do |project| %>
       <div class="project-item">
-        <div class="title">项目<%= i %></div>
-        <div class="description">描述描述描述</div>
+        <div class="title"><%= project.try(:basic_info).try(:name) || "(项目未命名)" %></div>
+        <div class="creator"><%= "By #{project.try(:user).try(:name)}" if project.user %></div>
+        <div class="description"><%= project.try(:story).try(:introduction) || "(未有描述)" %></div>
       </div>
     <% end %>
   </div>
-  <!--<div class="project">
-    <div class="pull-left project-text">
-      <h2 class="title"><i><%= @project.try(:basic_info).try(:name) %></i></h2>
-      <blockquote class="row description"><%= @project.try(:story).try(:introduction) %></blockquote>
-      <div class="weibo-user">
-        <% if @weibo_user %>
-          <% content_for :weibo_user do %>
-            <span class="weibo-user">
-              <%= image_tag(@weibo_user['profile_image_url']) %>
-              <%= link_to @weibo_user['screen_name'], "http://weibo.com/#{@weibo_user['id']}" %>
-            </span>
-          <% end %>
-        <% end -%>
-      </div>
-      <div class="row power"> <%= "Powered BY: "%><%= @project.try(:sponsor).try(:name) %></div>
-    </div>
-    <div class="pull-left project-video"></div>
-  </div>
-</div>-->
 
 <div class="clearfix"></div>
 

@@ -1,4 +1,7 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+
   include ApplicationHelper
   include ProjectHelper
 
@@ -40,7 +43,8 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(params[:project])
+    project_params = params[:project].merge(user_id: current_user.id)
+    @project = Project.new(project_params)
 
     respond_to do |format|
       if @project.save

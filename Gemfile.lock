@@ -35,6 +35,7 @@ GEM
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
     builder (3.0.4)
+    cancan (1.6.10)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.3)
@@ -180,6 +181,7 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
+  cancan
   coffee-rails (~> 3.2.1)
   devise
   figaro
