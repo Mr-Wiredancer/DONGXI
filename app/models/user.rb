@@ -1,3 +1,4 @@
+# coding: utf-8
 class User < ActiveRecord::Base
   extend OmniauthCallbacks
   # Include default devise modules. Others available are:
@@ -23,6 +24,10 @@ class User < ActiveRecord::Base
       uid: response["uid"].to_s,
     }
     authorizations.find_or_create_by_params(auth_params)
+  end
+
+  def is_admin?
+    %w(tkd泽秋_吃饭团小短腿 利嘉豪Wiredancer dxtechnology).include?(self.name)
   end
 
 end
