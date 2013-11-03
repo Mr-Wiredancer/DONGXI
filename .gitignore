@@ -23,5 +23,6 @@ pickle-email-*.html
 
 # configuration
 
-# public photos
+# public
+/public/assets
 /public/content
