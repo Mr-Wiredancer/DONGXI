@@ -32,10 +32,13 @@
       <% end %>
       </div>
       <div class="item">
-        <%= text_field_tag 'q', nil, size: 40, placeholder: '搜索项目' %>
+        <%= form_tag search_path do %>
+          <%= text_field_tag 'key', nil, size: 40, placeholder: '寻找你感兴趣的项目...' %>
+          <span><%= submit_tag '搜索' %>
+        <% end %>
       </div>
     </div>
-    <div class="pull-right" style="margin-right: 20px;">
+    <div class="pull-right">
     <% if user_signed_in? %>
       <% if current_user.weibo %>
         <%= render :partial => 'layouts/weibo_user', locals: { weibo_user: oauth_retrieve(current_user.weibo_id) } %>

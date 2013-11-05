@@ -22,9 +22,6 @@ class Ability
       basic_read_only
     end
 
-    def basic_read_only
-      #can :show, Project
-    end
 
     # Define abilities for the passed in user here. For example:
     #
@@ -52,5 +49,9 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
+  end
+
+  def basic_read_only
+    can :read, Project
   end
 end

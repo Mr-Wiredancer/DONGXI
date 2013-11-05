@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    %w(tkd泽秋_吃饭团小短腿 利嘉豪Wiredancer dxtechnology).include?(self.name)
+    %w(tkd泽秋_吃饭团小短腿 利嘉豪Wiredancer dxtechnology tester).include?(self.name)
   end
 
   def has_role?(role)

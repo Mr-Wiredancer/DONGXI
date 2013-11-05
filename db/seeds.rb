@@ -9,7 +9,7 @@ Region.delete_all
 User.delete_all
 Authorization.delete_all
 
-u = User.create(name: 'tester', password: 'test_dongxi', password_confirmation: 'test_dongxi')
+u = User.create(name: 'tester', email: 'tester@dongxi.com', password: 'test_dongxi', password_confirmation: 'test_dongxi')
 
 %w(慈善 体育 艺术).each do |cat_name|
   Category.create(name: cat_name, description: "#{cat_name}的描述")
@@ -22,7 +22,7 @@ end
 project = Project.new(category_id: Category.first.id, sponsor_id: Sponsor.first.id, user_id: u.id)
 project.basic_info = ProjectBasicInfo.create(name: "DongXi Tech")
 project.story = ProjectStory.create(introduction: "DONGXI TECH 由来自Berkeley的Jiahao Li，圣三一学院的Water，和来自Sun Yat-sen Univ的Allen Wu倾情打造（说的很高端似的……）\n我们主要的想法就是做一个东西。\n 暂时是这个。")
-project.save
+project.save!
 
 %w(广州 上海 北京).each do |name|
   Region.create(name: name, description: name)

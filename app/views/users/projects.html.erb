@@ -1,11 +1,12 @@
-<h1>Listing projects</h1>
+<h1>我的项目</h1>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Slogan</th>
-    <th>Introduction</th>
-    <th>Risk</th>
+    <th class="name">项目名称</th>
+    <th class="slogan">口号</th>
+    <th class="introduction">项目简介</th>
+    <th class="risk">项目风险</th>
+    <th class="status">是否发布</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,19 +14,19 @@
 
 <% @projects.each do |project| %>
   <tr>
-    <td><%= project.try(:basic_info).try(:name) %></td>
-    <td><%= project.try(:basic_info).try(:slogan) %></td>
-    <td><%= project.try(:story).try(:introduction) %></td>
-    <td><%= project.try(:story).try(:risk) %></td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td class="name"><%= project.try(:basic_info).try(:name) %></td>
+    <td class="slogan"><%= project.try(:basic_info).try(:slogan) %></td>
+    <td class="introduction"><%= project.try(:story).try(:introduction) %></td>
+    <td class="risk"><%= project.try(:story).try(:risk) %></td>
+    <td class="status"><%= project.published ? '是' : '否' %></td>
+    <td><%= link_to '查看', project %></td>
+    <td><%= link_to '编辑', edit_project_path(project) %></td>
+    <td><%= link_to '删除', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-
-<%= link_to 'New project', new_project_path %>
-<%= link_to "Back To Home", root_path %>
+<%= link_to "创建项目", new_project_path %>
+<%= link_to "回主页", root_path %>

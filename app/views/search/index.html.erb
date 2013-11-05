@@ -1,0 +1,4 @@
+<% @projects.each do |p| %>
+  <div>项目名称: <%= p.try(:basic_info).try(:name) %></div>
+  <div>项目简介: <%= p.try(:story).try(:introduction) %></div>
+<% end %>

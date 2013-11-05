@@ -13,6 +13,8 @@ Website::Application.routes.draw do
   resources :projects do
     member do
       get :preview
+      get :publish
+      get :unpublish
     end
   end
 
@@ -21,6 +23,7 @@ Website::Application.routes.draw do
   end
 
   get '/my_projects' => "users#projects"
+  post '/search' => "search#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

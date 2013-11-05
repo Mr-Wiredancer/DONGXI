@@ -1,5 +1,6 @@
+# coding: utf-8
 class ProjectsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:show]
   load_and_authorize_resource
 
   include ApplicationHelper
@@ -87,6 +88,30 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_url }
       format.json { head :no_content }
+    end
+  end
+
+  def publish
+    @project = Project.find(params[:id])
+    respond_to do |format|
+    begin
+      @project.publish!
+      format.html { redirect_to projects_url, notice: '发布成功!' }
+    rescue => e
+      format.html { render action: "index" }
+    end
+    end
+  end
+
+  def unpublish
+    @project = Project.find(params[:id])
+    respond_to do |format|
+    begin
+      @project.unpublish!
+      format.html { redirect_to projects_url, notice: '取消发布成功!' }
+    rescue => e
+      format.html { render action: "index" }
+    end
     end
   end
 end
