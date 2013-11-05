@@ -1,22 +1,22 @@
 <div class="dx-container">
 <p>
   <b>Name:</b>
-  <%= @project.basic_info.name %>
+  <%= @project.try(:basic_info).try(:name) %>
 </p>
 
 <p>
   <b>Slogan:</b>
-  <%= @project.basic_info.slogan %>
+  <%= @project.try(:basic_info).try(:slogan) %>
 </p>
 
 <p>
   <b>Introduction:</b>
-  <%= @project.story.introduction %>
+  <%= @project.try(:story).try(:introduction) %>
 </p>
 
 <p>
   <b>Risk:</b>
-  <%= @project.story.risk %>
+  <%= @project.try(:story).try(:risk) %>
 </p>
 <div>
   <%= image_tag @project.basic_info.photo.url(:normal) if @project.try(:basic_info).try(:photo).nil? %>
