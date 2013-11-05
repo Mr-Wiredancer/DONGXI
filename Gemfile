@@ -31,6 +31,8 @@ group :development, :test do
   #gem 'capybara'
   gem 'rspec-rails'
   gem 'pry-rails'
+  gem 'capistrano', '~> 2.15'
+  gem 'rvm-capistrano'
 end
 
 group :production do

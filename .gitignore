@@ -26,3 +26,5 @@ pickle-email-*.html
 # public
 /public/assets
 /public/content
+
+config/database.yml
