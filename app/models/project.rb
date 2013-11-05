@@ -5,7 +5,8 @@ class Project < ActiveRecord::Base
                   :story_attributes,
                   :owner_attributes,
                   :user_id,
-                  :sponsor_id
+                  :sponsor_id,
+                  :published
 
   has_one   :basic_info, class_name: "ProjectBasicInfo", dependent: :destroy
   has_one   :story, class_name: "ProjectStory", dependent: :destroy

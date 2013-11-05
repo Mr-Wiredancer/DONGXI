@@ -70,25 +70,13 @@ ActiveRecord::Schema.define(:version => 20131026043011) do
   end
 
   create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.string   "slogan"
-    t.text     "introduction"
-    t.text     "risk"
     t.integer  "category_id"
     t.integer  "region_id"
     t.integer  "user_id"
-    t.string   "video_url"
-    t.string   "photo_url"
     t.integer  "sponsor_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.integer  "amount"
-    t.string   "owner_avatar_url"
-    t.string   "owner_name"
-    t.string   "owner_introduction"
-    t.string   "owner_website_url"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.boolean  "published",   :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "sponsors", :force => true do |t|
