@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @project = Project.first
+    @projects = Project.published.first(4)
   end
 
 end

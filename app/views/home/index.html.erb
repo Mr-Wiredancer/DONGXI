@@ -52,13 +52,21 @@
     <div class="region" style="font-size: 22px;">
       广州，广东
     </div>
-    <% Project.first(4).each do |project| %>
+    <% @projects.each do |project| %>
       <div class="project-item">
         <div class="title"><%= project.try(:basic_info).try(:name) || "(项目未命名)" %></div>
         <div class="creator"><%= "By #{project.try(:user).try(:name)}" if project.user %></div>
         <div class="description"><%= project.try(:story).try(:introduction) || "(未有描述)" %></div>
       </div>
     <% end %>
+    <% (4 - @projects.count).times do |i| %>
+      <div class="project-item">
+        <div class="title"><%= "项目#{i}" %></div>
+        <div class="creator"><%= "用户#{i}" %></div>
+        <div class="description"><%= "(未有描述)" %></div>
+      </div>
+    <% end %>
+
   </div>
 
 <div class="clearfix"></div>
