@@ -24,7 +24,7 @@
     <td><%= link_to '编辑', edit_project_path(project) %></td>
     <td><%= link_to '删除', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <td>
-      <% if projec.published %>
+      <% if project.published %>
         <%= link_to '取消发布', unpublish_project_path(project) %>
       <% else %>
         <%= link_to '发布', publish_project_path(project) %>
