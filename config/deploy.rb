@@ -64,7 +64,12 @@ namespace :deploy do
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
-  after "deploy:finalize_update", "deploy:symlink_config"
+  task :mkdir_dot_test, roles: :app do
+    run "mkdir -p /home/#{user}/.test"
+    run "mkdir -p /home/#{user}/.test/pids"
+    run "mkdir -p /home/#{user}/.test/log"
+  end
+  after "deploy:finalize_update", "deploy:symlink_config", "deploy:mkdir_dot_test"
 
   desc "Make sure local git is in sync with remote."
   task :check_revision, roles: :app do
@@ -76,7 +81,8 @@ namespace :deploy do
   end
   before "deploy", "deploy:check_revision"
 
-  # db
+  ### database
+
   #after "deploy:setup" do
     #run "RAILS_ENV=production rake db:create"
   #end
