@@ -1,7 +1,15 @@
 class Ability
   include CanCan::Ability
 
+  # :manage => all
+  # :read => :index & :show
+  # :update => :edit & :update
+  # :destroy => :destroy
+  # :create => :new & :create
+
   def initialize(user)
+
+    alias_action :show, :update, :destroy, :to => :manage_single
 
     if user.blank?
       cannot :manage, :all
@@ -10,10 +18,10 @@ class Ability
       can :manage, :all
     elsif user.has_role?(:member)
       # projects
-      alias_action :show, :create, :update, :destroy, :to => :manage_single
       can :manage_single, Project do |project|
         project.user_id == user.id
       end
+      can :create, Project
 
       can :manage_single, User, id: user.id
 
