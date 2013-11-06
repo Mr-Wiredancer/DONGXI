@@ -86,19 +86,27 @@ namespace :deploy do
   #after "deploy:setup" do
     #run "RAILS_ENV=production rake db:create"
   #end
+  namespace :db do
+    task :reset, roles: :app do
+      run "cd #{current_path}; RAILS_ENV=production rake db:drop"
+      run "cd #{current_path}; RAILS_ENV=production rake db:create"
+      run "cd #{current_path}; RAILS_ENV=production rake db:migrate"
+      run "cd #{current_path}; RAILS_ENV=production rake db:seed"
+    end
+  end
 
   after "deploy:cold" do
     # 1st migration is defined in gem.
     run "cd #{current_path}; RAILS_ENV=production rake db:seed"
   end
 
-  task :set_db, roles: :app do
-    set :db_user, Capistrano::CLI.ui.ask("Application database user: ")
-    set :db_pass, Capistrano::CLI.password_prompt("Password: ")
+  #task :set_db, roles: :app do
+    #set :db_user, Capistrano::CLI.ui.ask("Application database user: ")
+    #set :db_pass, Capistrano::CLI.password_prompt("Password: ")
 
-    run "sed -i 's!\[USERNAME\]!#{db_user}!' #{current_path}/config/database.yml"
-    run "sed -i 's!\[PASSWORD\]!#{db_pass}!' #{current_path}/config/database.yml"
-  end
+    #run "sed -i 's!\[USERNAME\]!#{db_user}!' #{current_path}/config/database.yml"
+    #run "sed -i 's!\[PASSWORD\]!#{db_pass}!' #{current_path}/config/database.yml"
+  #end
 
   #before "deploy:migration", "deploy:set_db"
   after "deploy:update", "deploy:migrations"
