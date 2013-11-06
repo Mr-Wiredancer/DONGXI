@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(:version => 20131026043011) do
     t.integer  "region_id"
     t.integer  "user_id"
     t.integer  "sponsor_id"
-    t.boolean  "published",   :default => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.integer  "status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "sponsors", :force => true do |t|

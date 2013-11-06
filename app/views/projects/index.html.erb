@@ -19,15 +19,14 @@
     <td class="slogan"><%= project.try(:basic_info).try(:slogan) %></td>
     <td class="introduction"><%= project.try(:story).try(:introduction) %></td>
     <td class="risk"><%= project.try(:story).try(:risk) %></td>
-    <td class="status"><%= project.published ? '是' : '否' %></td>
+    <td class="status"><%= project.status_name %></td>
     <td><%= link_to '查看', project %></td>
     <td><%= link_to '编辑', edit_project_path(project) %></td>
     <td><%= link_to '删除', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <td>
-      <% if project.published %>
-        <%= link_to '取消发布', unpublish_project_path(project) %>
-      <% else %>
+      <% if project.in_audit? %>
         <%= link_to '发布', publish_project_path(project) %>
+        <%= link_to '退回编辑', unpublish_project_path(project) %>
       <% end %>
     </td>
   </tr>

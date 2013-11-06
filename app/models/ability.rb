@@ -9,7 +9,6 @@ class Ability
 
   def initialize(user)
 
-    alias_action :show, :update, :destroy, :to => :manage_single
 
     if user.blank?
       cannot :manage, :all
@@ -18,12 +17,15 @@ class Ability
       can :manage, :all
     elsif user.has_role?(:member)
       # projects
-      can :manage_single, Project do |project|
-        project.user_id == user.id
+      alias_action :preview, :submit, :update, :destroy, :to => :manage_own
+      can :create,        Project
+      can :show,          Project, :user_id => user.id
+      can :manage_own, Project do |p|
+        p.user_id == user.id && p.in_edit?
       end
-      can :create, Project
 
-      can :manage_single, User, id: user.id
+      can :manage, User, id: user.id
+      cannot :destroy, User
 
     else
       cannot :manage, :all

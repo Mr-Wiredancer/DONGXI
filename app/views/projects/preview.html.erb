@@ -19,5 +19,11 @@
     <p>几天内我们会把关于项目的状态发给你</p>
     <p>通过之后你可以随时发布</p>
   </div>
+  <h1>项目预览：</h1>
+  <%= render :template => "projects/show" %>
+  <br>
   <%= link_to "上一步", edit_project_path(@project, { step: 'owner' }) %>
+  <% if @project.in_edit? %>
+    <%= link_to "提交审核", submit_project_path(@project), confirm: '确认提交审核么？提交后你将无法修改' %>
+  <% end %>
 </div>

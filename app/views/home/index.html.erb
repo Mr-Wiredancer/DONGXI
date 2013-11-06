@@ -54,7 +54,7 @@
     </div>
     <% @projects.each do |project| %>
       <div class="project-item">
-        <div class="title"><%= project.try(:basic_info).try(:name) || "(项目未命名)" %></div>
+        <div class="title"><%= link_to (project.try(:basic_info).try(:name) || "(项目未命名)"), project_path(project) %></div>
         <div class="creator"><%= "By #{project.try(:user).try(:name)}" if project.user %></div>
         <div class="description"><%= project.try(:story).try(:introduction) || "(未有描述)" %></div>
       </div>
@@ -82,4 +82,11 @@
   </div>
 </div>
 <% end %>
+
+<!--
+<br />
+<% if user_signed_in? %>
+  <%= (can? :edit, current_user.projects.first) ? "可以有" : "不行" %>
+<% end %>
+-->
 

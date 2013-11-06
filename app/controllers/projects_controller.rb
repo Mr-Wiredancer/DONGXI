@@ -91,6 +91,18 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def submit
+    @project = Project.find(params[:id])
+    respond_to do |format|
+    begin
+      @project.submit!
+      format.html { redirect_to project_url(@project), notice: '提交成功!等待审核中...' }
+    rescue => e
+      format.html { render action: "preview" }
+    end
+    end
+  end
+
   def publish
     @project = Project.find(params[:id])
     respond_to do |format|
