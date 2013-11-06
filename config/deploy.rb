@@ -25,6 +25,14 @@ after "deploy", "deploy:cleanup" # keep only last 5 releases
 
 namespace :deploy do
 
+  task :default do
+    update_code
+    db.reset
+    stop
+    start
+    cleanup
+  end
+
   namespace :server do
     %w[start stop restart].each do |command|
       desc "#{command} server: unicorn & nginx"
