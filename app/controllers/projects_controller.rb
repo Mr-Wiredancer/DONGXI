@@ -25,13 +25,26 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def new
-    @project = Project.new
-    @project.build_basic_info
+  #def add
+    #@project = current_user.projects.in_edit.first
+    #unless @project.nil?
+      #redirect_to edit_project_url(@project)
+    #else
+      #redirect_to new_project_url
+    #end
+  #end
 
+  def new
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @project }
+      @project = current_user.projects.in_edit.first
+      if current_user.has_role?(:member) && @project.present?
+        format.html { redirect_to edit_project_url(@project) }
+      else
+        @project = Project.new
+        @project.build_basic_info
+        format.html # new.html.erb
+        format.json { render json: @project }
+      end
     end
   end
 

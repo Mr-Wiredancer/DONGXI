@@ -36,7 +36,9 @@ class Project < ActiveRecord::Base
   before_validation :set_default_status
 
   # scopes
-  scope :published, where(status: Project::STATUS[:in_publish][:weight])
+  scope :in_publish, where(status: Project::STATUS[:in_publish][:weight])
+  scope :in_edit, where(status: Project::STATUS[:in_edit][:weight])
+
   scope :title_like, lambda { |key| includes(:basic_info).where("LOWER(project_basic_infos.name) LIKE ?", "%#{key.downcase}%") }
   scope :text_like, lambda { |key| includes(:story).where("LOWER(project_stories.introduction) LIKE ?", "%#{key.downcase}%") }
 

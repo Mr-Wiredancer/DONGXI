@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   def has_role?(role)
     case role
     when :admin then admin?
-    when :member then valid?
+    when :member then !admin? && valid?
     else false
     end
   end

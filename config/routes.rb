@@ -17,6 +17,9 @@ Website::Application.routes.draw do
       get :publish
       get :unpublish
     end
+    #collection do
+      #get :add
+    #end
   end
 
   scope "/admin" do
