@@ -25,12 +25,14 @@ after "deploy", "deploy:cleanup" # keep only last 5 releases
 
 namespace :deploy do
 
-  %w[start stop restart].each do |command|
-    desc "#{command} server: unicorn & nginx"
-    task command, roles: :app, except: { no_release: true } do
-      run "/etc/init.d/unicorn_#{application} #{command}"
-      #unicorn_rails
-      #sudo "service nginx #{command}"
+  namespace :server do
+    %w[start stop restart].each do |command|
+      desc "#{command} server: unicorn & nginx"
+      task command, roles: :app, except: { no_release: true } do
+        run "/etc/init.d/unicorn_#{application} #{command}"
+        #unicorn_rails
+        #sudo "service nginx #{command}"
+      end
     end
   end
 
@@ -91,6 +93,11 @@ namespace :deploy do
       run "cd #{current_path}; RAILS_ENV=production rake db:drop"
       run "cd #{current_path}; RAILS_ENV=production rake db:create"
       run "cd #{current_path}; RAILS_ENV=production rake db:migrate"
+      #run "cd #{current_path}; RAILS_ENV=production rake db:seed"
+      seed
+    end
+
+    task :seed, roles: :app do
       run "cd #{current_path}; RAILS_ENV=production rake db:seed"
     end
   end
