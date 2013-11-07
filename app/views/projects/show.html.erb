@@ -46,6 +46,6 @@
   <%= check_box_tag 'is_comment', true %>评论给当前微博
 </div>-->
 <% end %>
-<wb:share-button appkey="S51Y5" addition="number" type="button" ralateUid="3876426391" default_text="<%= @project.try(:basic_info).try(:name) %>"></wb:share-button>
+<wb:share-button appkey="S51Y5" addition="number" type="button" ralateUid="3876426391" url="http://v.youku.com/v_show/id_XMzk1NjM4MzMy.html" pic="http%3A%2F%2Fstatic.youku.com%2Findex%2Fimg%2Fheader%2Fyklogo.png" default_text=" <%= CGI::escape("#东西科技#") + " " + "#{@project.try(:basic_info).try(:name)}" %> "></wb:share-button>
 
 </div>

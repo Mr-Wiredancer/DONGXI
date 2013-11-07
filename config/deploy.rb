@@ -27,10 +27,13 @@ namespace :deploy do
 
   task :default do
     update_code
-    db.reset
-    stop
-    start
-    cleanup
+    create_symlink
+    # WARNING:
+    # bug in unicorn_init.sh: restart option doesn't work. use `stop & start` for now.
+    # but this bug should be fixed.
+    server.stop
+    db.reset # WARNING: should use db.migrate later
+    server.start
   end
 
   namespace :server do
