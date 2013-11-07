@@ -1,0 +1,11 @@
+<% default_text = "更多信息请点击：" + request.original_url %>
+<wb:share-button
+    type="button"
+    appkey=<%= ENV["WEIBO_APPKEY"] %>
+    addition="number"
+    ralateUid="3876426391"
+    title=<%= request.original_url %>
+    url=<%= "http://v.youku.com/v_show/id_XMzk1NjM4MzMy.html" %>
+    pic=<%= pic_url %>
+    default_text="<%= CGI::escape(tag) + " " + text + default_text %>"
+></wb:share-button>

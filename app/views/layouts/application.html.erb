@@ -2,6 +2,7 @@
 <html xmlns:wb=“http://open.weibo.com/wb”>
 <head>
   <title>Website</title>
+  <%= yield :weibo_meta %>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
   <%= javascript_include_tag "application" %>
