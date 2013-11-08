@@ -10,5 +10,5 @@ test:
 # dongxi_pro: only used in staging/testing machine and production machine
 production:
   WEIBO_APPKEY:         "2645092102"
-  WEIBO_APPSECRET:      "f21014e380d8818e8daa6852ab14fd43"
+  WEIBO_APPSECRET:      "3b4aa9e6f485ea33ad17407835e88314"
   WEIBO_ACCESS_TOKEN:   "2.00_aF2OEqRXAtC2fd33143edtCrzSE"
