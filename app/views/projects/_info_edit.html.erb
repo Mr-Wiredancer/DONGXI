@@ -34,8 +34,8 @@
       </fieldset>
       <fieldset class="field">
         <div class="fieldset-inner">
-          <%= info.label :category_id, '分类' %>
-          <%= info.select :category_id, Category.all.collect {|c| [c.name, c.id]}, { include_blank: true } , class: 'category' %>
+          <%= f.label :category_id, '分类' %>
+          <%= f.select :category_id, Category.all.collect {|c| [c.name, c.id]}, { include_blank: true } , class: 'category' %>
         </div>
       </fieldset>
       <fieldset class="field">
@@ -47,8 +47,8 @@
       </fieldset>
       <fieldset class="field">
         <div class="fieldset-inner">
-          <%= info.label :region_id, '项目地区' %>
-          <%= info.select :region_id, Region.all.collect {|c| [c.name, c.id]}, { include_blank: true }, class: 'region' %>
+          <%= f.label :region_id, '项目地区' %>
+          <%= f.select :region_id, Region.all.collect {|c| [c.name, c.id]}, { include_blank: true }, class: 'region' %>
         </div>
       </fieldset>
       <fieldset class="field">
@@ -68,6 +68,7 @@
           <%= info.text_field :amount %>
         </div>
       </fieldset>
+      <!--<%= info.text_field :amount, label: '筹措金额' %>-->
     <% end %>
     <%= hidden_field_tag 'step', 'info' %>
     <%= hidden_field_tag 'next', 'reward' %>

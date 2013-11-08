@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
   STATUS = {
     in_edit:      { weight: 0, description: '编辑中' },
     in_audit:     { weight: 1, description: '审核中' },
-    in_publish: { weight: 2, description: '已发布' },
+    in_publish:   { weight: 2, description: '已发布' },
   }
 
   # attr* macros
@@ -17,6 +17,8 @@ class Project < ActiveRecord::Base
                   :sponsor_id,
                   :status
 
+  attr_accessor :submitting
+
   # associations
   has_one   :basic_info, class_name: "ProjectBasicInfo", dependent: :destroy
   has_one   :story, class_name: "ProjectStory", dependent: :destroy
@@ -27,10 +29,16 @@ class Project < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
   belongs_to :region
-  belongs_to :sponsor, class_name: "Sponsor"
+  belongs_to :sponsor
 
   # validations
-  validates :status, inclusion: { in: 0..2 }
+  with_options if: lambda { |o| o.in_submit? } do |condition|
+    condition.validates :status,      inclusion: { in: 0..2 }
+    condition.validates :basic_info,  presence: true, associated: true
+    condition.validates :story,       presence: true, associated: true
+    condition.validates :owner,       presence: true, associated: true
+    condition.validates_presence_of :category_id, :region_id, :user_id
+  end
 
   # callbacks
   before_validation :set_default_status
@@ -43,12 +51,22 @@ class Project < ActiveRecord::Base
   scope :text_like, lambda { |key| includes(:story).where("LOWER(project_stories.introduction) LIKE ?", "%#{key.downcase}%") }
 
   scope :search, lambda {|params={}|
-    projects = published
+    projects = in_publish
     projects = projects.title_like(params[:key]) | projects.text_like(params[:key]) if params[:key].present?
     projects
   }
 
   # methods
+  %w(name slogan photo amount).each do |info_attr|
+    delegate info_attr, to: :basic_info, prefix: false, allow_nil: true
+  end
+
+  %w(introduction risk video_url).each do |story_attr|
+    delegate story_attr, to: :story, prefix: false, allow_nil: true
+  end
+  %w(name introduction website_url avatar).each do |owner_attr|
+    delegate owner_attr, to: :owner, prefix: true, allow_nil: true
+  end
 
   def set_default_status
     self.status = 0 if self.new_record?
@@ -60,7 +78,12 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def in_submit?
+    self.submitting == true
+  end
+
   def submit!
+    self.submitting = true
     self.update_attributes!(status: 1) if in_edit?
   end
 

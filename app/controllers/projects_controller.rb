@@ -25,15 +25,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  #def add
-    #@project = current_user.projects.in_edit.first
-    #unless @project.nil?
-      #redirect_to edit_project_url(@project)
-    #else
-      #redirect_to new_project_url
-    #end
-  #end
-
   def new
     respond_to do |format|
       @project = current_user.projects.in_edit.first
@@ -111,7 +102,7 @@ class ProjectsController < ApplicationController
       @project.submit!
       format.html { redirect_to project_url(@project), notice: '提交成功!等待审核中...' }
     rescue => e
-      format.html { render action: "preview" }
+      format.html { redirect_to preview_project_url(@project) , alert: '提交失败！' }
     end
     end
   end

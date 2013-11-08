@@ -9,22 +9,37 @@ Region.delete_all
 User.delete_all
 Authorization.delete_all
 
-admin = User.create(name: 'admin', email: 'admin@dxhackers.com', password: 'dxhackers', password_confirmation: 'dxhackers')
-hacker = User.create(name: 'hacker', email: 'hacker@dxhackers.com', password: 'dxhackers', password_confirmation: 'dxhackers')
-
-%w(慈善 体育 艺术).each do |cat_name|
-  Category.create(name: cat_name, description: "#{cat_name}的描述")
+def project_attr(username = 'admin')
+  {
+    category_id:    Category.first.id,
+    sponsor_id:     Sponsor.first.id,
+    user_id:        User.find_by_name(username).id,
+    region_id:      Region.first.id
+  }
 end
 
-%w(耐克 阿迪达斯 宝洁).each do |sponsor_name|
-  Sponsor.create(name: sponsor_name, description: "#{sponsor_name}的描述")
+def user_attr(username = 'admin')
+  {
+    name:                   username,
+    email:                  "#{username}@dxhackers.com",
+    password:               "dxhackers",
+    password_confirmation:  "dxhackers"
+  }
 end
 
-project = Project.new(category_id: Category.first.id, sponsor_id: Sponsor.first.id, user_id: admin.id)
-project.basic_info = ProjectBasicInfo.create(name: "DongXi Tech")
-project.story = ProjectStory.create(introduction: "DONGXI TECH 由来自Berkeley的Jiahao Li，圣三一学院的Water，和来自Sun Yat-sen Univ的Allen Wu倾情打造（说的很高端似的……）\n我们主要的想法就是做一个东西。\n 暂时是这个。")
-project.save!
+%w(admin hacker).each { |name| User.create(user_attr(name)) }
+%w(公益).each { |cat_name| Category.create(name: cat_name, description: "#{cat_name}的描述") }
+%w(广州 上海 北京).each { |name| Region.create(name: name, description: name) }
+%w(耐克 阿迪达斯 宝洁).each { |sponsor_name| Sponsor.create(name: sponsor_name, description: "#{sponsor_name}的描述") }
 
-%w(广州 上海 北京).each do |name|
-  Region.create(name: name, description: name)
-end
+# TODO: Create two projects: one for admin, the other for member
+
+project1 = Project.new(project_attr)
+project1.basic_info = ProjectBasicInfo.create(name: "DongXi Tech")
+project1.story = ProjectStory.create(introduction: "DONGXI TECH 由来自Berkeley的Jiahao Li，圣三一学院的Water，和来自Sun Yat-sen Univ的Allen Wu倾情打造（说的很高端似的……）\n我们主要的想法就是做一个东西。\n 暂时是这个。")
+project1.save!
+
+project2 = Project.new(project_attr('hacker'))
+project2.basic_info = ProjectBasicInfo.create(name: "Test Proj")
+project2.story = ProjectStory.create(introduction: "This is a testing project")
+project2.save!

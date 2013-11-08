@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :projects
 
-  has_many :authorizations do
+  has_many :authorizations, dependent: :destroy do
     def find_or_create_by_params(params)
       provider,uid = params[:provider],params[:uid].to_s
       find_or_create_by_provider_and_uid(provider, uid)
