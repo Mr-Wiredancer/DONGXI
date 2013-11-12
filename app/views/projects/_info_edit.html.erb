@@ -35,7 +35,7 @@
       <fieldset class="field">
         <div class="fieldset-inner">
           <%= f.label :category_id, '分类' %>
-          <%= f.select :category_id, Category.all.collect {|c| [c.name, c.id]}, { include_blank: true } , class: 'category' %>
+          <%= f.select :category_id, Category.all.collect {|c| [c.name, c.id]}, class: 'category' %>
         </div>
       </fieldset>
       <fieldset class="field">
@@ -63,7 +63,16 @@
         <div class="fieldset-inner">
           <%= info.label :raise_type, '募集类型' %>
           <%= info.select :raise_type, project_raise_type_options %>
-          <%= info.text_field :amount %> 元
+          <%= info.text_field :amount %>
+          <span id="raise_type_unit">
+            <% if info.object.raise_type == ProjectBasicInfo::RAISE_TYPE[:volunteer][:weight] %>
+              <span style="display:none">元</span>
+              <span>人</span>
+            <% else %>
+              <span>元</span>
+              <span style="display:none">人</span>
+            <% end %>
+          </span>
         </div>
       </fieldset>
     <% end %>

@@ -13,3 +13,8 @@ $ ->
       is_comment: is_comment
     },print_log,"json").done ->
       window.location.reload()
+
+  # 根据dropdown调整单位
+  $('#project_basic_info_attributes_raise_type').change ->
+    $('#raise_type_unit span').toggle()
+

@@ -1,4 +1,4 @@
-<div class="pull-right">
+<div class="pull-right user">
   <% if user_signed_in? %>
     <% if current_user.weibo %>
       <%= render :partial => 'common/weibo_user', locals: { weibo_user: oauth_retrieve(current_user.weibo_id) } %>
@@ -7,8 +7,8 @@
     <% end %>
     <%= "(Admin)"if current_user.has_role?(:admin) %>  |
     <%= link_to '我的项目', projects_user_path(current_user) %> |
-      <%= link_to '用户信息', edit_user_registration_path %> |
-      <%= link_to '退出登录', destroy_user_session_path, :method => :delete %>
+    <%= link_to '用户信息', edit_user_registration_path %> |
+    <%= link_to '退出登录', destroy_user_session_path, :method => :delete %>
   <% else %>
     <%= link_to '注册', new_user_registration_path %> |
     <%= link_to '登录', new_user_session_path %> |

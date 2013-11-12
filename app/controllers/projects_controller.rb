@@ -53,7 +53,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to edit_project_url(@project, { step: params[:next] }), notice: 'project was successfully created.' }
+        format.html { redirect_to edit_project_url(@project, { step: params[:next] }) }
         format.json { render json: @project, status: :created, location: @project }
       else
         format.html { render action: "new" }

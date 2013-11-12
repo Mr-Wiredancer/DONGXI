@@ -61,9 +61,8 @@ h1 { font-size: 26px; }
 }
 
 .navbar {
-  /*background-color: #000;*/
-  /*color: #fff;*/
   height: 30px;
+  margin-bottom: 20px;
   .slogan {
     h1 {
       font-size: 26px;
@@ -75,9 +74,10 @@ h1 { font-size: 26px; }
       padding: 0 20px;
     }
   }
-  /*a, a:visited { color: #fff; text-decoration: none; }*/
-  margin-bottom: 20px;
-  .weibo-user img { margin-top: 5px; width: 20px; }
+  .user {
+    font-size: 14px;
+    .weibo-user img { margin-top: 5px; width: 20px; }
+  }
 }
 
 #notice {
