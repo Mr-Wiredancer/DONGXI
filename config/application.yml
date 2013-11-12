@@ -1,14 +1,14 @@
-# dongxidong: only used in local machine
+# dongxi_dev: only used in local machine
 development:
-  WEIBO_APPKEY:         "541199209"
-  WEIBO_APPSECRET:      "29de0fa5dff6e080ecd6fa5350ba6221"
-  WEIBO_ACCESS_TOKEN:   "2.00RgzAzB0Vdocaf4cd9d5ad8Mlu8RD"
+  WEIBO_APPKEY:         "1552726334"
+  WEIBO_APPSECRET:      "bd6fa1e59dea33a79fbeec2a2a836413"
+  WEIBO_ACCESS_TOKEN:   "2.00_aF2OEIDFFhB30536bf8370ZsA6Y"
 test:
-  WEIBO_APPKEY:         "541199209"
-  WEIBO_APPSECRET:      "29de0fa5dff6e080ecd6fa5350ba6221"
-  WEIBO_ACCESS_TOKEN:   "2.00RgzAzB0Vdocaf4cd9d5ad8Mlu8RD"
-# dongxixi: only used in staging/testing machine and production machine
+  WEIBO_APPKEY:         "1552726334"
+  WEIBO_APPSECRET:      "bd6fa1e59dea33a79fbeec2a2a836413"
+  WEIBO_ACCESS_TOKEN:   "2.00_aF2OEIDFFhB30536bf8370ZsA6Y"
+# dongxi_pro: only used in staging/testing machine and production machine
 production:
-  WEIBO_APPKEY:         "2267569622"
-  WEIBO_APPSECRET:      "ebc1f1cdae0ae6f17f85908ccc871edb"
-  WEIBO_ACCESS_TOKEN:   "2.00RgzAzBa8U9TC5d5b5c8a7543IGsC"
+  WEIBO_APPKEY:         "2645092102"
+  WEIBO_APPSECRET:      "3b4aa9e6f485ea33ad17407835e88314"
+  WEIBO_ACCESS_TOKEN:   "2.00_aF2OEqRXAtC2fd33143edtCrzSE"

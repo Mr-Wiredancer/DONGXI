@@ -1,6 +1,6 @@
 <div class="dx-container">
   <div class="project-title info">
-    <h1>Meet Your new project</h1>
+    <h1>欢迎来到你的新项目</h1>
     <p>给它一个名字，图片和其他细节</p>
   </div>
 </div>
@@ -34,8 +34,8 @@
       </fieldset>
       <fieldset class="field">
         <div class="fieldset-inner">
-          <%= info.label :category_id, '分类' %>
-          <%= info.select :category_id, Category.all.collect {|c| [c.name, c.id]}, { include_blank: true } , class: 'category' %>
+          <%= f.label :category_id, '分类' %>
+          <%= f.select :category_id, Category.all.collect {|c| [c.name, c.id]}, class: 'category' %>
         </div>
       </fieldset>
       <fieldset class="field">
@@ -47,30 +47,37 @@
       </fieldset>
       <fieldset class="field">
         <div class="fieldset-inner">
-          <%= info.label :region_id, '项目地区' %>
-          <%= info.select :region_id, Region.all.collect {|c| [c.name, c.id]}, { include_blank: true }, class: 'region' %>
+          <%= f.label :region_id, '项目地区' %>
+          <%= f.select :region_id, Region.all.collect {|c| [c.name, c.id]}, { include_blank: true }, class: 'region' %>
         </div>
       </fieldset>
       <fieldset class="field">
-        <legend>项目时间</legend>
+        <legend>公众募集持续时间</legend>
         <div class="fieldset-inner">
-          <%= info.label :start_time, "开始时间" %>
-          <%= info.datetime_select :start_time, order: [:month, :day, :year] %>
-          <br />
-          <%= info.label :end_time, "结束时间" %>
-          <%= info.datetime_select :end_time, order: [:month, :day, :year] %>
+          <%= info.label :duration_days, "天数" %>
+          <%= info.text_field :duration_days %>
           <p>我们推荐项目持续时间少于30天。越短的时间通常有越高的成功率，因为这会形成一种对于该项目的紧迫感。</p>
         </div>
       </fieldset>
       <fieldset class="field">
         <div class="fieldset-inner">
-          <%= info.label :amount, '筹措金额' %>
+          <%= info.label :raise_type, '募集类型' %>
+          <%= info.select :raise_type, project_raise_type_options %>
           <%= info.text_field :amount %>
+          <span id="raise_type_unit">
+            <% if info.object.raise_type == ProjectBasicInfo::RAISE_TYPE[:volunteer][:weight] %>
+              <span style="display:none">元</span>
+              <span>人</span>
+            <% else %>
+              <span>元</span>
+              <span style="display:none">人</span>
+            <% end %>
+          </span>
         </div>
       </fieldset>
     <% end %>
     <%= hidden_field_tag 'step', 'info' %>
-    <%= hidden_field_tag 'next', 'reward' %>
+    <%= hidden_field_tag 'next', 'story' %>
     <div class="actions">
       <%= submit_tag '保存' %>
     </div>

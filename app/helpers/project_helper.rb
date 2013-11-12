@@ -1,9 +1,8 @@
 module ProjectHelper
-  def steps
-    ['info', 'story', 'owner', 'final']
+  def render_project_content(project)
   end
-  def next_step_of(step)
-    index = steps.index(step) + 1
-    steps[index]
+
+  def project_raise_type_options
+    ProjectBasicInfo::RAISE_TYPE.collect {|k,v| [v[:description], v[:weight]] }
   end
 end

@@ -31,18 +31,17 @@ ActiveRecord::Schema.define(:version => 20131026043011) do
   end
 
   create_table "project_basic_infos", :force => true do |t|
-    t.string   "name"
-    t.integer  "category_id"
-    t.string   "slogan"
-    t.integer  "region_id"
-    t.integer  "amount"
-    t.integer  "project_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "name"
+    t.string   "slogan"
+    t.integer  "amount"
+    t.integer  "duration_days"
+    t.datetime "published_time"
+    t.integer  "raise_type"
+    t.integer  "project_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end

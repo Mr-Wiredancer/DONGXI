@@ -24,8 +24,8 @@ class Ability
         p.user_id == user.id && p.in_edit?
       end
 
-      can :manage, User, id: user.id
-      cannot :destroy, User
+      #can :manage, User, id: user.id
+      #cannot :destroy, User
 
     else
       cannot :manage, :all

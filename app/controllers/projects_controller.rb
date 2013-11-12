@@ -25,15 +25,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  #def add
-    #@project = current_user.projects.in_edit.first
-    #unless @project.nil?
-      #redirect_to edit_project_url(@project)
-    #else
-      #redirect_to new_project_url
-    #end
-  #end
-
   def new
     respond_to do |format|
       @project = current_user.projects.in_edit.first
@@ -62,7 +53,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to edit_project_url(@project, { step: params[:next] }), notice: 'project was successfully created.' }
+        format.html { redirect_to edit_project_url(@project, { step: params[:next] }) }
         format.json { render json: @project, status: :created, location: @project }
       else
         format.html { render action: "new" }
@@ -76,12 +67,12 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        #params[:step] ||= 'info'
-        #step = next_step_of(params[:step]) # in ProjectHelper
         if params[:next] == 'preview'
-          format.html { redirect_to preview_project_url(@project), notice: 'project was successfully updated.' }
-        else
+          format.html { redirect_to preview_project_url(@project) }
+        elsif %w(info story owner submit).include?(params[:next])
           format.html { redirect_to edit_project_url(@project, { step: params[:next] }) }
+        else
+          format.html { redirect_to edit_project_url(@project) }
         end
       else
         format.html { render action: "edit" }
@@ -111,7 +102,7 @@ class ProjectsController < ApplicationController
       @project.submit!
       format.html { redirect_to project_url(@project), notice: '提交成功!等待审核中...' }
     rescue => e
-      format.html { render action: "preview" }
+      format.html { redirect_to preview_project_url(@project) , alert: '提交失败！' }
     end
     end
   end

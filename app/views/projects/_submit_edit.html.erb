@@ -1,0 +1,25 @@
+<div class="dx-container">
+  <div class="project-title">
+    <h1>hoola!</h1>
+    <p>一旦所有东西都就位，提交你的项目吧</p>
+  </div>
+</div>
+<div class="dx-container">
+  <div style="width:600px; margin: 10px auto;">
+    <h2>在提交之前：</h2>
+    <p>确保你已经：</p>
+    <p>清楚的解释你的项目</p>
+    <p>把你的视频上传！这是最有效与大家沟通的方式！</p>
+    <p>检查你的项目，向一个朋友问他/她的反馈</p>
+
+    <br />
+    <h2>在提交之后：</h2>
+    <p>一旦你做完了上面的步骤</p>
+    <p>你的项目会受到审查，以确保它符合我们的guidelines</p>
+    <p>几天内我们会把关于项目的状态发给你</p>
+    <p>通过之后你可以随时发布</p>
+  </div>
+  <% if @project.in_edit? %>
+    <%= link_to "提交审核", submit_project_path(@project), confirm: '确认提交审核么？提交后你将无法修改' %>
+  <% end %>
+</div>
