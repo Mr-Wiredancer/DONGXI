@@ -17,11 +17,12 @@
       </fieldset>
     <% end %>
 
-    <%= f.fields_for :story do |story| %>
+    <%= f.fields_for :story, builder: DxFormBuilder do |story| %>
       <fieldset class="field">
         <div class="fieldset-inner">
           <%= story.label :video_url, '项目视频' %>
           <%= story.text_field :video_url %>
+          <%= story.hint :video_url, text: '用一个视频去介绍你的项目会大大提高你的成功率。它不需要是一个奥斯卡级别的电影，只需要是你，还有解释你要做什么' %>
         </div>
       </fieldset>
       <fieldset class="field">
@@ -34,12 +35,14 @@
       <fieldset class="field">
         <div class="fieldset-inner">
           <%= story.label :risk, '风险与挑战' %>
+          <%= story.hint :risk, text: ['askdljgalgjas;kaalsfhlkadsjlasl', 'asldaklsdjasdlfjaslkjgdklajg', 'asjsadljglkjkljsdg;alskjg'] %>
+          <div class="clearfix"></div>
           <%= story.text_area :risk, rows: 5 %>
         </div>
       </fieldset>
       <fieldset>
-        <legend>项目FAQ</legend>
-        <p>项目发布之后你可以添加FAQ</p>
+        <%= story.label :faq, '项目FAQ' %>
+        <%= story.hint :faq, text: '项目发布之后你可以添加FAQ' %>
       </fieldset>
     <% end %>
 

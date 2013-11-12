@@ -112,3 +112,35 @@ h1 { font-size: 26px; }
     list-style: square;
   }
 }
+
+
+/*=================== dxtech ========================*/
+.dx-form-label {
+  float: left;
+  margin: 10px;
+  padding: 10px 0;
+  width: 100px;
+
+  label {
+    width: 50px;
+  }
+}
+.dx-form-hint {
+  margin: 10px;
+  padding: 10px 0;
+  margin-left: 120px;
+}
+.dx-form-textarea {
+  width: inherit;
+  margin: 0 20px 0 120px;
+  textarea {
+    width: 100%;
+  }
+}
+.dx-form-textfield {
+  width: inherit;
+  margin: 0 20px 0 120px;
+  input {
+    width: 100%;
+  }
+}
