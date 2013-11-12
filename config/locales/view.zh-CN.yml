@@ -3,9 +3,10 @@ zh-CN:
     application:
       login_with_weibo: "使用微博登录"
   projects:
-    new:
-      info: '基本'
-      reward: '奖励'
-      story: '故事'
-      owner: '关于你'
-      account: '账户'
+    info: '基本'
+    reward: '奖励'
+    story: '故事'
+    owner: '关于你'
+    submit: '提交'
+    account: '账户'
+    preview: '预览'

@@ -57,7 +57,7 @@ class Project < ActiveRecord::Base
   }
 
   # methods
-  %w(name slogan photo amount).each do |info_attr|
+  %w(name slogan photo amount duration_days published_time raise_type).each do |info_attr|
     delegate info_attr, to: :basic_info, prefix: false, allow_nil: true
   end
 

@@ -67,12 +67,12 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        #params[:step] ||= 'info'
-        #step = next_step_of(params[:step]) # in ProjectHelper
         if params[:next] == 'preview'
-          format.html { redirect_to preview_project_url(@project), notice: 'project was successfully updated.' }
-        else
+          format.html { redirect_to preview_project_url(@project) }
+        elsif %w(info story owner submit).include?(params[:next])
           format.html { redirect_to edit_project_url(@project, { step: params[:next] }) }
+        else
+          format.html { redirect_to edit_project_url(@project) }
         end
       else
         format.html { render action: "edit" }
