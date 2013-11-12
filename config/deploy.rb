@@ -45,6 +45,13 @@ namespace :deploy do
         #sudo "service nginx #{command}"
       end
     end
+    task :start_webrick_dev, roles: :app do
+      run "cd #{current_path}; RAILS_ENV=development bundle exec rails s"
+    end
+
+    task :start_webrick_pro, roles: :app do
+      run "cd #{current_path}; RAILS_ENV=production bundle exec rails s"
+    end
   end
 
   #desc "Start server"
@@ -117,7 +124,6 @@ namespace :deploy do
     # 1st migration is defined in gem.
     run "cd #{current_path}; RAILS_ENV=production rake db:seed"
   end
-
   #task :set_db, roles: :app do
     #set :db_user, Capistrano::CLI.ui.ask("Application database user: ")
     #set :db_pass, Capistrano::CLI.password_prompt("Password: ")
