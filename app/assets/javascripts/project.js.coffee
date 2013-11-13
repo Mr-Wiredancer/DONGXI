@@ -1,7 +1,12 @@
 $ ->
-  $('ul.banner a').click ->
-    $('form input[name="next"]').val($(@).attr('href').substring(1))
-    $('form').submit()
+  $('ul.banner a').click (e)->
+    $form = $('.project-edit-form form')
+    if $form.length > 0
+      e.preventDefault()
+      $form.find('input[name="next"]').val($(@).data('step'))
+      $form.submit()
+    else
+      true
 
   $('button#repost').click ->
     print_log = (data) -> console.log(data)

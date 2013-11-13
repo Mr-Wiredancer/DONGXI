@@ -4,8 +4,8 @@
     <p>告诉大家你是谁！关于你的网页链接也是很有用的。</p>
   </div>
 </div>
-<div class="dx-container">
-  <%= form_for @project, :method => :put do |f| %>
+<div class="dx-container project-edit-form">
+  <%= form_for @project, builder: DxFormBuilder, :method => :put do |f| %>
     <% if @project.errors.any? %>
       <fieldset id="error_explanation">
         <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -28,7 +28,9 @@
         <div class="fieldset-inner">
           <%= owner.label :name, '姓名' %>
           <%= owner.text_field :name %>
-          <button>实名认证</button>
+          <div class="clearfix"></div>
+          <%= owner.label :id_card_num, '身份证' %>
+          <%= owner.text_field :id_card_num %>
         </div>
       </fieldset>
       <fieldset class="field">
@@ -38,16 +40,18 @@
         </div>
       </fieldset>
       <fieldset class="field">
+        <div class="fieldset-inner">
           <%= owner.label :website_url, '个人网页' %>
           <%= owner.text_field :website_url %>
-        <p>这些网页应该有助于支持者和商家更好的了解你，明白你为什么有能力来完成你的这个项目。你的个人主页，微博，以前做过的工作都会有帮助哦~</p>
+          <%= owner.hint :website_url, text: "这些网页应该有助于支持者和商家更好的了解你，明白你为什么有能力来完成你的这个项目。你的个人主页，微博，以前做过的工作都会有帮助哦~" %>
+        </div>
       </fieldset>
     <% end %>
     <div class="actions">
       <%= submit_tag '保存' %>
     </div>
     <%= hidden_field_tag "step", "owner" %>
-    <%= hidden_field_tag "next", "account" %>
+    <%= hidden_field_tag "next", "submit" %>
   <% end %>
 </div>
 

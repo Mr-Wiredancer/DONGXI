@@ -1,5 +1,5 @@
 class ProjectOwner < ActiveRecord::Base
-  attr_accessible :introduction, :name, :website_url, :avatar
+  attr_accessible :introduction, :name, :website_url, :avatar, :id_card_num
 
   has_attached_file :avatar,  :styles => { :normal => ["100x100#", :png] },
                               :url    => ":assets_host/content/:class/:attachment/:hash/:style.:extension",
@@ -12,6 +12,7 @@ class ProjectOwner < ActiveRecord::Base
     condition.validates :name,          presence: true
     condition.validates :website_url,   presence: true, format: { with: /([http|https]:\/\/)?[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+/}
     condition.validates :avatar,        presence: true
+    condition.validates :id_card_num,   presence: true, format: { with: /(^\d{15}$)|(^\d{17}[0-9Xx]{1}$)/ }
   end
 
   def in_submit?

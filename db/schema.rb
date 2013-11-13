@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20131026043011) do
     t.string   "website_url"
     t.text     "introduction"
     t.integer  "project_id"
+    t.string   "id_card_num"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"

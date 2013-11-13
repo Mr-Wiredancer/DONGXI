@@ -1,10 +1,14 @@
 <div class="dx-container" style="text-align:center; margin-bottom: 20px;">
   <ul class="banner">
-    <% for step in %w(info story owner submit preview) %>
-      <li style="display:inline-block; margin-right: 20px;"><%= link_to t("projects.#{step}"), "##{step}"%>
+    <% for step in %w(info story owner submit) %>
+      <li style="display:inline-block; margin-right: 20px;">
+      <%
+          current_url = "#{request.raw_host_with_port}#{request.path_info}"
+      %>
+      <a href=<%= "#{request.path}?step=#{step}" %> data-step="<%= "#{step}" %>"><%= t("projects.#{step}") %></a>
     <% end %>
     <% unless @project.new_record? %>
-      <li style="display:inline-block;"><%= link_to 'Preview', preview_project_path(@project) %>
+      <li style="display:inline-block;"><%= link_to '预览', preview_project_path(@project) %>
     <% end %>
   </ul>
 </div>
