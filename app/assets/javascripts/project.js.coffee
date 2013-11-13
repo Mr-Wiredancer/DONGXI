@@ -1,5 +1,5 @@
 $ ->
-  $('ul.banner a').click (e)->
+  $('ul.banner a.editable').click (e)->
     $form = $('.project-edit-form form')
     if $form.length > 0
       e.preventDefault()

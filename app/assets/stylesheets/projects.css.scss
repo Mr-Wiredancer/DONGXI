@@ -1,36 +1,48 @@
 #projects {
-  .project-title {
-    margin: 0 auto;
-    text-align: center;
-  }
-  .form {
-    margin: 0 auto;
-  }
-  form {
-    fieldset {
-      width: 600px;
-      margin: 20px auto;
-      border: 1px solid #000;
-
-      label {
-        /*width: 100px;*/
-        margin-left: 20px;
-        display: inline-block;
-      }
-      input, select, textarea {
-        margin: 10px auto;
-        border: 1px solid #000;
-      }
-      input[type="text"], select.category, select.region {
-        /*width: 300px;*/
+  &.show, &.preview {
+    .project {
+      .title { text-align: center; }
+      .meta { text-align: right; }
+      .content {
+        overflow: hidden;
+        .information {
+        }
       }
     }
   }
-  table.projects {
-    margin: 20px auto 0;
-    th, td { text-align: center; }
-    .name { width: 180px; }
-    .introduction { width: 360px; }
-    .slogan, .risk, .status { width: 120px; }
+  &.edit, &.new {
+    .title {
+      margin: 0 auto;
+      text-align: center;
+    }
+    form.project-edit-form {
+      fieldset {
+        width: 600px;
+        margin: 20px auto;
+        border: 1px solid #000;
+
+        label {
+          /*width: 100px;*/
+          margin-left: 20px;
+          display: inline-block;
+        }
+        input, select, textarea {
+          margin: 10px auto;
+          border: 1px solid #000;
+        }
+        input[type="text"], select.category, select.region {
+          /*width: 300px;*/
+        }
+      }
+    }
+  }
+  &.index {
+    table.projects {
+      margin: 20px auto 0;
+      th, td { text-align: center; }
+      .name { width: 180px; }
+      .introduction { width: 360px; }
+      .slogan, .risk, .status { width: 120px; }
+    }
   }
 }

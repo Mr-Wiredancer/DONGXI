@@ -1,43 +1,44 @@
-<div class="dx-container">
-<p>
-  <b>Name:</b>
-  <%= @project.try(:basic_info).try(:name) %>
-</p>
+<div class="dx-container project">
+  <div class="title">
+    <h1><%= @project.try(:name) || "项目名称" %></h1>
+    <p>由<%= @project.try(:owner_name) || "免费午餐团队" %>发起</p>
+  </div>
 
-<p>
-  <b>Slogan:</b>
-  <%= @project.try(:basic_info).try(:slogan) %>
-</p>
+  <div class="meta">
+    <!-- FIXME WITH ICONS! -->
+    <span>地区：<%= @project.try(:region_name) || 'xx省xx市' %></span>
+    <span>类别：<%= @project.try(:category_name) || "公益 教育" %></span>
+  </div>
 
-<p>
-  <b>Introduction:</b>
-  <%= @project.try(:story).try(:introduction) %>
-</p>
-
-<p>
-  <b>Risk:</b>
-  <%= @project.try(:story).try(:risk) %>
-</p>
-<div>
-  <%= image_tag @project.basic_info.photo.url(:normal) if @project.try(:basic_info).try(:photo).nil? %>
-</div>
-<div>
-  <%= image_tag @project.owner.avatar.url(:normal) unless @project.try(:owner).try(:avatar).nil? %>
-</div>
-
+  <div class="content">
+    <div class="pull-left information dx-u-7-10">
+      <div class='wrap'>
+        <div class="video">
+          <!-- FIXME WITH REAL VIDEO! -->
+          <iframe height=298 width=310 src="http://player.youku.com/embed/XMzk1NjM4MzMy" frameborder=0 allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="pull-left sns-share dx-u-3-10">
+      <div class='wrap'>
+        还差38个分享就阔以筹集了。
+        <!-- shared... -->
+      </div>
+    </div>
+  </div>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
 
-<% if @status %>
-<div style="margin-top: 20px;">
+<!--<% if @status %>
+<di- style="margin-top: 20px;">
   <div style="border: 1px solid #000; width: 600px;">
     <p><%= @status["user"]["screen_name"] %></p>
     <p><%= @status["text"] %></p>
     <span><%= "转发(#{@status["reposts_count"]})" %></span>
     <span><%= "评论(#{@status["comments_count"]})" %></span>
   </div>
-</div>
+</div>-->
 <!--<div>
   <%= text_area_tag "status", nil, size: '70x3' %>
   <%= hidden_field_tag "access_token", ENV["WEIBO_ACCESS_TOKEN"] %>--><!-- token这么写好像不行.. -->

@@ -42,23 +42,7 @@ input, textarea {
 h1 { font-size: 26px; }
 
 /*==================  custom class definition ======================*/
-
-.pull-left { float: left; }
-.pull-right { float: right; }
-.clearfix { clear: both; }
-
-.row {
-  margin: 10px;
-}
-.dx-wrapper {
-  width: 1120px;
-  margin: 0 auto;
-}
-
-.dx-container {
-  width: 1040px;
-  margin: 0 auto;
-}
+@import 'dx';
 
 .navbar {
   height: 30px;
@@ -110,37 +94,5 @@ h1 { font-size: 26px; }
   ul li {
     font-size: 12px;
     list-style: square;
-  }
-}
-
-
-/*=================== dxtech ========================*/
-.dx-form-label {
-  float: left;
-  margin: 10px;
-  padding: 10px 0;
-  width: 100px;
-
-  label {
-    width: 50px;
-  }
-}
-.dx-form-hint {
-  margin: 10px;
-  padding: 10px 0;
-  margin-left: 120px;
-}
-.dx-form-textarea {
-  width: inherit;
-  margin: 0 20px 0 120px;
-  textarea {
-    width: 100%;
-  }
-}
-.dx-form-textfield {
-  width: inherit;
-  margin: 0 20px 0 120px;
-  input {
-    width: 100%;
   }
 }

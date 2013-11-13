@@ -67,6 +67,8 @@ class Project < ActiveRecord::Base
   %w(name introduction website_url avatar).each do |owner_attr|
     delegate owner_attr, to: :owner, prefix: true, allow_nil: true
   end
+  delegate :name, to: :region, prefix: true, allow_nil: true
+  delegate :name, to: :category, prefix: true, allow_nil: true
 
   def set_default_status
     self.status = 0 if self.new_record?
