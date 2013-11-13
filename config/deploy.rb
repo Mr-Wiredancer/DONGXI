@@ -1,6 +1,10 @@
 require "rvm/capistrano"
 require "bundler/capistrano"
-server "115.29.192.209", :web, :app, :db, primary: true
+#server "115.29.192.209", :web, :app, :db, primary: true
+role :web, "115.29.192.209", "192.168.1.99"
+role :app, "115.29.192.209", "192.168.1.99"
+role :db, "115.29.192.209", "192.168.1.99" # WARNING: one database?
+server "192.168.1.99", :db, primary: true
 
 set :application, "website"
 set :user, "deployer"
@@ -77,6 +81,7 @@ namespace :deploy do
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
+    put File.read("config/application.yml"), "#{shared_path}/config/application.yml"
     puts "Now edit the config files in #{shared_path}"
   end
   after "deploy:setup", "deploy:setup_config"
