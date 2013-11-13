@@ -12,3 +12,10 @@ production:
   WEIBO_APPKEY:         "2645092102"
   WEIBO_APPSECRET:      "3b4aa9e6f485ea33ad17407835e88314"
   WEIBO_ACCESS_TOKEN:   "2.00_aF2OEqRXAtC2fd33143edtCrzSE"
+
+# dongxi_pro_local: only used in local staging machine
+#production:
+  #WEIBO_APPKEY:         "1289553392"
+  #WEIBO_APPSECRET:      "79c3f41483cb5ed1ab40df853cbf61fb"
+  #WEIBO_ACCESS_TOKEN:   "2.00_aF2OEQkpQ6Bcbccd4f0e3BhSN5E"
+
