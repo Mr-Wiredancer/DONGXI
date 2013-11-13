@@ -1,11 +1,29 @@
-<% default_text = "更多信息请点击：" + request.original_url %>
+<% default_text = "更多信息请点击：" + url %>
 <wb:share-button
     type="button"
-    appkey=<%= ENV["WEIBO_APPKEY"] %>
     addition="number"
-    ralateUid="3876426391"
-    title=<%= request.original_url %>
-    url=<%= "http://v.youku.com/v_show/id_XMzk1NjM4MzMy.html" %>
+    appkey=<%= ENV["WEIBO_APPKEY"] %>
     pic=<%= pic_url %>
-    default_text="<%= CGI::escape(tag) + " " + text + default_text %>"
+    url=<%= url %>
+    ralateUid="3876426391"
+    default_text="<%= CGI::escape(tag) + " " + text + " " + default_text %>"
 ></wb:share-button>
+
+<!--<a target="blank" href="http://share.baidu.com/s?type=text&searchPic=0&sign=on&to=tsina&url=<%= url %>&title=<%= text %>&key=<%= ENV["WEIBO_APPKEY"] %>">新浪微博</a>-->
+<!-- Baidu Button BEGIN -->
+<!--<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+  <a class="bds_tsina"></a>
+  <a class="bds_renren"></a>
+  <span class="bds_more"></span>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6863237" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+var bds_config={
+  "bdText":"<%= CGI::escape(tag) + " " + text + " " + default_text %>",
+  "wbUid":'3876426391',
+  "snsKey":{'tsina':'1552726334'}
+};
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>-->
+<!-- Baidu Button END -->
