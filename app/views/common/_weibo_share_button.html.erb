@@ -1,5 +1,5 @@
 <% default_text = "更多信息请点击：" + url %>
-<wb:share-button
+<!--<wb:share-button
     type="button"
     addition="number"
     appkey=<%= ENV["WEIBO_APPKEY"] %>
@@ -7,7 +7,31 @@
     url=<%= url %>
     ralateUid="3876426391"
     default_text="<%= CGI::escape(tag) + " " + text + " " + default_text %>"
-></wb:share-button>
+></wb:share-button>-->
+<!--<wb:publish action="forward" type="web" language="zh_cn" button_type="red" button_size="middle" button_text="转发微博" mid="AhBaXzCZ9" uid="3876426391" default_text="文案文案" tag="东西科技" refer="y" appkey="2vbrf8" ></wb:publish>-->
+
+<a class="publishButton publishButton_red02" id="wb_publisher">
+  <span>分享到微博</span>
+</a>
+
+<script>
+  WB2.anyWhere(function(W){
+    W.widget.publish({
+      action:"forward",
+      type:"web",
+      language:"zh_cn",
+      button_type:"red",
+      button_size:"middle",
+      uid:"3876426391",     // FIXME: uid should be stored in @project
+      mid:"AhBaXzCZ9",      // FIXME: mid should be stored in @project
+      tag:"<%= tag %>",
+      default_text: "<%= text %>",
+      refer:"y",
+      appkey:"2vbrf8",
+      id: "wb_publisher"
+    });
+  });
+</script>
 
 <!--<a target="blank" href="http://share.baidu.com/s?type=text&searchPic=0&sign=on&to=tsina&url=<%= url %>&title=<%= text %>&key=<%= ENV["WEIBO_APPKEY"] %>">新浪微博</a>-->
 <!-- Baidu Button BEGIN -->

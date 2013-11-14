@@ -32,7 +32,7 @@
                       :locals  => {
                         :url      => request.original_url,
                         :pic_url  => "http%3A%2F%2Fstatic.youku.com%2Findex%2Fimg%2Fheader%2Fyklogo.png",
-                        :tag      => "#东西科技#", # slogan?
+                        :tag      => "东西科技", # slogan?
                         :text     => @project.try(:basic_info).try(:name),
                       }
           %>
@@ -52,15 +52,15 @@
     <span><%= "转发(#{@status["reposts_count"]})" %></span>
     <span><%= "评论(#{@status["comments_count"]})" %></span>
   </div>
-</div>-->
-<!--<div>
+</div>
+<div>
   <%= text_area_tag "status", nil, size: '70x3' %>
-  <%= hidden_field_tag "access_token", ENV["WEIBO_ACCESS_TOKEN"] %>--><!-- token这么写好像不行.. -->
-  <!--<%= hidden_field_tag "uid", @status["mid"] %>
+  <%= hidden_field_tag "access_token", ENV["WEIBO_ACCESS_TOKEN"] %>
+  <%= hidden_field_tag "uid", @status["mid"] %>
   <%= button_tag "转发此微博", type: 'button', id: 'repost' %>
   <%= check_box_tag 'is_comment', true %>评论给当前微博
-</div>-->
-<% end %>
+</div>
+<% end %>-->
 
 <%= content_for :weibo_meta do %>
   <meta property="og:type" content="webpage" />
@@ -71,5 +71,31 @@
   <meta name="weibo:webpage:create_at" content="2013-11-07 09:12:56 +0800" />
   <meta name="weibo:webpage:update_at" content="2013-11-07 10:30:16 +0800" />
 <% end %>
+<div class="statuses">
 
 </div>
+
+<!--<script>
+  $(function() {
+    $.ajax({
+      url: "https://api.weibo.com/2/statuses/mentions.json",
+      data: {
+        access_token: "2.00_aF2OEqRXAtC2fd33143edtCrzSE",
+      },
+      dataType: "jsonp",
+      type: "GET"
+    }).done(function(data) {
+      var statuses = data["data"]["statuses"];
+      console.log(statuses[0])
+      $.each(statuses, function(key, value) {
+        $text = $('<span></span>', {
+          text: "mid:" + value["mid"],
+        });
+        $user = $('<span></span>', {
+          text: "   name:" + value["user"]["name"],
+        });
+        $('<div></div>').append($text).append($user).appendTo(".statuses")
+      })
+    });
+  })
+</script>-->
