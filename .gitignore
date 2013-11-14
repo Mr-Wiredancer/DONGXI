@@ -26,5 +26,6 @@ pickle-email-*.html
 # public
 /public/assets
 /public/content
+/public/ckeditor_assets
 
 config/database.yml

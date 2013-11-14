@@ -28,8 +28,7 @@
       <fieldset class="field">
         <div class="fieldset-inner">
           <%= story.label :introduction, '项目介绍' %>
-          <!-- add rich-text editor here -->
-          <%= story.text_area :introduction, rows: 5 %>
+          <%= story.cktext_area :introduction, rows: 5 %>
         </div>
       </fieldset>
       <fieldset class="field">

@@ -1,5 +1,7 @@
 Website::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
   post '/search' => "search#index"
 
   devise_for :users, :path => 'account', :controllers => {
