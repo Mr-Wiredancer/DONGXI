@@ -28,3 +28,4 @@ pickle-email-*.html
 /public/content
 
 config/database.yml
+config/application.yml
