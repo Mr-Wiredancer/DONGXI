@@ -29,6 +29,11 @@ class DxFormBuilder < ActionView::Helpers::FormBuilder
       super
     end
   end
+  def cktext_area(name, *args)
+    content_tag :div, class: 'dx-form-ck-textarea' do
+      super
+    end
+  end
   def text_field(name, *args)
     options = args.extract_options!
     return super(name, options) if options[:original] == true

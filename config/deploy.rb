@@ -80,6 +80,7 @@ namespace :deploy do
     sudo "cp #{shared_path}/system/nginx.conf /etc/nginx/nginx.conf"
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
+    run "mkdir -p #{shared_path}/ckeditor_assets"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
     put File.read("config/application.yml"), "#{shared_path}/config/application.yml"
     puts "Now edit the config files in #{shared_path}"
@@ -96,6 +97,9 @@ namespace :deploy do
     run "mkdir -p /home/#{user}/.test/log"
   end
   after "deploy:finalize_update", "deploy:symlink_config", "deploy:mkdir_dot_test"
+  after "deploy:finalize_update" do
+    run "ln -s #{shared_path}/ckeditor_assets #{release_path}/public/ckeditor_assets"
+  end
 
   desc "Make sure local git is in sync with remote."
   task :check_revision, roles: :app do

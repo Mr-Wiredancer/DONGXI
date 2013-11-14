@@ -48,6 +48,13 @@
     width: 100%;
   }
 }
+.dx-form-ck-textarea {
+  width: inherit;
+  margin-left: 120px;
+  textarea {
+    width: 100%;
+  }
+}
 .dx-form-textfield {
   width: inherit;
   margin: 0 20px 0 120px;
