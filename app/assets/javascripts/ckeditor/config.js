@@ -1,10 +1,12 @@
 CKEDITOR.editorConfig = function( config ){
   config.toolbar_Basic = [
-    ['Bold','Italic','Underline','Link','Unlink','Image','BulletedList'],
+    ['Bold','Italic','Underline','Link','Unlink','Image','BulletedList','MediaEmbed'],
   ];
   config.toolbar = 'Basic';
   config.language = 'zh-CN';
   config.uiColor = '#ffffff';
+
+  config.extraPlugins = 'mediaembed';
 
   /* Copy from gem ckeditor: app/assets/javascripts/ckeditor/config.js */
 

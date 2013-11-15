@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/allenfantasy/ckeditor.git
+  revision: c32bd08dbe70f31b0074d2a139982f002d48f567
+  specs:
+    ckeditor (4.0.6)
+      mime-types
+      orm_adapter
+
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -44,9 +52,6 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    ckeditor (4.0.6)
-      mime-types
-      orm_adapter
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.3)
@@ -116,7 +121,7 @@ GEM
     omniauth-weibo-oauth2 (0.3.0)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
-    orm_adapter (0.4.0)
+    orm_adapter (0.5.0)
     paperclip (3.5.2)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -212,7 +217,7 @@ DEPENDENCIES
   binding_of_caller
   cancan
   capistrano (~> 2.15)
-  ckeditor
+  ckeditor!
   coffee-rails (~> 3.2.1)
   devise
   figaro

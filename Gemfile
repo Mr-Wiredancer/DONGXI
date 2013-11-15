@@ -7,7 +7,7 @@ gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 
-gem 'ckeditor'
+gem 'ckeditor', :git => "git://github.com/allenfantasy/ckeditor.git"
 
 # databases
 gem 'sqlite3', :group => [:development, :test]
