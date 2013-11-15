@@ -1,13 +1,5 @@
 class DxFormBuilder < ActionView::Helpers::FormBuilder
   delegate :content_tag, to: :@template
-  #def text_field(name, *args)
-    #@template.content_tag :fieldset, class: "field" do
-      #options = args.extract_options!
-      #content_tag :div, class: "fieldset-inner" do
-        #label(name, options[:label]) + super
-      #end
-    #end
-  #end
 
   # REFACTOR: all classes will go to 'dx-form'
 

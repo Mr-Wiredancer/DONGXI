@@ -23,6 +23,7 @@ class Project < ActiveRecord::Base
   has_one   :basic_info, class_name: "ProjectBasicInfo", dependent: :destroy
   has_one   :story, class_name: "ProjectStory", dependent: :destroy
   has_one   :owner, class_name: "ProjectOwner", dependent: :destroy
+  has_one   :weibo_status, class_name: "WeiboStatus", dependent: :destroy
 
   accepts_nested_attributes_for :basic_info, :story, :owner
 
@@ -61,7 +62,7 @@ class Project < ActiveRecord::Base
     delegate info_attr, to: :basic_info, prefix: false, allow_nil: true
   end
 
-  %w(introduction risk video_url).each do |story_attr|
+  %w(introduction risk video_url weibo_url).each do |story_attr|
     delegate story_attr, to: :story, prefix: false, allow_nil: true
   end
   %w(name introduction website_url avatar).each do |owner_attr|

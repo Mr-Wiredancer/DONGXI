@@ -27,6 +27,13 @@
       </fieldset>
       <fieldset class="field">
         <div class="fieldset-inner">
+          <%= story.label :weibo_url, '微博地址' %>
+          <%= story.text_field :weibo_url %>
+          <%= story.hint :weibo_url, text: '给出一个微博的地址，以便更好的介绍这个项目' %>
+        </div>
+      </fieldset>
+      <fieldset class="field">
+        <div class="fieldset-inner">
           <%= story.label :introduction, '项目介绍' %>
           <%= story.cktext_area :introduction, rows: 5 %>
         </div>

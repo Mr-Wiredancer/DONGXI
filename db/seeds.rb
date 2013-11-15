@@ -1,13 +1,14 @@
 # encoding: utf-8
 Project.delete_all
-ProjectBasicInfo.delete_all
-ProjectStory.delete_all
-ProjectOwner.delete_all
+#ProjectBasicInfo.delete_all
+#ProjectStory.delete_all
+#ProjectOwner.delete_all
 Category.delete_all
 Sponsor.delete_all
 Region.delete_all
 User.delete_all
 Authorization.delete_all
+WeiboStatus.delete_all
 
 def project_attr(username = 'admin')
   {
@@ -34,12 +35,14 @@ end
 
 # TODO: Create two projects: one for admin, the other for member
 
-project1 = Project.new(project_attr)
-project1.basic_info = ProjectBasicInfo.create(name: "DongXi Tech")
-project1.story = ProjectStory.create(introduction: "DONGXI TECH 由来自Berkeley的Jiahao Li，圣三一学院的Water，和来自Sun Yat-sen Univ的Allen Wu倾情打造（说的很高端似的……）\n我们主要的想法就是做一个东西。\n 暂时是这个。")
+project1 = Project.create(project_attr)
+project1.build_basic_info(name: "DongXi Tech")
+project1.build_story(introduction: "DONGXI TECH 由来自Berkeley的Jiahao Li，圣三一学院的Water，和来自Sun Yat-sen Univ的Allen Wu倾情打造（说的很高端似的……）\n我们主要的想法就是做一个东西。\n 暂时是这个。", weibo_url: "http://weibo.com/3876426391/AiFnt8zMh")
 project1.save!
 
-project2 = Project.new(project_attr('hacker'))
-project2.basic_info = ProjectBasicInfo.create(name: "Test Proj")
-project2.story = ProjectStory.create(introduction: "This is a testing project")
+project2 = Project.create(project_attr('hacker'))
+project2.build_basic_info(name: "Test Proj")
+project2.build_story(introduction: "This is a testing project")
 project2.save!
+
+w = WeiboStatus.create(project_id: Project.first.id, status_mid: "AiFnt8zMh", status_id: "3644489632044157")

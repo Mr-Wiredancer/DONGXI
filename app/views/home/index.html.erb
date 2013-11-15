@@ -71,18 +71,6 @@
 
 <div class="clearfix"></div>
 
-<!-- mock status -->
-<% if @status %>
-<div style="margin-top: 20px;">
-  <div style="border: 1px solid #000; width: 600px;">
-    <p><%= @status["user"]["screen_name"] %></p>
-    <p><%= @status["text"] %></p>
-    <span><%= "转发(#{@status["reposts_count"]})" %></span>
-    <span><%= "评论(#{@status["comments_count"]})" %></span>
-  </div>
-</div>
-<% end %>
-
 <!--
 <br />
 <% if user_signed_in? %>
