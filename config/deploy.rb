@@ -24,30 +24,40 @@ set :log_dir, "#{shared_path}/log"
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
-# if you want to clean up old releases on each deploy uncomment this:
+after "deploy:setup", "deploy:setup_config"
+after "deploy:cold", "deploy:db:seed"
+before "deploy", "deploy:check_revision"
 after "deploy", "deploy:cleanup" # keep only last 5 releases
+after "deploy:finalize_update" do
+  symlink_config
+  mkdir_dot_test
+  run "ln -s #{shared_path}/ckeditor_assets #{release_path}/public/ckeditor_assets"
+end
 
 namespace :deploy do
 
   task :default do
     update_code
     create_symlink
-    # WARNING:
+    # FIXME:
     # bug in unicorn_init.sh: restart option doesn't work. use `stop & start` for now.
     # but this bug should be fixed.
     server.stop
-    db.reset # WARNING: should use db.migrate later
+    db.reset # FIXME: should use db.migrate, when db structure is stable
     server.start
   end
 
   namespace :server do
-    %w[start stop restart].each do |command|
+    %w[start stop].each do |command|
       desc "#{command} server: unicorn & nginx"
       task command, roles: :app, except: { no_release: true } do
         run "/etc/init.d/unicorn_#{application} #{command}"
         #unicorn_rails
         #sudo "service nginx #{command}"
       end
+    end
+    task :restart, roles: :app do
+      run "kill -USR2 `cat #{deploy_to}/shared/pids/unicorn.pid`"
     end
     task :start_webrick_dev, roles: :app do
       run "cd #{current_path}; RAILS_ENV=development bundle exec rails s"
@@ -82,10 +92,15 @@ namespace :deploy do
     run "mkdir -p #{shared_path}/config"
     run "mkdir -p #{shared_path}/ckeditor_assets"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
+
+    set :db_user, Capistrano::CLI.ui.ask("Application database user: ")
+    set :db_pass, Capistrano::CLI.password_prompt("Password: ")
+    run "sed -i 's!USERNAME!#{db_user}!' #{shared_path}/config/database.yml"
+    run "sed -i 's!PASSWORD!#{db_pass}!' #{shared_path}/config/database.yml"
+
     put File.read("config/application.yml"), "#{shared_path}/config/application.yml"
     puts "Now edit the config files in #{shared_path}"
   end
-  after "deploy:setup", "deploy:setup_config"
 
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
@@ -96,10 +111,6 @@ namespace :deploy do
     run "mkdir -p /home/#{user}/.test/pids"
     run "mkdir -p /home/#{user}/.test/log"
   end
-  after "deploy:finalize_update", "deploy:symlink_config", "deploy:mkdir_dot_test"
-  after "deploy:finalize_update" do
-    run "ln -s #{shared_path}/ckeditor_assets #{release_path}/public/ckeditor_assets"
-  end
 
   desc "Make sure local git is in sync with remote."
   task :check_revision, roles: :app do
@@ -109,40 +120,21 @@ namespace :deploy do
       exit
     end
   end
-  before "deploy", "deploy:check_revision"
 
   ### database
 
-  #after "deploy:setup" do
-    #run "RAILS_ENV=production rake db:create"
-  #end
   namespace :db do
+    %w(drop create migrate seed).each do |command|
+      task command, roles: :app do
+        run "cd #{current_path}; RAILS_ENV=production rake db:#{command}"
+      end
+    end
     task :reset, roles: :app do
-      run "cd #{current_path}; RAILS_ENV=production rake db:drop"
-      run "cd #{current_path}; RAILS_ENV=production rake db:create"
-      run "cd #{current_path}; RAILS_ENV=production rake db:migrate"
-      #run "cd #{current_path}; RAILS_ENV=production rake db:seed"
+      drop
+      create
+      migrate
       seed
     end
-
-    task :seed, roles: :app do
-      run "cd #{current_path}; RAILS_ENV=production rake db:seed"
-    end
   end
-
-  after "deploy:cold" do
-    # 1st migration is defined in gem.
-    run "cd #{current_path}; RAILS_ENV=production rake db:seed"
-  end
-  #task :set_db, roles: :app do
-    #set :db_user, Capistrano::CLI.ui.ask("Application database user: ")
-    #set :db_pass, Capistrano::CLI.password_prompt("Password: ")
-
-    #run "sed -i 's!\[USERNAME\]!#{db_user}!' #{current_path}/config/database.yml"
-    #run "sed -i 's!\[PASSWORD\]!#{db_pass}!' #{current_path}/config/database.yml"
-  #end
-
-  #before "deploy:migration", "deploy:set_db"
-  after "deploy:update", "deploy:migrations"
 
 end

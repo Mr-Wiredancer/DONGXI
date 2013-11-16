@@ -13,6 +13,6 @@ test:
 production:
   adapter: postgresql
   database: dongxi_production
-  username: [USERNAME]
-  password: [PASSWORD]
+  username: USERNAME
+  password: PASSWORD
   host: 127.0.0.1
