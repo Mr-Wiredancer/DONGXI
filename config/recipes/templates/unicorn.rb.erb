@@ -1,0 +1,34 @@
+working_directory <%= current_path %>
+pid <%= unicorn_pid %>
+stderr_path "<%= pid_dir %>/unicorn.stderr.log"
+stdout_path "<%= pid_dir %>/unicorn.stdout.log"
+
+listen "/tmp/unicorn.<%= application %>.sock", :backlog => 64
+worker_processes <%= unicorn_workers %>
+listen 8080, :tcp_nopush => true # ???
+timeout 30
+
+preload_app true
+GC.respond_to?(:copy_on_write_friendly=) and
+  GC.copy_on_write_friendly = true
+
+check_client_connection false
+
+before_fork do |server, worker|
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
+
+  old_pid = "<%= pid_dir %>/unicorn.pid.oldbin"
+  if File.exists?(old_pid) && old_pid != server.pid
+   begin
+     Process.kill("QUIT", File.read(old_pid).to_i)
+   rescue Errno::ENOENT, Errno::ESRCH
+     puts "Send 'QUIT' signal to unicorn error!"
+   end
+ end
+end
+
+after_fork do |server, worker|
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.establish_connection
+end
