@@ -27,6 +27,8 @@
         <div class="row">还差<span class="share-count">38个分享</span></div>
         <div class="row">该项目就可进入公共筹集</div>
         <div class="row">离结束还有<span class="day-count">23天</span></div>
+        <% sid = @project.try(:weibo_status).try(:status_id) %>
+        <% if !sid.nil? %>
         <div class="row">
           <%= render  :partial => "common/weibo_share_button",
                       :locals  => {
@@ -34,16 +36,14 @@
                         :pic_url  => "http%3A%2F%2Fstatic.youku.com%2Findex%2Fimg%2Fheader%2Fyklogo.png",
                         :tag      => "东西科技", # slogan?
                         :text     => @project.try(:basic_info).try(:name),
-                        :mid      => (@project.try(:weibo_status).try(:status_mid) || "AhBaXzCZ9"),
+                        :mid      => @project.try(:weibo_status).try(:status_mid),
                       }
           %>
         </div>
-        <%
-          status = status_retrieve(@project.try(:weibo_status).try(:status_id) || "AhBaXzCZ9")
-        %>
         <div class="row">
-          <%= render :partial => "common/weibo_status", :locals => { status: status } %>
+          <%= render :partial => "common/weibo_status", :locals => { status: status_retrieve(sid) } %>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -60,31 +60,3 @@
   <meta name="weibo:webpage:create_at" content="2013-11-07 09:12:56 +0800" />
   <meta name="weibo:webpage:update_at" content="2013-11-07 10:30:16 +0800" />
 <% end %>
-<div class="statuses">
-
-</div>
-
-<!--<script>
-  $(function() {
-    $.ajax({
-      url: "https://api.weibo.com/2/statuses/mentions.json",
-      data: {
-        access_token: "2.00_aF2OEqRXAtC2fd33143edtCrzSE",
-      },
-      dataType: "jsonp",
-      type: "GET"
-    }).done(function(data) {
-      var statuses = data["data"]["statuses"];
-      console.log(statuses[0])
-      $.each(statuses, function(key, value) {
-        $text = $('<span></span>', {
-          text: "mid:" + value["mid"],
-        });
-        $user = $('<span></span>', {
-          text: "   name:" + value["user"]["name"],
-        });
-        $('<div></div>').append($text).append($user).appendTo(".statuses")
-      })
-    });
-  })
-</script>-->

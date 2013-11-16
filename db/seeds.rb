@@ -44,5 +44,3 @@ project2 = Project.create(project_attr('hacker'))
 project2.build_basic_info(name: "Test Proj")
 project2.build_story(introduction: "This is a testing project")
 project2.save!
-
-w = WeiboStatus.create(project_id: Project.first.id, status_mid: "AiFnt8zMh", status_id: "3644489632044157")
