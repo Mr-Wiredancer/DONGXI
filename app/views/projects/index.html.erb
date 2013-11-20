@@ -17,7 +17,7 @@
   <tr>
     <td class="name"><%= project.try(:basic_info).try(:name) %></td>
     <td class="slogan"><%= project.try(:basic_info).try(:slogan) %></td>
-    <td class="introduction"><%= project.try(:story).try(:introduction).html_safe %></td>
+    <td class="introduction"><%= project.try(:story).try(:introduction).try(:html_safe) || "暂无介绍" %></td>
     <td class="risk"><%= project.try(:story).try(:risk) %></td>
     <td class="status"><%= project.status_name %></td>
     <td><%= link_to '查看', project %></td>
