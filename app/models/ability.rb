@@ -9,7 +9,6 @@ class Ability
 
   def initialize(user)
 
-
     if user.blank?
       cannot :manage, :all
       basic_read_only
@@ -19,6 +18,7 @@ class Ability
       # projects
       alias_action :preview, :submit, :update, :destroy, :to => :manage_own
       can :create,        Project
+      can :donate,        Project
       can :show,          Project, :user_id => user.id
       can :manage_own, Project do |p|
         p.user_id == user.id && p.in_edit?

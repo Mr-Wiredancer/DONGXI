@@ -15,6 +15,7 @@ Website::Application.routes.draw do
       get :submit
       get :publish
       get :unpublish
+      post :donate
     end
   end
 

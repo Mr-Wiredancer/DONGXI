@@ -130,4 +130,16 @@ class ProjectsController < ApplicationController
     end
     end
   end
+
+  def donate # POST
+    @project = Project.find(params[:id])
+    respond_to do |format|
+    begin
+      @project.add_donation!(params)
+      format.html { redirect_to project_url(@project), notice: '捐款成功!' }
+    rescue => e
+      format.html { redirect_to project_url(@project), notice: '捐款出现了点问题。。' }
+    end
+    end
+  end
 end

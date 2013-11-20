@@ -25,6 +25,8 @@ class Project < ActiveRecord::Base
   has_one   :owner, class_name: "ProjectOwner", dependent: :destroy
   has_one   :weibo_status, class_name: "WeiboStatus", dependent: :destroy
 
+  has_many  :donations, class_name: "Donation", dependent: :destroy
+
   accepts_nested_attributes_for :basic_info, :story, :owner
 
   belongs_to :category
@@ -42,7 +44,7 @@ class Project < ActiveRecord::Base
   end
 
   # callbacks
-  before_validation :set_default_status
+  before_validation :set_default
 
   # scopes
   scope :in_publish, where(status: Project::STATUS[:in_publish][:weight])
@@ -71,8 +73,11 @@ class Project < ActiveRecord::Base
   delegate :name, to: :region, prefix: true, allow_nil: true
   delegate :name, to: :category, prefix: true, allow_nil: true
 
-  def set_default_status
-    self.status = 0 if self.new_record?
+  def set_default
+    if self.new_record?
+      self.status = 0
+      self.raised_amount = 0
+    end
   end
 
   %w(edit audit publish).each do |method_name|
@@ -102,4 +107,11 @@ class Project < ActiveRecord::Base
     STATUS.select{ |k,v| v[:weight] == status }.values[0][:description]
   end
 
+  def add_donation!(options)
+    options.slice!(:trade_no, :amount, :user_id)
+    self.raised_amount =  options[:amount].to_i + self.raised_amount
+    self.donations << Donation.create(options)
+    self.save!
+    # NOTICE: change project status when donation is enough??
+  end
 end

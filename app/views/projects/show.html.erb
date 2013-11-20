@@ -43,9 +43,28 @@
         <div class="row">
           <%= render :partial => "common/weibo_status", :locals => { status: status_retrieve(sid) } %>
         </div>
+        <% if user_signed_in? %>
         <div class="row">
-          <a href="http://me.alipay.com/allenfantasy" target="_blank">我要付款</a>
+          <!-- FIXME: add QR-code -->
+          <!-- FIXME: remind user to fill in the form -->
+          <!-- FIXME: fake fill-in? -->
+          <a href='http://me.alipay.com/allenfantasy' target="_blank"> <img src='https://img.alipay.com/sys/personalprod/style/mc/btn-index.png' /> </a>
         </div>
+        <div class="row">
+          <%= form_for @project, url: donate_project_path, method: :post, html: { class: 'donate', id: 'donate' } do |f| %>
+            <div>
+            <%= label_tag 'trade_no', '交易号' %>
+            <%= text_field_tag 'trade_no', nil, class: 'form-control' %>
+            </div>
+            <div>
+            <%= label_tag 'amount', '数额' %>
+            <%= text_field_tag 'amount', nil, class: 'form-control' %>
+            </div>
+            <%= hidden_field_tag 'user_id', current_user.id %>
+            <%= f.submit '提交' %>
+          <% end %>
+        </div>
+        <% end %>
         <% end %>
       </div>
     </div>
