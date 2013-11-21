@@ -19,11 +19,11 @@ describe Project do
   context "#add_donation" do
     it "add raised_amount for project" do
       expect {
-        project.add_donation(donation_attr)
+        project.add_donation!(donation_attr)
       }.to change { project.raised_amount }.by(100)
     end
     it "add an donation for project" do
-      project.add_donation(donation_attr)
+      project.add_donation!(donation_attr)
       project.should have(1).donations
     end
   end

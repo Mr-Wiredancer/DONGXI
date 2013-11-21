@@ -39,6 +39,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'capistrano', '~> 2.15'
   gem 'rvm-capistrano'
+  gem 'spork', '~> 1.0rc'
 end
 group :test do
   gem 'capybara'
