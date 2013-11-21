@@ -1,0 +1,14 @@
+<div class="row">
+  <%= form_for project, url: donate_project_path, method: :post, html: { class: 'donate', id: 'donate' } do |f| %>
+    <div>
+    <%= label_tag 'trade_no', '交易号' %>
+    <%= text_field_tag 'trade_no', nil, class: 'form-control' %>
+    </div>
+    <div>
+    <%= label_tag 'amount', '数额' %>
+    <%= text_field_tag 'amount', nil, class: 'form-control' %>
+    </div>
+    <%= hidden_field_tag 'user_id', current_user.id %>
+    <%= f.submit '提交' %>
+  <% end %>
+</div>

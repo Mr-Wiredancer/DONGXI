@@ -15,6 +15,7 @@ class Project < ActiveRecord::Base
                   :owner_attributes,
                   :user_id,
                   :sponsor_id,
+                  :published_time,
                   :status
 
   attr_accessor :submitting
@@ -60,7 +61,7 @@ class Project < ActiveRecord::Base
   }
 
   # methods
-  %w(name slogan photo amount duration_days published_time raise_type).each do |info_attr|
+  %w(name slogan photo amount duration_days raise_type).each do |info_attr|
     delegate info_attr, to: :basic_info, prefix: false, allow_nil: true
   end
 
@@ -96,7 +97,9 @@ class Project < ActiveRecord::Base
   end
 
   def publish!
-    self.update_attributes!(status: 2) if in_audit?
+    if in_audit?
+      self.update_attributes!(status: 2, published_time: Time.now)
+    end
   end
 
   def unpublish!

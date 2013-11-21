@@ -12,6 +12,27 @@
             font-size: 30px;
             padding: 0 0.5em;
           }
+          .progress-bar {
+            background: #e6e6e6;
+            .speed {
+              height: 10px;
+              display: block;
+              background: #f8550d;
+            }
+            .speed.success {
+              background: #01a05f;
+            }
+          }
+          form.donate {
+            label {
+              width: 50px;
+              display: inline-block;
+              font-size: 14px;
+            }
+            input[type="text"] {
+              width: 180px;
+            }
+          }
         }
       }
     }

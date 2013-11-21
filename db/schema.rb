@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20131120045417) do
     t.string   "slogan"
     t.integer  "amount"
     t.integer  "duration_days"
-    t.datetime "published_time"
     t.integer  "raise_type"
     t.integer  "project_id"
     t.datetime "created_at",         :null => false
@@ -110,9 +109,10 @@ ActiveRecord::Schema.define(:version => 20131120045417) do
     t.integer  "user_id"
     t.integer  "sponsor_id"
     t.integer  "raised_amount"
+    t.datetime "published_time"
     t.integer  "status"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "sponsors", :force => true do |t|

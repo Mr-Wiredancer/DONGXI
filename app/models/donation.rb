@@ -4,7 +4,7 @@ class Donation < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
 
-  validates :trade_no, presence: true, length: { is: 28 }
+  validates :trade_no, presence: true, length: { is: 28 }, uniqueness: true
   validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates_presence_of :user, :project
 end
