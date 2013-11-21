@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:wb=“http://open.weibo.com/wb”>
 <head>
-  <title>Website</title>
+  <title>V梦享</title>
+
   <%= yield :weibo_meta %>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+
   <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+
+  <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body id="<%= "#{controller_name}" %>" class="<%= "#{action_name}" %>">
 
-<div class="dx-wrapper">
-  <div class="navbar">
-    <div class="slogan pull-left" style="width: 100px;">
+<div id='header'>
+  <div class="content">
+
+    <div class='dx-row-item'>
       <h1><%= link_to "梦享", root_path %></h1>
     </div>
-    <div class="pull-left project">
-      <div class="item">
-        <%= link_to projects_path do %>
-          <div>
-            <p style="font-size: 20px; line-height: 25px;">发现</p>
-            <span>感兴趣的项目</span>
-          </div>
-        <% end %>
-      </div>
-      <div class="item">
-        <%= link_to new_project_path do %>
+
+    <div class='dx-row-item'>
+      <%= link_to projects_path do %>
         <div>
-          <p style="font-size: 20px; line-height: 25px;">创建</p>
-          <span>一个新项目</span>
+          <p>发现</p>
+          <span>感兴趣的项目</span>
         </div>
       <% end %>
-      </div>
-      <div class="item">
-        <%= form_tag search_path do %>
-          <%= text_field_tag 'key', nil, size: 40, placeholder: '寻找你感兴趣的项目...' %>
-          <span><%= submit_tag '搜索' %>
-        <% end %>
-      </div>
     </div>
-    <%= render "common/user_nav" %>
+
+    <div class='dx-row-item'>
+      <%= link_to new_project_path do %>
+      <div>
+        <p>创建</p>
+        <span>一个新项目</span>
+      </div>
+    <% end %>
+    </div>
+
+    <div class='dx-row-item'>
+      <%= form_tag search_path do %>
+        <%= text_field_tag 'key', nil, size: 40, placeholder: '寻找你感兴趣的项目...' %>
+        <span><%= submit_tag '搜索' %>
+      <% end %>
+    </div>
+
+    <div class='dx-row-item'>
+      <%= render "common/user_nav" %>
+    </div>
   </div>
 </div>
 <div class="clearfix"></div>

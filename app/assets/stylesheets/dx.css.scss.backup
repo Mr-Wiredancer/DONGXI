@@ -1,0 +1,71 @@
+/*! dx.css.scss !*/
+/* @allenfantasy */
+
+/*=================== dxtech ========================*/
+.pull-left { float: left; }
+.pull-right { float: right; }
+.centered { text-align: center; }
+.clearfix { clear: both; }
+.row { margin: 10px 0; }
+.wrap {
+  margin: 10px;
+  padding: 20px;
+}
+
+/* ==================  Grid  ================== */
+.dx-u-3-10 { width: 30%; }
+.dx-u-7-10 { width: 70%; }
+
+.dx-wrapper {
+  width: 1120px;
+  margin: 0 auto;
+}
+
+.dx-container {
+  width: 1040px;
+  margin: 0 auto;
+}
+
+.dx-form-label {
+  float: left;
+  margin: 10px;
+  padding: 10px 0;
+  width: 100px;
+
+  label {
+    width: 50px;
+  }
+}
+.dx-form-hint {
+  margin: 10px;
+  padding: 10px 0;
+  margin-left: 120px;
+}
+.dx-form-textarea {
+  width: inherit;
+  margin: 0 20px 0 120px;
+  textarea {
+    width: 100%;
+  }
+}
+.dx-form-ck-textarea {
+  width: inherit;
+  margin-left: 120px;
+  textarea {
+    width: 100%;
+  }
+}
+.dx-form-textfield {
+  width: inherit;
+  margin: 0 20px 0 120px;
+  input {
+    width: 100%;
+  }
+}
+.form-control {
+  padding: 6px 12px;
+  height: 34px;
+  border: 1px solid #ccc;
+  margin: 5px 0;
+  font-size: 14px;
+}
