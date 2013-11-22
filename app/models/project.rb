@@ -16,6 +16,7 @@ class Project < ActiveRecord::Base
                   :user_id,
                   :sponsor_id,
                   :published_time,
+                  :comments_count,
                   :status
 
   attr_accessor :submitting
@@ -27,6 +28,7 @@ class Project < ActiveRecord::Base
   has_one   :weibo_status, class_name: "WeiboStatus", dependent: :destroy
 
   has_many  :donations, class_name: "Donation", dependent: :destroy
+  has_many  :comments, dependent: :destroy
 
   accepts_nested_attributes_for :basic_info, :story, :owner
 
@@ -46,6 +48,12 @@ class Project < ActiveRecord::Base
 
   # callbacks
   before_validation :set_default
+  def set_default
+    if self.new_record?
+      self.status = 0
+      self.raised_amount = 0
+    end
+  end
 
   # scopes
   scope :in_publish, where(status: Project::STATUS[:in_publish][:weight])
@@ -61,6 +69,8 @@ class Project < ActiveRecord::Base
   }
 
   # methods
+
+  # get something
   %w(name slogan photo amount duration_days raise_type).each do |info_attr|
     delegate info_attr, to: :basic_info, prefix: false, allow_nil: true
   end
@@ -74,13 +84,11 @@ class Project < ActiveRecord::Base
   delegate :name, to: :region, prefix: true, allow_nil: true
   delegate :name, to: :category, prefix: true, allow_nil: true
 
-  def set_default
-    if self.new_record?
-      self.status = 0
-      self.raised_amount = 0
-    end
+  def status_name
+    STATUS.select{ |k,v| v[:weight] == status }.values[0][:description]
   end
 
+  # check status
   %w(edit audit publish).each do |method_name|
     define_method "in_#{method_name}?" do
       status == STATUS["in_#{method_name}".to_sym][:weight]
@@ -96,6 +104,7 @@ class Project < ActiveRecord::Base
     self.update_attributes!(status: 1) if in_edit?
   end
 
+  # manipulation
   def publish!
     if in_audit?
       self.update_attributes!(status: 2, published_time: Time.now)
@@ -106,15 +115,15 @@ class Project < ActiveRecord::Base
     self.update_attributes!(status: 0) if in_audit?
   end
 
-  def status_name
-    STATUS.select{ |k,v| v[:weight] == status }.values[0][:description]
-  end
-
   def add_donation!(options)
     options.slice!(:trade_no, :amount, :user_id)
     self.raised_amount =  options[:amount].to_i + self.raised_amount
     self.donations << Donation.create(options)
     self.save!
     # NOTICE: change project status when donation is enough??
+  end
+
+  def update_comments_count
+    self.update_attributes!(comments_count: comments.count)
   end
 end

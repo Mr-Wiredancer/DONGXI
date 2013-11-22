@@ -1,3 +1,5 @@
+$light-blue: #ADD8E6;
+
 #projects {
   &.show, &.preview {
     .project {
@@ -71,5 +73,13 @@
       .introduction { width: 360px; }
       .slogan, .risk, .status { width: 120px; }
     }
+  }
+}
+#comments {
+  background: $light-blue;
+  .reply { overflow: hidden; }
+  .commentor {
+    font-size: 14px;
+    color: red;
   }
 }

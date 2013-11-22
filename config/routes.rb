@@ -17,6 +17,7 @@ Website::Application.routes.draw do
       get :unpublish
       post :donate
     end
+    resources :comments
   end
 
   namespace :cpanel do

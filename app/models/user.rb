@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name
 
   has_many :projects
+  has_many :comments
 
   has_many :authorizations, dependent: :destroy do
     def find_or_create_by_params(params)

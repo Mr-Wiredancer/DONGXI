@@ -1,3 +1,7 @@
+# ProjectController 下JS功能
+window.Project =
+  commentCallback : (success, msg) ->
+
 $ ->
   $('ul.banner a.editable').click (e)->
     $form = $('.project-edit-form form')

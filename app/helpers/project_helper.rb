@@ -37,6 +37,10 @@ module ProjectHelper
     render :partial => "donate_form", locals: { project: project }
   end
 
+  def render_project_weibo_meta(project)
+    render :partial => "weibo_meta", locals: { project: @project }
+  end
+
   def project_raise_type_options
     ProjectBasicInfo::RAISE_TYPE.collect {|k,v| [v[:description], v[:weight]] }
   end
