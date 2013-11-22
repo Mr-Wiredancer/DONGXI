@@ -38,7 +38,7 @@ namespace :deploy do
     update_code
     create_symlink
     server.stop
-    db.reset # FIXME: should use db.migrate, when db structure is stable
+    db.migrate # FIXME: should use db.migrate, when db structure is stable
     server.start
   end
 

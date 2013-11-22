@@ -30,12 +30,14 @@
       </div>
     </div>
     <!-- 已有的评论 -->
+    <% if @project.comments.any? %>
     <div id="comments" class="pull-right dx-u-3-10">
       <div class="total row">共收到<%= @project.comments_count %>条评论</div>
       <div class="items row">
         <%= render :partial => "comments/comment", :collection => @project.comments %>
       </div>
     </div>
+    <% end %>
     <!-- 新添评论 -->
     <div id="comment" class="pull-left dx-u-7-10">
       <%= form_for(Comment.new, url: project_comments_path(@project)) do |f| %>
