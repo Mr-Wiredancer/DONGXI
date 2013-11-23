@@ -9,6 +9,7 @@ Region.delete_all
 User.delete_all
 Authorization.delete_all
 WeiboStatus.delete_all
+Donation.delete_all
 
 def project_attr(username = 'admin')
   {

@@ -4,7 +4,10 @@ describe ProjectsController do
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:user, :admin) }
   let(:project) { FactoryGirl.create(:project) }
-  #let(:in_audit_project) { FactoryGirl.create(:project, :audit) }
+  let(:valid_project) { FactoryGirl.create(:project, :valid) }
+  let(:submitted_project) { p = FactoryGirl.create(:project, :valid); p.update_attribute(:status, 1); p }
+  let(:published_project) { p = FactoryGirl.create(:project, :valid); p.update_attribute(:status, 2); p }
+
   before(:each) do
     sign_in user
   end
@@ -22,12 +25,12 @@ describe ProjectsController do
         post 'donate', donate_valid_attr
         response.should redirect_to(project_url(project))
       end
-      it "should add raised_amount for project" do
-        original_amount = project.raised_amount
-        post 'donate', donate_valid_attr
-        project.reload # can we use expect??
-        (project.raised_amount - original_amount).should == 100
-      end
+      #it "should add raised_amount for project" do
+        #original_amount = project.raised_amount
+        #post 'donate', donate_valid_attr
+        #project.reload # can we use expect??
+        #(project.raised_amount - original_amount).should == 100
+      #end
       it "should add one donation" do
         post 'donate', donate_valid_attr
         project.should have(1).donations

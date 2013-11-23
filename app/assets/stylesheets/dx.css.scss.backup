@@ -22,7 +22,7 @@
 }
 
 .dx-container {
-  width: 1040px;
+  width: 960px;
   margin: 0 auto;
 }
 

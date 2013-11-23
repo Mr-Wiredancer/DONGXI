@@ -56,7 +56,7 @@ class Cpanel::UsersController < Cpanel::ApplicationController
       else
         @user.update_without_password(params[:user])
       end
-        format.html { redirect_to cpanel_users_url, notice: 'User was successfully updated.' }
+        format.html { redirect_to cpanel_users_url, notice: '成功修改用户信息.' }
         format.json { head :no_content }
       rescue => e
         format.html { render action: "edit" }

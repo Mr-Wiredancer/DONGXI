@@ -37,6 +37,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'pry-rails'
+  gem 'database_cleaner'
+  gem 'fuubar'
   gem 'capistrano', '~> 2.15'
   gem 'rvm-capistrano'
   gem 'spork', '~> 1.0rc'

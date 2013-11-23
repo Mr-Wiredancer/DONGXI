@@ -40,11 +40,12 @@ class User < ActiveRecord::Base
   end
 
   def weibo
-    self.authorizations(provider: 'weibo').first
+    auth = self.authorizations(provider: 'weibo')
+    auth.any? ? auth.first : nil
   end
 
   def weibo_id
-    self.weibo.uid
+    self.weibo.try(:uid)
   end
 
 end

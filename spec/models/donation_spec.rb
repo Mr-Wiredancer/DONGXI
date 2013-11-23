@@ -29,13 +29,13 @@ describe Donation do
         donation.save!
         expect {
           another_donation.save!
-        }.to raise_error(ActiveRecord::RecordInvalid, "验证失败: Trade no 已经被使用")
+        }.to raise_error(ActiveRecord::RecordInvalid, "验证失败: 交易号 已经被使用")
       end
     end
-    describe "#user" do
+    describe "#donor" do
       it "is required" do
-        donation.user = nil
-        donation.should have(1).error_on(:user)
+        donation.donor = nil
+        donation.should have(1).error_on(:donor)
       end
     end
     describe "#project" do
@@ -44,5 +44,7 @@ describe Donation do
         donation.should have(1).error_on(:project)
       end
     end
+  end
+  context "when save / update a donation" do
   end
 end

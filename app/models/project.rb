@@ -17,6 +17,7 @@ class Project < ActiveRecord::Base
                   :sponsor_id,
                   :published_time,
                   :comments_count,
+                  :raised_amount,
                   :status
 
   attr_accessor :submitting
@@ -59,12 +60,16 @@ class Project < ActiveRecord::Base
   scope :in_publish, where(status: Project::STATUS[:in_publish][:weight])
   scope :in_edit, where(status: Project::STATUS[:in_edit][:weight])
 
-  scope :title_like, lambda { |key| includes(:basic_info).where("LOWER(project_basic_infos.name) LIKE ?", "%#{key.downcase}%") }
-  scope :text_like, lambda { |key| includes(:story).where("LOWER(project_stories.introduction) LIKE ?", "%#{key.downcase}%") }
+  scope :info_like, lambda { |key| includes(:basic_info)
+                             .where("(LOWER(project_basic_infos.name) LIKE ?) OR (LOWER(project_basic_infos.slogan) LIKE ?) ",
+                                    "%#{key.downcase}%", "%#{key.downcase}%") }
+  scope :introduction_like, lambda { |key| includes(:story).where("LOWER(project_stories.introduction) LIKE ?", "%#{key.downcase}%") }
+  scope :owner_like, lambda { |key| includes(:owner).where("LOWER(project_owners.name) LIKE ?", "%#{key.downcase}%") }
 
+  #scope
   scope :search, lambda {|params={}|
     projects = in_publish
-    projects = projects.title_like(params[:key]) | projects.text_like(params[:key]) if params[:key].present?
+    projects = projects.info_like(params[:key]) | projects.introduction_like(params[:key]) | projects.owner_like(params[:key]) if params[:key].present?
     projects
   }
 
@@ -116,11 +121,9 @@ class Project < ActiveRecord::Base
   end
 
   def add_donation!(options)
-    options.slice!(:trade_no, :amount, :user_id)
-    self.raised_amount =  options[:amount].to_i + self.raised_amount
-    self.donations << Donation.create(options)
+    options.slice!(:trade_no, :user_id)
+    self.donations << Donation.new(options)
     self.save!
-    # NOTICE: change project status when donation is enough??
   end
 
   def update_comments_count

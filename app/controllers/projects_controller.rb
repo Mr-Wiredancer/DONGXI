@@ -6,18 +6,9 @@ class ProjectsController < ApplicationController
   include ApplicationHelper
   include ProjectHelper
 
-  def index
-    @projects = Project.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @projects }
-    end
-  end
 
   def show
     @project = Project.find(params[:id])
-    status_retrieve("3637946596783717")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -81,7 +72,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def preview
+  def preview # preview.html.erb
     @project = Project.find(params[:id])
   end
 

@@ -1,5 +1,6 @@
 Website::Application.routes.draw do
 
+
   mount Ckeditor::Engine => '/ckeditor'
 
   post '/search' => "search#index"
@@ -22,6 +23,7 @@ Website::Application.routes.draw do
 
   namespace :cpanel do
     resources :users
+    resources :donations
   end
 
   root :to => 'home#index'

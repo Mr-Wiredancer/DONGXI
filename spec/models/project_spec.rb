@@ -19,14 +19,12 @@ describe Project do
     it "has no money" do
       project.raised_amount.should == 0
     end
+    it "should be in_edit" do
+      project.should be_in_edit
+    end
   end
 
   describe "#add_donation!" do
-    it "add raised_amount for project" do
-      expect {
-        project.add_donation!(donation_attr)
-      }.to change { project.raised_amount }.by(100)
-    end
     it "add an donation for project" do
       project.add_donation!(donation_attr)
       project.should have(1).donations
@@ -46,7 +44,7 @@ describe Project do
       it "change status to in_audit" do
         valid_project.submit!
         valid_project.reload
-        valid_project.should be_in_audit # failed
+        valid_project.should be_in_audit
       end
     end
   end
@@ -74,6 +72,12 @@ describe Project do
       published_project.unpublish!
       published_project.reload
       published_project.should be_in_publish
+    end
+  end
+
+  describe "#search" do
+    describe "search info" do
+      pending
     end
   end
 end

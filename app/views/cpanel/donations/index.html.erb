@@ -1,0 +1,27 @@
+<h1>捐赠记录</h1>
+
+<table>
+  <tr>
+    <td>捐赠ID</td>
+    <td>捐赠数额</td>
+    <td>捐赠用户<td>
+    <td></td>
+  </tr>
+
+<% @donations.each do |donation| %>
+  <tr>
+    <td><%= donation.trade_no %></td>
+    <td><%= donation.amount || "待添加" %></td>
+    <td><%= donation.donor_name %></td>
+    <td>
+      <%= link_to '查看', cpanel_donation_path(donation) %>
+      <%= link_to '修改', edit_cpanel_donation_path(donation) %>
+      <%= link_to '删除', cpanel_donation_path(donation), method: :delete, data: { confirm: '确定删除捐赠记录?' } %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to "添加捐赠记录", new_cpanel_donation_path %>
