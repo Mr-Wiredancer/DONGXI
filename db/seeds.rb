@@ -1,8 +1,5 @@
 # encoding: utf-8
 Project.delete_all
-#ProjectBasicInfo.delete_all
-#ProjectStory.delete_all
-#ProjectOwner.delete_all
 Category.delete_all
 Sponsor.delete_all
 Region.delete_all

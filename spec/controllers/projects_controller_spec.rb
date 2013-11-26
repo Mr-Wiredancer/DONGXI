@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ProjectsController do
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:user, :admin) }
-  let(:project) { FactoryGirl.create(:project) }
+  let(:project) { FactoryGirl.create(:project, user: user) }
   let(:valid_project) { FactoryGirl.create(:project, :valid) }
   let(:submitted_project) { p = FactoryGirl.create(:project, :valid); p.update_attribute(:status, 1); p }
   let(:published_project) { p = FactoryGirl.create(:project, :valid); p.update_attribute(:status, 2); p }
@@ -52,6 +52,28 @@ describe ProjectsController do
         project.update_attributes!(status: 1)
         get 'publish', { id: project.id }
         response.should redirect_to(root_url)
+      end
+    end
+  end
+
+  describe "PUT update" do
+    context "step=story" do
+      it "should redirect_to edit page" do
+        project
+        put 'update', {
+          id: project.id,
+          step: "story",
+          next: "owner",
+          project: {
+            story_attributes: {
+              video_url: "",
+              weibo_url: "",
+              introduction: "<p>This is a testing project&nbsp;</p>\r\n\r\n<p>Okay this is the project right??</p>\r\n\r\n<ul>\r\n\t<li>First</li>\r\n\t<li>Second</li>\r\n</ul>\r\n",
+              risk: "Risk risk risk..."
+            }
+          }
+        }
+        response.should redirect_to(edit_project_url(project, { step: "owner" }))
       end
     end
   end

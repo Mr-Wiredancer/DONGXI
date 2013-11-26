@@ -7,10 +7,11 @@ class ProjectStory < ActiveRecord::Base
     condition.validates :introduction, presence: true
     condition.validates :risk, presence: true
     condition.validates :video_url, presence: true, format: { with: /([http|https]:\/\/)?[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)+/ }
-    condition.validates :weibo_url, presence: true # TODO: add format
+    # http://weibo.com/{user_id}/{status_mid} TODO: status_mid always has 9 digits?
+    condition.validates :weibo_url, presence: true, format: { with: /http:\/\/weibo\.com\/\d{10}\/[0-9A-Za-z]{9}/ }
   end
 
-  after_save :save_weibo_id, unless: lambda { |story| story.weibo_url.nil? }
+  after_save :save_weibo_id, if: lambda { |story| story.has_valid_weibo? }
 
   def save_weibo_id
     mid = self.weibo_url.split('/').last
@@ -24,5 +25,10 @@ class ProjectStory < ActiveRecord::Base
 
   def in_submit?
     project && project.in_submit?
+  end
+
+  def has_valid_weibo?
+    return false if self.weibo_url.nil?
+    !!(self.weibo_url =~ /http:\/\/weibo\.com\/\d{10}\/[0-9A-Za-z]{9}/)
   end
 end
