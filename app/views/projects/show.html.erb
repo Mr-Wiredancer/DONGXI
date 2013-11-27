@@ -13,17 +13,17 @@
   <div class="content">
     <div class="pull-left information dx-u-7-10">
       <div class='wrap'>
-        <%= render_project_video(@project) %>
-        <%= render_project_introduction(@project) %>
+        <%= render_story_and_info(@project) %>
       </div>
     </div>
     <div class="pull-left sns-share dx-u-3-10">
       <div class='wrap'>
+        <%= render_project_owner(@project) %>
         <%= render_project_status(@project) %>
         <%= render_project_weibo(@project) %>
+        <!-- TODO: add an 'I want donate' link -->
         <% if user_signed_in? %>
         <!-- TODO: remind user to fill in the form -->
-        <!-- WARNING: how to know whether the user fill-in the form but didn't donate actually? -->
           <%= render_donate_box(@project) %>
           <%= render_donate_form(@project) %>
         <% end %>
