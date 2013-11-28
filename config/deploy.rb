@@ -30,6 +30,7 @@ after "deploy", "deploy:cleanup" # keep only last 5 releases
 after "deploy:finalize_update", "deploy:symlink_config", "deploy:mkdir_dot_test"
 after "deploy:finalize_update" do
   run "ln -s #{shared_path}/ckeditor_assets #{release_path}/public/ckeditor_assets"
+  run "ln -s #{shared_path}/content #{release_path}/public/content"
 end
 
 namespace :deploy do
@@ -38,7 +39,7 @@ namespace :deploy do
     update_code
     create_symlink
     server.stop
-    db.migrate # FIXME: should use db.migrate, when db structure is stable
+    db.migrate
     server.start
   end
 
@@ -86,6 +87,7 @@ namespace :deploy do
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
     run "mkdir -p #{shared_path}/ckeditor_assets"
+    run "mkdir -p #{shared_path}/content"
     put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
 
     # set user & passwd for database

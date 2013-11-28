@@ -1,7 +1,6 @@
 <div class="dx-container project">
   <div class="title">
-    <h1><%= @project.try(:name) || "项目名称" %></h1>
-    <p>由<%= @project.try(:owner_name) || "免费午餐团队" %>发起</p>
+    <%= render_project_name(@project) %>
   </div>
 
   <div class="meta">
