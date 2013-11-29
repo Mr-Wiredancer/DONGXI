@@ -1,12 +1,20 @@
 CKEDITOR.editorConfig = function( config ){
   config.toolbar_Basic = [
-    ['Bold','Italic','Underline','Link','Unlink','Image','BulletedList','MediaEmbed'],
+    ['Bold','Italic','Link','Unlink','Video','Image','BulletedList'], // TODO: Audio, Heading
   ];
   config.toolbar = 'Basic';
-  config.language = 'zh-CN';
+  config.language = 'en';
   config.uiColor = '#ffffff';
 
   config.extraPlugins = 'mediaembed';
+  config.coreStyles_italic = { element: 'i' }
+  config.coreStyles_bold = { element: 'b' }
+
+  /* hide button icons, display button labels */
+  CKEDITOR.on("instanceReady", function() {
+    $('.cke_button_icon').hide()
+    $('.cke_button_label').show()
+  })
 
   /* Copy from gem ckeditor: app/assets/javascripts/ckeditor/config.js */
 
@@ -90,4 +98,5 @@ CKEDITOR.editorConfig = function( config ){
       }
     }
   });
+
 };
