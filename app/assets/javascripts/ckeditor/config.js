@@ -1,12 +1,12 @@
 CKEDITOR.editorConfig = function( config ){
   config.toolbar_Basic = [
-    ['Bold','Italic','Link','Unlink','Video','Image','BulletedList'], // TODO: Audio, Heading
+    ['Bold','Italic','Link','Unlink','Video','Image','BulletedList', 'Heading'], // TODO: Audio
   ];
   config.toolbar = 'Basic';
   config.language = 'en';
   config.uiColor = '#ffffff';
 
-  config.extraPlugins = 'mediaembed';
+  config.extraPlugins = 'mediaembed,heading';
   config.coreStyles_italic = { element: 'i' }
   config.coreStyles_bold = { element: 'b' }
 

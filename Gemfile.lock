@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/allenfantasy/ckeditor.git
-  revision: 450082a75de3f3cd5eae8958ea18162003209191
+  revision: 9fb40123e6ae74a326eafd808d3408fd78b29b3e
   specs:
     ckeditor (4.0.6)
       mime-types
