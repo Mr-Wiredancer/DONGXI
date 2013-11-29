@@ -1,5 +1,12 @@
 # coding: utf-8
 module ProjectHelper
+  ### name
+  def render_project_name(project)
+    name = @project.name.blank? ? "暂无名称" : project.name
+    owner = project.owner_name.blank? ? "暂无团队名称" : "由#{project.owner_name}发起"
+    output = content_tag("h1", name) + content_tag(:p, owner)
+    output
+  end
 
   ### story & info
   def render_story_and_info(project)

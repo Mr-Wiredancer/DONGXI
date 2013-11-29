@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/allenfantasy/ckeditor.git
-  revision: c32bd08dbe70f31b0074d2a139982f002d48f567
+  revision: 9fb40123e6ae74a326eafd808d3408fd78b29b3e
   specs:
     ckeditor (4.0.6)
       mime-types
@@ -112,7 +112,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.2)
-    mime-types (1.25)
+    mime-types (1.25.1)
     mini_portile (0.5.2)
     multi_json (1.8.2)
     multipart-post (1.2.0)
