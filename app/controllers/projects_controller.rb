@@ -126,11 +126,26 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     respond_to do |format|
     begin
-      @project.add_donation!(params)
+      @project.add_donation(params)
       format.html { redirect_to project_url(@project), notice: '捐款成功!' }
     rescue => e
       format.html { redirect_to project_url(@project), notice: '捐款出现了点问题。。' }
     end
     end
   end
+
+  # POST project/:id/add_volunteer.json
+  def add_volunteer
+    project = Project.find(params[:id])
+    project.add_volunteer(params[:user_id].to_i)
+    render json: { message: 'ok', amount: project.volunteer_amount }
+  end
+
+  # POST project/:id/remove_volunteer.json
+  def remove_volunteer
+    project = Project.find(params[:id])
+    project.remove_volunteer(params[:user_id].to_i)
+    render json: { message: 'ok', amount: project.volunteer_amount }
+  end
+
 end

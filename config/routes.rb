@@ -17,6 +17,8 @@ Website::Application.routes.draw do
       get :publish
       get :unpublish
       post :donate
+      post :add_volunteer
+      post :remove_volunteer
     end
     resources :comments
   end

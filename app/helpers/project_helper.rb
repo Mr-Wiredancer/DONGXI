@@ -24,17 +24,18 @@ module ProjectHelper
     project.photo ? image_tag(project.photo.url(:normal)) : ""
   end
 
-  ### owner
-  def render_project_owner(project)
-    image_tag @project.owner_avatar.try(:url, :normal)
-  end
-
-  ### status
-  def render_project_status(project)
-    content_tag(:div, ("还差" + content_tag(:span, '38个分享', class: 'share-count')).html_safe, class: 'row') +
-    content_tag(:div, "该项目就可进入公共筹集", class: 'row') +
-    content_tag(:div, ("离结束还有" + content_tag(:span, '23天', class: 'day-count')).html_safe, class: 'row') +
-    render_progress(project)
+  ### progress
+  def render_progress_bar(progress, target)
+    percentage = if target == 0
+                  0
+                elsif progress == target
+                  100
+                else
+                  (progress.to_f / target.to_f * 100).to_i
+                end
+    content_tag :div, class: "progress-bar" do
+      render_speed(percentage)
+    end
   end
 
   ### SNS
@@ -59,18 +60,6 @@ module ProjectHelper
     end
   end
 
-  ### donation
-  def render_donate_box(project)
-    content_tag :div, class: 'row' do
-      link_to 'http://me.alipay.com/allenfantasy', target: '_blank' do
-        tag(:img, src: "https://img.alipay.com/sys/personalprod/style/mc/btn-index.png")
-      end
-    end
-  end
-  def render_donate_form(project)
-    render :partial => "donate_form", locals: { project: project }
-  end
-
   ### others
   def render_project_weibo_meta(project)
     render :partial => "weibo_meta", locals: { project: project }
@@ -81,31 +70,7 @@ module ProjectHelper
   end
 
   private
-  def render_progress(project)
-    progress, target = if (project.amount.nil? || project.amount == 0)
-                         [0, 0]
-                       else
-                         [project.raised_amount, project.amount]
-                       end
-    content_tag :div, class: 'row' do
-      render_progress_bar(progress, target) +
-      tag(:br) +
-      content_tag(:div, "当前进度：".html_safe + content_tag(:span,"#{progress} / #{target}"), class: "pull-right")
-    end
-  end
 
-  def render_progress_bar(progress, target)
-    percentage = if target == 0
-                  0
-                elsif progress == target
-                  100
-                else
-                  (progress.to_f / target.to_f * 100).to_i
-                end
-    content_tag :div, class: "progress-bar" do
-      render_speed(percentage)
-    end
-  end
 
   def render_speed(percentage)
     flag = percentage >= 100 ? "success" : ""

@@ -17,15 +17,30 @@
     </div>
     <div class="pull-left sns-share dx-u-3-10">
       <div class='wrap'>
-        <%= render_project_owner(@project) %>
-        <%= render_project_status(@project) %>
+        <%= image_tag @project.owner_avatar.try(:url, :normal) %>
+
+        <div class="row">还差<span class="share-count">38个分享</span></div>
+        <div class="row">该项目就可进入公共筹集</div>
+        <div class="row">离结束还有<span class="day-count">23天</span></div>
+
+        <%= render :partial => "progress", locals: { project: @project } %>
         <%= render_project_weibo(@project) %>
-        <!-- TODO: add an 'I want donate' link -->
-        <% if user_signed_in? %>
         <!-- TODO: remind user to fill in the form -->
-          <%= render_donate_box(@project) %>
-          <%= render_donate_form(@project) %>
-        <% end %>
+        <div class="row">
+          <% if user_signed_in? %>
+              <%= link_to "捐款支持", 'http://me.alipay.com/allenfantasy', target: '_blank' %>
+              <% if volunteer?(@project) %>
+                <%= link_to "退出志愿者报名", "", id: "remove_volunteer" %>
+                <%= link_to "成为志愿者", "", id: "add_volunteer", style: "display:none;" %>
+              <% else %>
+                <%= link_to "成为志愿者", "", id: "add_volunteer" %>
+                <%= link_to "退出志愿者报名", "", id: "remove_volunteer", style: "display:none;" %>
+              <% end %>
+              <%= render :partial => "donate_form", locals: { project: @project } %>
+          <% else %>
+            <%= link_to "登录后支持", new_user_registration_path %>
+          <% end %>
+        </div>
       </div>
     </div>
     <!-- 已有的评论 -->

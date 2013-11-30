@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131122041211) do
+ActiveRecord::Schema.define(:version => 20131130022356) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -72,6 +72,13 @@ ActiveRecord::Schema.define(:version => 20131122041211) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "participations", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "volunteer_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "project_basic_infos", :force => true do |t|
     t.string   "photo_file_name"
     t.string   "photo_content_type"
@@ -119,9 +126,10 @@ ActiveRecord::Schema.define(:version => 20131122041211) do
     t.integer  "raised_amount"
     t.datetime "published_time"
     t.integer  "status"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "comments_count"
+    t.integer  "volunteer_amount"
   end
 
   create_table "sponsors", :force => true do |t|

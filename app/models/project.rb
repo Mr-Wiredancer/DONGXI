@@ -18,6 +18,7 @@ class Project < ActiveRecord::Base
                   :published_time,
                   :comments_count,
                   :raised_amount,
+                  :volunteer_amount,
                   :status
 
   attr_accessor :submitting
@@ -29,6 +30,8 @@ class Project < ActiveRecord::Base
   has_one   :weibo_status, class_name: "WeiboStatus", dependent: :destroy
 
   has_many  :donations, class_name: "Donation", dependent: :destroy
+  has_many  :participations, dependent: :destroy
+  has_many  :volunteers, through: :participations
   has_many  :comments, dependent: :destroy
 
   accepts_nested_attributes_for :basic_info, :story, :owner
@@ -120,10 +123,31 @@ class Project < ActiveRecord::Base
     self.update_attributes!(status: 0) if in_audit?
   end
 
-  def add_donation!(options)
+  def add_donation(options)
     options.slice!(:trade_no, :user_id)
     self.donations << Donation.new(options)
     self.save!
+  end
+
+  def add_volunteer(user_id)
+    user = User.find(user_id)
+    unless (self.volunteer_ids.include?(user_id) || user.nil?)
+      self.volunteers << user
+      amount = (self.volunteer_amount || 0) + 1
+      self.update_attributes(volunteer_amount: amount)
+      self.save
+    end
+  end
+
+  def remove_volunteer(user_id)
+    if self.volunteer_ids.include?(user_id)
+      self.participations.where(volunteer_id: user_id).delete_all
+      self.update_attributes(volunteer_amount: self.volunteer_amount - 1)
+    end
+  end
+
+  def volunteer_ids
+    self.volunteers.map(&:id)
   end
 
   def update_comments_count

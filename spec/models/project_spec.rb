@@ -24,9 +24,9 @@ describe Project do
     end
   end
 
-  describe "#add_donation!" do
+  describe "#add_donation" do
     it "add an donation for project" do
-      project.add_donation!(donation_attr)
+      project.add_donation(donation_attr)
       project.should have(1).donations
     end
   end
@@ -77,7 +77,7 @@ describe Project do
 
   describe "#search" do
     describe "search info" do
-      pending
+      #pending
     end
   end
 end

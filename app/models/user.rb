@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name
 
   has_many :projects
+  has_many :participations, dependent: :destroy, foreign_key: "volunteer_id"
+  has_many :volunteered_projects, through: :participations, source: :project
   has_many :comments
 
   has_many :authorizations, dependent: :destroy do

@@ -21,4 +21,9 @@ module ApplicationHelper
     JSON.parse(response.body)
   end
 
+  def volunteer?(project)
+    return false if project.blank? or current_user.blank?
+    project.volunteer_ids.include?(current_user.id)
+  end
+
 end

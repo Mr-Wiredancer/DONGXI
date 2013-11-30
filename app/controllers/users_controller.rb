@@ -12,8 +12,11 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET
   def projects
+    # TODO: display only one project
     @projects = current_user.projects
   end
+
 
 end
