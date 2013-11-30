@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - "1.9.3-p429"
+  - "1.9.3-p448"
 install:
   - "sh .travis_install.sh"
   - "bundle install"
