@@ -1,7 +1,7 @@
 <div class="pull-right user">
   <% if user_signed_in? %>
     <% if current_user.weibo %>
-      <%= render :partial => 'common/weibo_user', locals: { weibo_user: oauth_retrieve(current_user.weibo_id) } %>
+      <%= render :partial => 'common/weibo_user' %>
     <% else %>
       <%= current_user.name %>
     <% end %>
