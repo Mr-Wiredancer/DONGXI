@@ -4,11 +4,13 @@ class CommentsController < ApplicationController
   before_filter :find_project
   # load_and_authorize_resource
 
-  # xhr POST
+  # POST
   def create
+    comment_params = params[:comment].merge({
+      project_id: @project.id,
+      user_id: current_user.id
+    })
     @comment = Comment.new(params[:comment])
-    @comment.project_id = @project.id
-    @comment.user_id = current_user.id
 
     respond_to do |format|
       begin
@@ -22,7 +24,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def delete # by admin
+  def delete # TODO: by admin
   end
 
   protected

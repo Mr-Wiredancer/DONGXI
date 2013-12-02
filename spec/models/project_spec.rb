@@ -19,6 +19,9 @@ describe Project do
     it "has no money" do
       project.raised_amount.should == 0
     end
+    it "has no volunteer" do
+      project.volunteer_amount.should == 0
+    end
     it "should be in_edit" do
       project.should be_in_edit
     end
@@ -76,8 +79,96 @@ describe Project do
   end
 
   describe "#search" do
-    describe "search info" do
-      #pending
+    context "unpublished projects" do
+      it "can not be searched" do
+        p = FactoryGirl.create(:project, :valid)
+        p.basic_info = FactoryGirl.create(:project_basic_info, name: "dongxi")
+        p.save
+
+        Project.search(key: 'dongxi').should_not include(p)
+      end
+
+      it "can be searched after published" do
+        p = FactoryGirl.create(:project, :valid)
+        p.basic_info = FactoryGirl.create(:project_basic_info, name: "dongxi")
+        p.status = 2; p.save
+
+        Project.search(key: 'dongxi').should include(p)
+      end
+    end
+    context "attributes: " do
+      it ".basic_info" do
+        p1 = FactoryGirl.create(:project, :valid)
+        p1.basic_info = FactoryGirl.create(:project_basic_info, name: "DONgXi")
+        p1.status = 2; p1.save;
+
+        p2 = FactoryGirl.create(:project, :valid)
+        p2.basic_info = FactoryGirl.create(:project_basic_info, slogan: "xiNan")
+        p2.status = 2; p2.save;
+
+        Project.search(key: "ong").should include(p1)
+        Project.search(key: "donGxI").should include(p1)
+        Project.search(key: "nan").should include(p2)
+        Project.search(key: "XiNAN").should include(p2)
+        Project.search(key: "xI").should include(p1,p2)
+
+      end
+      it ".introduction" do
+        p = FactoryGirl.create(:project, :valid)
+        p.story = FactoryGirl.create(:project_story, introduction: "We are hackers!")
+        p.status = 2; p.save;
+
+        Project.search(key: 'we').should include(p)
+        Project.search(key: 'Hack').should include(p)
+        Project.search(key: '!').should include(p)
+      end
+
+      it ".owner" do
+        p = FactoryGirl.create(:project, :valid)
+        p.owner = FactoryGirl.create(:project_owner, name: "dxHackers")
+        p.status = 2; p.save;
+
+        Project.search(key: "DX").should include(p)
+        Project.search(key: 'haCk').should include(p)
+        Project.search(key: 'ERS').should include(p)
+      end
+    end
+  end
+
+  describe "#add_volunteer" do
+    it "add one volunteer" do
+      project.add_volunteer(user.id)
+
+      project.volunteers.should include(user)
+      project.volunteer_amount.should == 1
+    end
+    it "can only add same volunteer once" do
+      project.add_volunteer(user.id)
+      project.add_volunteer(user.id)
+
+      project.volunteer_amount.should == 1
+    end
+  end
+  describe "#remove_volunteer" do
+    context "remove wrong id" do
+      it "do nothing" do
+        project.add_volunteer(user.id)
+        project.remove_volunteer(user.id + 1) # wrong id
+
+        project.volunteer_amount.should == 1
+      end
+    end
+    context "remove correct id" do
+      it "decrease volunteer_amount" do
+        # add one first...
+        project.volunteers << user
+        project.volunteer_amount = 1
+        project.save
+
+        project.remove_volunteer(user.id)
+
+        project.volunteer_amount.should == 0
+      end
     end
   end
 end

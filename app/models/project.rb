@@ -56,6 +56,7 @@ class Project < ActiveRecord::Base
     if self.new_record?
       self.status = 0
       self.raised_amount = 0
+      self.volunteer_amount = 0
     end
   end
 
