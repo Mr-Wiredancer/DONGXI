@@ -34,34 +34,34 @@ class Cpanel::DonationsController < Cpanel::ApplicationController
 
   def create
     @donation = Donation.new(params[:donation])
-    p = Project.find(params[:donation][:project_id])
-
+    
     respond_to do |format|
       begin
+        p = Project.find(params[:donation][:project_id])
         p.update_attributes!(raised_amount: p.raised_amount + params[:donation][:amount].to_i)
-        @donation.save!
+        @donation.save
         format.html { redirect_to cpanel_donations_url, notice: '添加捐赠记录成功.' }
         format.json { render json: @donation, status: :created, location: @donation }
       rescue => e
         format.html { render action: "new", errors: e.message }
-        format.json { render json: exception, status: :unprocessable_entity }
+        format.json { render json: e, status: :unprocessable_entity }
       end
     end
   end
 
   def update
     @donation = Donation.find(params[:id])
-    p = @donation.project
 
     respond_to do |format|
       begin
+        p = @donation.project
         p.update_attributes!(raised_amount: p.raised_amount - (@donation.amount || 0) + params[:donation][:amount].to_i)
         @donation.update_attributes!(params[:donation])
         format.html { redirect_to cpanel_donations_url, notice: '修改捐赠记录成功.' }
         format.json { head :no_content }
       rescue => e
         format.html { render action: "edit", errors: e.message }
-        format.json { render json: exception, status: :unprocessable_entity }
+        format.json { render json: e, status: :unprocessable_entity }
       end
     end
   end
