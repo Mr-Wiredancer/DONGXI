@@ -4,14 +4,12 @@ class CommentsController < ApplicationController
   before_filter :find_project
   # load_and_authorize_resource
 
-  # POST
-  def create
+  def create # POST
     comment_params = params[:comment].merge({
       project_id: @project.id,
       user_id: current_user.id
     })
-    @comment = Comment.new(params[:comment])
-
+    @comment = Comment.new(comment_params)
     respond_to do |format|
       begin
         @comment.save

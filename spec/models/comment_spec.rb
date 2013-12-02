@@ -6,7 +6,7 @@ describe Comment do
   describe "after_save" do
     it "update project's comment count" do
       c = Comment.create({
-      project_id: project.id,
+        project_id: project.id,
         user_id: user.id,
         body: "Testing"
       })
