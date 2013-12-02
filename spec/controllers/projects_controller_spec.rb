@@ -13,7 +13,7 @@ describe ProjectsController do
   end
   def donate_valid_attr
     {
-      id:         project.id,
+      id:         published_project.id,
       trade_no:   "2013112000001000000072962895",
       amount:     100,
       user_id:    user.id,
@@ -22,8 +22,9 @@ describe ProjectsController do
   describe "POST donate" do
     context "with valid attributes" do
       it "should redirect to project/:id/show" do
+        sign_in user
         post 'donate', donate_valid_attr
-        response.should redirect_to(project_url(project))
+        response.should redirect_to(project_url(published_project))
       end
       #it "should add raised_amount for project" do
         #original_amount = project.raised_amount
@@ -32,8 +33,9 @@ describe ProjectsController do
         #(project.raised_amount - original_amount).should == 100
       #end
       it "should add one donation" do
+        sign_in user
         post 'donate', donate_valid_attr
-        project.should have(1).donations
+        published_project.should have(1).donations
       end
     end
   end
