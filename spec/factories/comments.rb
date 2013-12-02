@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :comment do
-    project_id 1
-    body "MyString"
+    association :project
+    association :user
+    sequence(:body){ |n| "Comment-#{n}" }
   end
 end
