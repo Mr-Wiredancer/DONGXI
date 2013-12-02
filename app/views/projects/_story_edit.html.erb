@@ -21,7 +21,7 @@
       <fieldset class="field">
         <div class="fieldset-inner">
           <%= story.label :video_url, '项目视频' %>
-          <%= story.text_field :video_url %>
+          <%= story.text_area :video_url, rows: 3 %>
           <%= story.hint :video_url, text: '用一个视频去介绍你的项目会大大提高你的成功率。它不需要是一个奥斯卡级别的电影，只需要是你，还有解释你要做什么' %>
         </div>
       </fieldset>

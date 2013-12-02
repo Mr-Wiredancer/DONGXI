@@ -12,6 +12,7 @@ zh-CN:
         email: '邮箱'
         password: '密码'
         password_confirmation: '确认密码'
+        current_password: '当前密码'
       donation:
         trade_no: '交易号'
         amount: '金额'

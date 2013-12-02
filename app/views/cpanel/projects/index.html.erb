@@ -1,4 +1,4 @@
-<h1>所有项目</h1>
+<h1>管理所有项目</h1>
 
 <table class="projects">
   <tr>
@@ -7,6 +7,7 @@
     <th class="introduction">项目简介</th>
     <th class="risk">项目风险</th>
     <th class="status">是否发布</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -22,6 +23,12 @@
     <td><%= link_to '查看', project %></td>
     <td><%= link_to '编辑', edit_project_path(project) %></td>
     <td><%= link_to '删除', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+      <% if project.in_audit? %>
+        <%= link_to '发布', publish_project_path(project) %>
+        <%= link_to '退回编辑', unpublish_project_path(project) %>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>

@@ -1,11 +1,14 @@
 # coding: utf-8
 class ProjectsController < ApplicationController
-  before_filter :authenticate_user!, except: [:show]
+  before_filter :authenticate_user!, except: [:show, :index]
   load_and_authorize_resource
 
   include ApplicationHelper
   include ProjectHelper
 
+  def index
+    @projects = Project.in_publish
+  end
 
   def show
     @project = Project.find(params[:id])
@@ -86,19 +89,23 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def submit
+  def submit # GET
     @project = Project.find(params[:id])
     respond_to do |format|
     begin
       @project.submit!
-      format.html { redirect_to project_url(@project), notice: '提交成功!等待审核中...' }
+      if current_user.admin?
+        format.html { redirect_to cpanel_projects_url, notice: '提交成功!等待审核中...' }
+      else
+        format.html { redirect_to project_url(@project), notice: '提交成功!等待审核中...' }
+      end
     rescue => e
       format.html { redirect_to preview_project_url(@project) , alert: '提交失败！' }
     end
     end
   end
 
-  def publish
+  def publish # GET
     @project = Project.find(params[:id])
     respond_to do |format|
     begin
@@ -110,7 +117,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def unpublish
+  def unpublish # GET
     @project = Project.find(params[:id])
     respond_to do |format|
     begin

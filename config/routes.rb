@@ -26,6 +26,8 @@ Website::Application.routes.draw do
   namespace :cpanel do
     resources :users
     resources :donations
+    resources :projects, only: [:index]
+    get "dashboard" => "dashboard#index"
   end
 
   root :to => 'home#index'
