@@ -79,4 +79,9 @@ describe ProjectsController do
       end
     end
   end
+
+  describe "GET new" do
+    pending # TODO: guarantee user could only setup new project before he finished editing the current one.
+  end
+
 end

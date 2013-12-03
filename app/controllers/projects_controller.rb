@@ -21,11 +21,11 @@ class ProjectsController < ApplicationController
 
   def new
     respond_to do |format|
-      @project = current_user.projects.in_edit.first
-      if current_user.has_role?(:member) && @project.present?
-        format.html { redirect_to edit_project_url(@project) }
+      @project = current_user.editing_project
+      if @project.present?
+        format.html { redirect_to edit_project_url(@project, step: 'info') }
       else
-        @project = Project.new
+        @project = Project.create(user_id: current_user.id)
         @project.build_basic_info
         format.html # new.html.erb
         format.json { render json: @project }
@@ -97,7 +97,7 @@ class ProjectsController < ApplicationController
       if current_user.admin?
         format.html { redirect_to cpanel_projects_url, notice: '提交成功!等待审核中...' }
       else
-        format.html { redirect_to project_url(@project), notice: '提交成功!等待审核中...' }
+        format.html { redirect_to preview_project_url(@project), notice: '提交成功!等待审核中...' }
       end
     rescue => e
       format.html { redirect_to preview_project_url(@project) , alert: '提交失败！' }

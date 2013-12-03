@@ -154,4 +154,5 @@ class Project < ActiveRecord::Base
   def update_comments_count
     self.update_attributes!(comments_count: comments.count)
   end
+
 end
