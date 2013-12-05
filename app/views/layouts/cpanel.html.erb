@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:wb=“http://open.weibo.com/wb”>
+<head>
+  <title>V梦享 后台管理面板</title>
+
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %><!-- TODO: refactor -->
+  <%= csrf_meta_tags %>
+</head>
+<body id="<%= "#{controller_name}" %>" class="<%= "#{action_name}" %>">
+
+<div id='header'>
+  <div class="content">
+    <ul class="navbar">
+      <li><%= link_to '用户', cpanel_users_path %></li>
+      <li><%= link_to '项目', cpanel_projects_path %></li>
+      <li><%= link_to '捐赠记录', cpanel_donations_path %></li>
+      <li><%= link_to '评论', cpanel_comments_path %></li>
+    </ul>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="flash">
+  <% flash.each do |type, message| %>
+    <%= content_tag(:div, message, :class => "alert-#{type}") %>
+  <% end %>
+</div>
+<div id="admin">
+  <%= yield %>
+</div>
+
+</body>
+</html>

@@ -1,3 +1,10 @@
+/* colors: TODO: put colors, width, height in a seperate file */
+$valid-width: 960px;
+$light-blue: #ADD8E6;
+$aquamarine: #7FFFD4;
+$light-pink: #FFB6C1;
+$light-purple: #C9A8E0;
+
 /*=================== element definition ========================*/
 * {
   margin: 0;
@@ -19,6 +26,9 @@ p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 15px;
   line-height: 18px;
+}
+ul {
+  list-style: none;
 }
 
 pre {
@@ -94,5 +104,32 @@ h1 { font-size: 26px; }
   ul li {
     font-size: 12px;
     list-style: square;
+  }
+}
+
+.navbar > li {
+  float: left;
+  > a {
+    padding: 15px;
+  }
+}
+
+/* custom css: Will move them elsewhere when design is ok */
+
+#admin {
+  #project-in-audit {
+    float: left;
+    width: 50%;
+    height: 300px;
+    background: $aquamarine;
+  }
+  #latest-comments {
+    float: left;
+    width: 50%;
+    height: 300px;
+    background: $light-purple;
+  }
+  #others {
+    background: $light-pink;
   }
 }

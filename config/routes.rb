@@ -27,7 +27,9 @@ Website::Application.routes.draw do
     resources :users
     resources :donations
     resources :projects, only: [:index]
+    resources :comments, only: [:index, :destroy]
     get "dashboard" => "dashboard#index"
+    get "/" => "dashboard#index"
   end
 
   root :to => 'home#index'

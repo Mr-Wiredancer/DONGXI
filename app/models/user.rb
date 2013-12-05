@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :projects
   has_many :participations, dependent: :destroy, foreign_key: "volunteer_id"
   has_many :volunteered_projects, through: :participations, source: :project
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   has_many :authorizations, dependent: :destroy do
     def find_or_create_by_params(params)
