@@ -1,0 +1,6 @@
+<p>志愿者列表：</p>
+<ul>
+  <% @project.volunteers.each do |volunteer| %>
+   <li>姓名：<%= volunteer.name %></li>
+  <% end %>
+</ul>

@@ -26,7 +26,11 @@ Website::Application.routes.draw do
   namespace :cpanel do
     resources :users
     resources :donations
-    resources :projects, only: [:index]
+    resources :projects, only: [:index] do
+      member do
+        get :volunteers
+      end
+    end
     resources :comments, only: [:index, :destroy]
     get "dashboard" => "dashboard#index"
     get "/" => "dashboard#index"

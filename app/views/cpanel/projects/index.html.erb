@@ -11,6 +11,7 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @projects.each do |project| %>
@@ -20,6 +21,7 @@
     <td class="introduction"><%= project.try(:story).try(:introduction).try(:html_safe) || "暂无介绍" %></td>
     <td class="risk"><%= project.try(:story).try(:risk) %></td>
     <td class="status"><%= project.status_name %></td>
+    <td><%= link_to '查看志愿者', volunteers_cpanel_project_path(project) %></td>
     <td><%= link_to '查看', project %></td>
     <td><%= link_to '编辑', edit_project_path(project) %></td>
     <td><%= link_to '删除', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
