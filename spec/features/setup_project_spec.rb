@@ -7,8 +7,6 @@ feature "Setup Project" do
 		User.create(name: "admin", email: "admin@dxhackers.com", password: "dxhackers", password_confirmation: "dxhackers")
 		Category.create(name: "公益", description: "公益项目包括扶助弱势群体,提供就业机会等等")
 		Region.create(name: "广州", description: "广州是一座美丽的城市,主要都是吃的")
-		p = FactoryGirl.create(:project, :valid)
-		p.submit!
 	end
 
 	scenario "create a project on straight flow" do
@@ -44,20 +42,9 @@ feature "Setup Project" do
     expect(page).to have_content("提交你的项目吧")
 
     # submit project
-    # ability BUG ? 
     click_link "提交审核"
     expect(page).to have_content("项目预览")
     expect(page).to have_content("提交成功!等待审核中...")
-	end
-
-	scenario "admin can publish in_audit project" do
-		log_in_with(email: "admin@dxhackers.com", password: "dxhackers")
-
-		visit '/cpanel/projects'
-
-		expect(page).to have_content("管理所有项目")
-		expect(page).to have_selector("#publish") 
-		expect(page).to have_selector("#unpublish") 
 	end
 	
 end  

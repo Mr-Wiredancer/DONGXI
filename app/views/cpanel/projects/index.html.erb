@@ -27,8 +27,8 @@
     <td><%= link_to '删除', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <td>
       <% if project.in_audit? %>
-        <%= link_to '发布', publish_project_path(project), id: "publish" %>
-        <%= link_to '退回编辑', unpublish_project_path(project), id: "unpublish" %>
+        <%= link_to '发布', publish_cpanel_project_path(project), id: "publish" %>
+        <%= link_to '退回编辑', unpublish_cpanel_project_path(project), id: "unpublish" %>
       <% end %>
     </td>
   </tr>

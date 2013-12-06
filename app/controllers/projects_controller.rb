@@ -105,29 +105,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def publish # GET
-    @project = Project.find(params[:id])
-    respond_to do |format|
-    begin
-      @project.publish!
-      format.html { redirect_to projects_url, notice: '发布成功!' }
-    rescue => e
-      format.html { render action: "index" }
-    end
-    end
-  end
-
-  def unpublish # GET
-    @project = Project.find(params[:id])
-    respond_to do |format|
-    begin
-      @project.unpublish!
-      format.html { redirect_to projects_url, notice: '取消发布成功!' }
-    rescue => e
-      format.html { render action: "index" }
-    end
-    end
-  end
 
   def donate # POST
     @project = Project.find(params[:id])

@@ -14,8 +14,6 @@ Website::Application.routes.draw do
     member do
       get :preview
       get :submit
-      get :publish
-      get :unpublish
       post :donate
       post :add_volunteer
       post :remove_volunteer
@@ -29,6 +27,8 @@ Website::Application.routes.draw do
     resources :projects, only: [:index] do
       member do
         get :volunteers
+        get :publish
+        get :unpublish
       end
     end
     resources :comments, only: [:index, :destroy]
