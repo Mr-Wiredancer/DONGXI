@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
 
   def new
     respond_to do |format|
-      @project = current_user.editing_project
+      @project = current_user.current_project
       if @project.present?
         format.html { redirect_to edit_project_url(@project, step: 'info') }
       else

@@ -50,9 +50,9 @@ class User < ActiveRecord::Base
     self.weibo.try(:uid)
   end
 
-  def editing_project
-    return nil if self.projects.in_edit.empty?
-    self.projects.in_edit.first
+  def current_project
+    return nil if self.projects.in_edit.empty? and self.projects.in_audit.empty?
+    self.projects.in_edit.first || self.projects.in_audit.first
   end
 
 end

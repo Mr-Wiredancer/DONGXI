@@ -61,8 +61,9 @@ class Project < ActiveRecord::Base
   end
 
   # scopes
-  scope :in_publish, where(status: Project::STATUS[:in_publish][:weight])
-  scope :in_edit, where(status: Project::STATUS[:in_edit][:weight])
+  %w[in_publish in_edit in_audit].each do |scope_name|
+    scope scope_name.to_sym, where(status: Project::STATUS[scope_name.to_sym][:weight])
+  end
 
   scope :info_like, lambda { |key| includes(:basic_info)
                              .where("(LOWER(project_basic_infos.name) LIKE ?) OR (LOWER(project_basic_infos.slogan) LIKE ?) ",

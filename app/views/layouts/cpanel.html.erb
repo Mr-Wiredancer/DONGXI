@@ -11,11 +11,15 @@
 
 <div id='header'>
   <div class="content">
+    <h1>V梦享</h1>
     <ul class="navbar">
+      <li><%= link_to '控制面板', cpanel_dashboard_path %></li>
       <li><%= link_to '用户', cpanel_users_path %></li>
       <li><%= link_to '项目', cpanel_projects_path %></li>
       <li><%= link_to '捐赠记录', cpanel_donations_path %></li>
       <li><%= link_to '评论', cpanel_comments_path %></li>
+      <li><%= link_to '回主页', root_path %></li>
+      <li><%= link_to '退出', destroy_user_session_path, :method => :delete %></li>
     </ul>
   </div>
 </div>

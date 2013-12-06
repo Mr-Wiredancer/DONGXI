@@ -17,12 +17,15 @@ class Ability
     elsif user.has_role?(:member)
       basic_read_only
       # projects
-      alias_action :preview, :submit, :update, :destroy, :to => :manage_own
+      alias_action :submit, :update, :destroy, :to => :manage_own
       alias_action :donate, :add_volunteer, :remove_volunteer, :to => :support
       can :support, Project, :status => 2 # published
       can :create, Project
       can :manage_own, Project do |p|
         p.user_id == user.id && p.in_edit?
+      end
+      can :preview, Project do |p|
+        p.user_id == user.id && !p.in_publish?
       end
     else
       cannot :manage, :all

@@ -63,6 +63,8 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
   FactoryGirl.reload
+
+  #ActiveSupport::Dependencies.clear # Reload models when cache_classes = true?
   
   # reload support files
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| load f }

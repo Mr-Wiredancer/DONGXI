@@ -21,6 +21,9 @@ feature "Setup Project" do
 	  fill_in "宣传语", with: "我们这个项目给力啊"
 	  select "公益", from: "分类"
 	  select "广州", from: "项目地区"
+    fill_in "天数", with: 30
+    select "金钱", from: "募集类型"
+    fill_in "project_basic_info_attributes_amount", with: 1000 # add amount
 
 	  click_button "保存"
 	  expect(page).to have_content("这不仅仅是一个项目")	
@@ -42,9 +45,9 @@ feature "Setup Project" do
 
     # submit project
     # ability BUG ? 
-    # click_link "提交审核"
-    # expect(page).to have_content("项目预览")
-    # expect(page).to have_content("提交成功!等待审核中...")
+    click_link "提交审核"
+    expect(page).to have_content("项目预览")
+    expect(page).to have_content("提交成功!等待审核中...")
 	end
 
 	scenario "admin can publish in_audit project" do
