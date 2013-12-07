@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   end
 
   def weibo
-    auth = self.authorizations(provider: 'weibo')
+    auth = self.authorizations.where(provider: 'weibo')
     auth.any? ? auth.first : nil
   end
 

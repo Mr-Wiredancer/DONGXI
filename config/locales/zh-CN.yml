@@ -103,6 +103,7 @@ zh-CN:
   common:
     provider:
       weibo: '新浪微博'
+      renren: '人人'
   errors: &errors
     format: ! "%{message}"
     messages:

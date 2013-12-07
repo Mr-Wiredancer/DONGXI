@@ -24,6 +24,7 @@ gem 'figaro'
 # 第三方 OAuth 登录
 gem 'omniauth'
 gem 'omniauth-weibo-oauth2'
+gem 'omniauth-renren-oauth2'
 
 # 图片上传
 gem 'paperclip', '~> 3.0'

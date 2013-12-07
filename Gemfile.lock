@@ -137,6 +137,9 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    omniauth-renren-oauth2 (0.0.6)
+      omniauth (~> 1.1)
+      omniauth-oauth2 (~> 1.1)
     omniauth-weibo-oauth2 (0.3.0)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
@@ -258,6 +261,7 @@ DEPENDENCIES
   fuubar
   jquery-rails
   omniauth
+  omniauth-renren-oauth2
   omniauth-weibo-oauth2
   paperclip (~> 3.0)
   pg

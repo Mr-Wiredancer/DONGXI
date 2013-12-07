@@ -44,7 +44,7 @@
     shared:
       links:
         sign_in: 登录
-        sign_in_with_provider: 用 %{provider} 登录
+        sign_in_with_provider: "使用%{provider}登录"
         sign_up: 注册
         forgot_password: 忘记密码?
     mailer:
