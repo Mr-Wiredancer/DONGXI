@@ -14,19 +14,14 @@ class User < ActiveRecord::Base
   has_many :volunteered_projects, through: :participations, source: :project
   has_many :comments, dependent: :destroy
 
-  has_many :authorizations, dependent: :destroy do
-    def find_or_create_by_params(params)
-      provider,uid = params[:provider],params[:uid].to_s
-      find_or_create_by_provider_and_uid(provider, uid)
-    end
-  end
+  has_many :authorizations, dependent: :destroy
 
   def bind_service(response)
     auth_params = {
       provider: response["provider"],
       uid: response["uid"].to_s,
     }
-    authorizations.find_or_create_by_params(auth_params)
+    self.authorizations << Authorization.find_or_create_by_provider_and_uid(auth_params)
   end
 
   def admin?
@@ -39,6 +34,10 @@ class User < ActiveRecord::Base
     when :member then !admin? && valid?
     else false
     end
+  end
+
+  def bind?(provider)
+    self.authorizations.collect { |a| a.provider }.include?(provider)
   end
 
   def weibo

@@ -27,4 +27,13 @@
 <% end %>
 
 <br />
+<% ["weibo", "renren"].each do |provider| %>
+  <p>
+  <% if current_user.bind? provider %>
+    <%= link_to t('users.unbind', provider: t("users.provider.#{provider}")), "/account/auth/#{provider}/unbind", title: "点击解除绑定", method: :delete %>
+  <% else %>
+    <%= link_to t("users.bind", provider: t("users.provider.#{provider}")), "/account/auth/#{provider}", title: "点击绑定" %>
+  <% end %>
+  </p>
+<% end %>
 <p><%= button_to "注销账号", registration_path(resource_name), :data => { :confirm => "确定注销吗?" }, :method => :delete %></p>

@@ -9,6 +9,7 @@ Website::Application.routes.draw do
     :omniauth_callbacks => "users/omniauth_callbacks",
     :registrations => "registrations"
   }
+  delete "/account/auth/:provider/unbind" => "users#auth_unbind", as: "unbind_account"
 
   resources :projects do
     member do

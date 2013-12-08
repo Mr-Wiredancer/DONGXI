@@ -18,5 +18,11 @@ class UsersController < ApplicationController
     @projects = current_user.projects
   end
 
+  def auth_unbind
+    provider = params[:provider]
+
+    current_user.authorizations.where(provider: provider).destroy_all
+    redirect_to edit_user_registration_path, :flash => { :warning => "解除绑定成功" }
+  end
 
 end

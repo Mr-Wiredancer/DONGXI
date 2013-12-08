@@ -1,0 +1,7 @@
+"zh-CN":
+  users:
+    provider:
+      weibo: "新浪微博"
+      renren: "人人"
+    bind: "绑定%{provider}"
+    unbind: "解除%{provider}绑定"

@@ -19,8 +19,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def omniauth_login_or_signup(provider_name)
     provider_name = I18n.t("common.provider.#{provider_name}")
     if not current_user.blank? # bind
-      current_user.bind_service(auth)
-      redirect_to root_url, :notice => "成功绑定#{provider_name}账号!"
+      current_user.bind_service(@auth)
+      redirect_to edit_user_registration_url, :notice => "成功绑定#{provider_name}账号!"
     elsif @authorization # login
       flash[:notice] = "#{provider_name}账号登录成功!"
       sign_in_and_redirect @authorization.user, :event => :authentication#, :notice => "#{provider_name}账号登录成功!"
