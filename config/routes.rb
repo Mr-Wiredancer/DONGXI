@@ -39,7 +39,7 @@ Website::Application.routes.draw do
 
   root :to => 'home#index'
 
-  resources :users do
+  resources :users, only: [:show] do
     member do
       get :projects
     end
