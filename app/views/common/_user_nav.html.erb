@@ -15,8 +15,9 @@
   <% else %>
     <%= link_to '注册', new_user_registration_path %> |
     <%= link_to '登录', new_user_session_path %> |
-    <%- resource_class.omniauth_providers.each do |provider| %>
-      <%= link_to t(".sign_in_with_provider", { provider: t("common.provider.#{provider.to_s}") }), omniauth_authorize_path(resource_name, provider) %><br />
+    <%- resource_class.omniauth_providers.each_with_index do |provider, index| %>
+      <%= link_to t(".sign_in_with_provider", { provider: t("common.provider.#{provider.to_s}") }), omniauth_authorize_path(resource_name, provider) %>
+      <%= " | " unless index == resource_class.omniauth_providers.length - 1 %>
     <% end -%>
   </div>
   <% end %>

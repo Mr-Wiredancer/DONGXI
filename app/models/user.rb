@@ -40,18 +40,22 @@ class User < ActiveRecord::Base
     self.authorizations.collect { |a| a.provider }.include?(provider)
   end
 
-  def weibo
-    auth = self.authorizations.where(provider: 'weibo')
-    auth.any? ? auth.first : nil
-  end
-
-  def weibo_id
-    self.weibo.try(:uid)
-  end
-
   def current_project
     return nil if self.projects.in_edit.empty? and self.projects.in_audit.empty?
     self.projects.in_edit.first || self.projects.in_audit.first
+  end
+
+  self.class_eval do
+    self.omniauth_providers.map(&:to_s).each do |provider|
+      define_method "#{provider}" do
+        auth = self.authorizations.where(provider: provider)
+        auth.any? ? auth.first : nil
+      end
+
+      define_method "#{provider}_id" do
+        self.__send__("#{provider}").try(:uid)
+      end
+    end
   end
 
 end
