@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131130022356) do
+ActiveRecord::Schema.define(:version => 20131210065211) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20131130022356) do
     t.datetime "updated_at",       :null => false
     t.integer  "comments_count"
     t.integer  "volunteer_amount"
+    t.boolean  "recommended"
   end
 
   create_table "sponsors", :force => true do |t|

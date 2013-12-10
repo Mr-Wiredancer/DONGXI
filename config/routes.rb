@@ -30,6 +30,8 @@ Website::Application.routes.draw do
         get :volunteers
         get :publish
         get :unpublish
+        get :recommend
+        get :unrecommend
       end
     end
     resources :comments, only: [:index, :destroy]
