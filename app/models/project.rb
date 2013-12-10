@@ -57,7 +57,6 @@ class Project < ActiveRecord::Base
       self.status = 0
       self.raised_amount = 0
       self.volunteer_amount = 0
-      self.recommended = false
     end
   end
 

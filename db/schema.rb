@@ -126,11 +126,11 @@ ActiveRecord::Schema.define(:version => 20131210065211) do
     t.integer  "raised_amount"
     t.datetime "published_time"
     t.integer  "status"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "comments_count"
     t.integer  "volunteer_amount"
-    t.boolean  "recommended"
+    t.boolean  "recommended",      :default => false
   end
 
   create_table "sponsors", :force => true do |t|

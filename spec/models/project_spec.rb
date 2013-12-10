@@ -25,6 +25,9 @@ describe Project do
     it "should be in_edit" do
       project.should be_in_edit
     end
+    it "is unrecommended" do
+      project.recommended.should be_false
+    end
   end
 
   describe "#add_donation" do

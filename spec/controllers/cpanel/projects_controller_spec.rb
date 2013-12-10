@@ -25,4 +25,23 @@ describe Cpanel::ProjectsController do
       project.should be_in_edit
     end
   end
+
+  describe "GET recommend" do
+    it "works" do
+      project.update_attributes!(status: 2) # published
+      get 'recommend', { id: project.id }
+      project.reload
+      project.recommended.should be_true
+    end
+  end
+
+  describe "GET unrecommend" do
+    it "works" do
+      project.update_attributes!(status: 2) # published
+      project.recommended = true; project.save! # set recommended
+      get 'unrecommend', { id: project.id }
+      project.reload
+      project.recommended.should be_false
+    end
+  end
 end
