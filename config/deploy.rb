@@ -37,7 +37,6 @@ namespace :deploy do
   end
 
   task :setup_config, roles: :app do
-
     run "mkdir -p #{shared_path}/ckeditor_assets"
     run "mkdir -p #{shared_path}/content"
 
@@ -62,5 +61,4 @@ namespace :deploy do
 
 end
 
-#server "192.168.1.99", :web, :app, :db, primary: true
 server "115.29.192.209", :web, :app, :db, primary: true
