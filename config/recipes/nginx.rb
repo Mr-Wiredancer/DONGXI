@@ -7,11 +7,12 @@ namespace :nginx do
   end
   after "deploy:install", "nginx:install"
 
-
   task :setup, roles: :web do
-    template "nginx_unicorn.erb", "/tmp/nginx_conf"
-    sudo "mv /tmp/nginx_conf /etc/nginx/sites-enabled/#{application}"
+    template "nginx_unicorn.erb", "#{shared_path}/system/nginx_unicorn_conf"
+    sudo "mv #{shared_path}/system/nginx_unicorn_conf /etc/nginx/sites-enabled/#{application}"
+
     sudo "rm -f /etc/nginx/sites-enabled/default"
+
     restart
   end
   after "deploy:setup", "nginx:setup"

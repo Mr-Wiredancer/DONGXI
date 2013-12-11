@@ -103,6 +103,7 @@ zh-CN:
   common:
     provider:
       weibo: '新浪微博'
+      renren: '人人'
   errors: &errors
     format: ! "%{message}"
     messages:
@@ -132,3 +133,9 @@ zh-CN:
       header:
         one: "有 1 个错误发生导致「%{model}」无法被保存。"
         other: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
+  activemodel:
+    errors:
+      <<: *errors
+  activerecord:
+    errors:
+      <<: *errors

@@ -1,16 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <div>
-  <span>Name: </span>
+  <span>姓名: </span>
   <span><%= @user.name %></span>
 </div>
 <div>
-  <span>Email: </span>
+  <span>邮箱: </span>
   <span><%= @user.email %></span>
 </div>
 <div>
-  <span>Weibo-Auth-Uid: </span>
-  <span><%= @user.authorizations.find_by_provider("weibo").try(:uid) %></span>
+  <span>微博uid: </span>
+  <span><%= @user.weibo_id %></span>
 </div>
-<%= link_to '编辑用户', edit_user_path(@user) %> |
-<%= link_to '查看所有用户', users_path %>
+<%= link_to '编辑用户', edit_cpanel_user_path(@user) %> |
+<%= link_to '查看所有用户', cpanel_users_path %>

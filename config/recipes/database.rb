@@ -11,4 +11,4 @@ namespace :db do
     seed
   end
 end
-after "deploy:cold", "deploy:db:seed"
+after "deploy:cold", "db:seed"

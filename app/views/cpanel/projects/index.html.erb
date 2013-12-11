@@ -1,0 +1,47 @@
+<h1>管理所有项目</h1>
+
+<table class="projects">
+  <tr>
+    <th class="name">项目名称</th>
+    <th class="slogan">口号</th>
+    <th class="introduction">项目简介</th>
+    <th class="risk">项目风险</th>
+    <th class="status">是否发布</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @projects.each do |project| %>
+  <tr>
+    <td class="name"><%= project.try(:basic_info).try(:name) %></td>
+    <td class="slogan"><%= project.try(:basic_info).try(:slogan) %></td>
+    <td class="introduction"><%= project.try(:story).try(:introduction).try(:html_safe) || "暂无介绍" %></td>
+    <td class="risk"><%= project.try(:story).try(:risk) %></td>
+    <td class="status"><%= project.status_name %></td>
+    <td><%= link_to '查看志愿者', volunteers_cpanel_project_path(project) %></td>
+    <td><%= link_to '查看', project %></td>
+    <td><%= link_to '编辑', edit_project_path(project) %></td>
+    <td><%= link_to '删除', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+      <% if project.in_audit? %>
+        <%= link_to '发布', publish_cpanel_project_path(project), id: "publish" %>
+        <%= link_to '退回编辑', unpublish_cpanel_project_path(project), id: "unpublish" %>
+      <% end %>
+      <% if project.in_publish? and project.recommended == false %>
+        <%= link_to '推荐', recommend_cpanel_project_path(project), id: "recommend" %>
+      <% end %>
+      <% if project.recommended %>
+        <%= link_to '取消推荐', unrecommend_cpanel_project_path(project), id: "unrecommend" %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to "创建项目", new_project_path %>
+<%= link_to "回主页", root_path %>

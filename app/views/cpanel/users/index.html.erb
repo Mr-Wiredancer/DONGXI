@@ -2,21 +2,23 @@
 
 <table>
   <tr>
-    <td>Name</td>
-    <td>Email</td>
-    <td>Weibo-Auth-Uid</td>
+    <td>姓名</td>
+    <td>邮箱</td>
+    <td>微博uid</td>
+    <td>人人uid</td>
     <td></td>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.name %>
-    <td><%= user.email %>
-    <td><%= user.authorizations.find_by_provider("weibo").try(:uid) %>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.weibo_id %></td>
+    <td><%= user.renren_id %></td>
     <td>
       <%= link_to '查看', cpanel_user_path(user) %>
       <%= link_to '修改', edit_cpanel_user_path(user) %>
-      <%= link_to '删除', cpanel_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to '删除', cpanel_user_path(user), method: :delete, data: { confirm: '确定删除用户?' } %>
     </td>
   </tr>
 <% end %>
@@ -24,4 +26,4 @@
 
 <br />
 
-<%= link_to '创建新用户', new_cpanel_user_path %>
+<%= link_to '添加用户', new_cpanel_user_path %>

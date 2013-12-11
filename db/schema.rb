@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131115013342) do
+ActiveRecord::Schema.define(:version => 20131210065211) do
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -37,6 +37,23 @@ ActiveRecord::Schema.define(:version => 20131115013342) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
+  create_table "comments", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "donations", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "trade_no"
+    t.integer  "amount"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "images", :force => true do |t|
     t.string   "data_file_name"
     t.string   "data_content_type"
@@ -55,6 +72,13 @@ ActiveRecord::Schema.define(:version => 20131115013342) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "participations", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "volunteer_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "project_basic_infos", :force => true do |t|
     t.string   "photo_file_name"
     t.string   "photo_content_type"
@@ -64,7 +88,6 @@ ActiveRecord::Schema.define(:version => 20131115013342) do
     t.string   "slogan"
     t.integer  "amount"
     t.integer  "duration_days"
-    t.datetime "published_time"
     t.integer  "raise_type"
     t.integer  "project_id"
     t.datetime "created_at",         :null => false
@@ -100,9 +123,14 @@ ActiveRecord::Schema.define(:version => 20131115013342) do
     t.integer  "region_id"
     t.integer  "user_id"
     t.integer  "sponsor_id"
+    t.integer  "raised_amount"
+    t.datetime "published_time"
     t.integer  "status"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "comments_count"
+    t.integer  "volunteer_amount"
+    t.boolean  "recommended",      :default => false
   end
 
   create_table "sponsors", :force => true do |t|

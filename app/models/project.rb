@@ -15,6 +15,10 @@ class Project < ActiveRecord::Base
                   :owner_attributes,
                   :user_id,
                   :sponsor_id,
+                  :published_time,
+                  :comments_count,
+                  :raised_amount,
+                  :volunteer_amount,
                   :status
 
   attr_accessor :submitting
@@ -24,6 +28,11 @@ class Project < ActiveRecord::Base
   has_one   :story, class_name: "ProjectStory", dependent: :destroy
   has_one   :owner, class_name: "ProjectOwner", dependent: :destroy
   has_one   :weibo_status, class_name: "WeiboStatus", dependent: :destroy
+
+  has_many  :donations, class_name: "Donation", dependent: :destroy
+  has_many  :participations, dependent: :destroy
+  has_many  :volunteers, through: :participations
+  has_many  :comments, dependent: :destroy
 
   accepts_nested_attributes_for :basic_info, :story, :owner
 
@@ -42,23 +51,37 @@ class Project < ActiveRecord::Base
   end
 
   # callbacks
-  before_validation :set_default_status
+  before_validation :set_default
+  def set_default
+    if self.new_record?
+      self.status = 0
+      self.raised_amount = 0
+      self.volunteer_amount = 0
+    end
+  end
 
   # scopes
-  scope :in_publish, where(status: Project::STATUS[:in_publish][:weight])
-  scope :in_edit, where(status: Project::STATUS[:in_edit][:weight])
+  %w[in_publish in_edit in_audit].each do |scope_name|
+    scope scope_name.to_sym, where(status: Project::STATUS[scope_name.to_sym][:weight])
+  end
 
-  scope :title_like, lambda { |key| includes(:basic_info).where("LOWER(project_basic_infos.name) LIKE ?", "%#{key.downcase}%") }
-  scope :text_like, lambda { |key| includes(:story).where("LOWER(project_stories.introduction) LIKE ?", "%#{key.downcase}%") }
+  scope :info_like, lambda { |key| includes(:basic_info)
+                             .where("(LOWER(project_basic_infos.name) LIKE ?) OR (LOWER(project_basic_infos.slogan) LIKE ?) ",
+                                    "%#{key.downcase}%", "%#{key.downcase}%") }
+  scope :introduction_like, lambda { |key| includes(:story).where("LOWER(project_stories.introduction) LIKE ?", "%#{key.downcase}%") }
+  scope :owner_like, lambda { |key| includes(:owner).where("LOWER(project_owners.name) LIKE ?", "%#{key.downcase}%") }
 
+  #scope
   scope :search, lambda {|params={}|
     projects = in_publish
-    projects = projects.title_like(params[:key]) | projects.text_like(params[:key]) if params[:key].present?
+    projects = projects.info_like(params[:key]) | projects.introduction_like(params[:key]) | projects.owner_like(params[:key]) if params[:key].present?
     projects
   }
 
   # methods
-  %w(name slogan photo amount duration_days published_time raise_type).each do |info_attr|
+
+  # get something
+  %w(name slogan photo amount duration_days raise_type).each do |info_attr|
     delegate info_attr, to: :basic_info, prefix: false, allow_nil: true
   end
 
@@ -71,10 +94,11 @@ class Project < ActiveRecord::Base
   delegate :name, to: :region, prefix: true, allow_nil: true
   delegate :name, to: :category, prefix: true, allow_nil: true
 
-  def set_default_status
-    self.status = 0 if self.new_record?
+  def status_name
+    STATUS.select{ |k,v| v[:weight] == status }.values[0][:description]
   end
 
+  # check status
   %w(edit audit publish).each do |method_name|
     define_method "in_#{method_name}?" do
       status == STATUS["in_#{method_name}".to_sym][:weight]
@@ -90,16 +114,46 @@ class Project < ActiveRecord::Base
     self.update_attributes!(status: 1) if in_edit?
   end
 
+  # manipulation
   def publish!
-    self.update_attributes!(status: 2) if in_audit?
+    if in_audit?
+      self.update_attributes!(status: 2, published_time: Time.now)
+    end
   end
 
   def unpublish!
     self.update_attributes!(status: 0) if in_audit?
   end
 
-  def status_name
-    STATUS.select{ |k,v| v[:weight] == status }.values[0][:description]
+  def add_donation(options)
+    options.slice!(:trade_no, :user_id)
+    self.donations << Donation.new(options)
+    self.save!
+  end
+
+  def add_volunteer(user_id)
+    user = User.find(user_id)
+    unless (self.volunteer_ids.include?(user_id) || user.nil?)
+      self.volunteers << user
+      amount = (self.volunteer_amount || 0) + 1
+      self.update_attributes(volunteer_amount: amount)
+      self.save
+    end
+  end
+
+  def remove_volunteer(user_id)
+    if self.volunteer_ids.include?(user_id)
+      self.participations.where(volunteer_id: user_id).delete_all
+      self.update_attributes(volunteer_amount: self.volunteer_amount - 1)
+    end
+  end
+
+  def volunteer_ids
+    self.volunteers.map(&:id)
+  end
+
+  def update_comments_count
+    self.update_attributes!(comments_count: comments.count)
   end
 
 end

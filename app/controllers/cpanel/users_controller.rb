@@ -37,7 +37,7 @@ class Cpanel::UsersController < Cpanel::ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to cpanel_users_url, notice: 'User was successfully created.' }
+        format.html { redirect_to cpanel_users_url, notice: '成功新建用户.' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -51,12 +51,12 @@ class Cpanel::UsersController < Cpanel::ApplicationController
 
     respond_to do |format|
       begin
-      if params[:password].present?
+      if params[:user][:password].present?
         @user.update_attributes(params[:user])
       else
         @user.update_without_password(params[:user])
       end
-        format.html { redirect_to cpanel_users_url, notice: 'User was successfully updated.' }
+        format.html { redirect_to cpanel_users_url, notice: '成功修改用户信息.' }
         format.json { head :no_content }
       rescue => e
         format.html { render action: "edit" }

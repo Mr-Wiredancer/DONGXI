@@ -1,0 +1,7 @@
+<meta property="og:type" content="webpage" />
+<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:title" content="<%= project.try(:basic_info).try(:name) %>" />
+<meta property="og:description" content="<%= project.try(:story).try(:introduction).try(:strip) %>" />
+<meta property="og:image" content="<%= project.try(:basic_info).try(:photo) %>" />
+<meta name="weibo:webpage:create_at" content="2013-11-07 09:12:56 +0800" />
+<meta name="weibo:webpage:update_at" content="2013-11-07 10:30:16 +0800" />

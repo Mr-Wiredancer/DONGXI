@@ -1,23 +1,17 @@
 # coding: utf-8
 class ProjectsController < ApplicationController
-  before_filter :authenticate_user!, except: [:show]
+  before_filter :authenticate_user!, except: [:show, :index]
   load_and_authorize_resource
 
   include ApplicationHelper
   include ProjectHelper
 
   def index
-    @projects = Project.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @projects }
-    end
+    @projects = Project.in_publish
   end
 
   def show
     @project = Project.find(params[:id])
-    status_retrieve("3637946596783717")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,11 +21,11 @@ class ProjectsController < ApplicationController
 
   def new
     respond_to do |format|
-      @project = current_user.projects.in_edit.first
-      if current_user.has_role?(:member) && @project.present?
-        format.html { redirect_to edit_project_url(@project) }
+      @project = current_user.current_project
+      if @project.present?
+        format.html { redirect_to edit_project_url(@project, step: 'info') }
       else
-        @project = Project.new
+        @project = Project.create(user_id: current_user.id)
         @project.build_basic_info
         format.html # new.html.erb
         format.json { render json: @project }
@@ -81,7 +75,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def preview
+  def preview # preview.html.erb
     @project = Project.find(params[:id])
   end
 
@@ -95,39 +89,47 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def submit
+  def submit # GET
     @project = Project.find(params[:id])
     respond_to do |format|
     begin
       @project.submit!
-      format.html { redirect_to project_url(@project), notice: '提交成功!等待审核中...' }
+      if current_user.admin?
+        format.html { redirect_to cpanel_projects_url, notice: '提交成功!等待审核中...' }
+      else
+        format.html { redirect_to preview_project_url(@project), notice: '提交成功!等待审核中...' }
+      end
     rescue => e
       format.html { redirect_to preview_project_url(@project) , alert: '提交失败！' }
     end
     end
   end
 
-  def publish
+
+  def donate # POST
     @project = Project.find(params[:id])
     respond_to do |format|
     begin
-      @project.publish!
-      format.html { redirect_to projects_url, notice: '发布成功!' }
+      @project.add_donation(params)
+      format.html { redirect_to project_url(@project), notice: '捐款成功!' }
     rescue => e
-      format.html { render action: "index" }
+      format.html { redirect_to project_url(@project), notice: '捐款出现了点问题。。' }
     end
     end
   end
 
-  def unpublish
-    @project = Project.find(params[:id])
-    respond_to do |format|
-    begin
-      @project.unpublish!
-      format.html { redirect_to projects_url, notice: '取消发布成功!' }
-    rescue => e
-      format.html { render action: "index" }
-    end
-    end
+  # POST project/:id/add_volunteer.json
+  def add_volunteer
+    project = Project.find(params[:id])
+    project.add_volunteer(params[:user_id].to_i)
+    render json: { message: 'ok', amount: project.volunteer_amount }
   end
+
+  # POST project/:id/remove_volunteer.json
+  def remove_volunteer
+    project = Project.find(params[:id])
+    project.remove_volunteer(params[:user_id].to_i)
+    render json: { message: 'ok', amount: project.volunteer_amount }
+  end
+
 end

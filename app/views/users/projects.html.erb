@@ -19,7 +19,13 @@
     <td class="introduction"><%= project.try(:story).try(:introduction) %></td>
     <td class="risk"><%= project.try(:story).try(:risk) %></td>
     <td class="status"><%= project.status_name %></td>
-    <td><%= link_to '查看', project %></td>
+    <td>
+      <% if project.in_publish? %>
+        <%= link_to '查看', project %>
+      <% else %>
+        <%= link_to '预览', preview_project_path(project) %>
+      <% end %>
+    </td>
     <td><%= link_to '编辑', edit_project_path(project) %></td>
     <td><%= link_to '删除', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
@@ -28,5 +34,5 @@
 
 <br />
 
-<%= link_to "创建项目", new_project_path %>
+<%= link_to_if current_user.current_project.nil?, "创建项目", new_project_path %>
 <%= link_to "回主页", root_path %>

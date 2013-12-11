@@ -2,10 +2,7 @@
   <ul class="banner">
     <% for step in %w(info story owner submit) %>
       <li style="display:inline-block; margin-right: 20px;">
-      <%
-          current_url = "#{request.raw_host_with_port}#{request.path_info}"
-      %>
-      <a class="editable" href=<%= "#{request.path}?step=#{step}" %> data-step="<%= "#{step}" %>"><%= t("projects.#{step}") %></a>
+      <%= link_to t("projects.#{step}"), edit_project_path(@project, step: step), class: "editable", data: { step: "#{step}" } %>
     <% end %>
     <% unless @project.new_record? %>
       <li style="display:inline-block;"><%= link_to '预览', preview_project_path(@project) %>

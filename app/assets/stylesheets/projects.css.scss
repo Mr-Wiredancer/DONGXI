@@ -1,3 +1,5 @@
+$light-blue: #ADD8E6;
+
 #projects {
   &.show, &.preview {
     .project {
@@ -11,6 +13,27 @@
           .share-count, .day-count {
             font-size: 30px;
             padding: 0 0.5em;
+          }
+          .progress-bar {
+            background: #e6e6e6;
+            .speed {
+              height: 10px;
+              display: block;
+              background: #f8550d;
+            }
+            .speed.success {
+              background: #01a05f;
+            }
+          }
+          form.donate {
+            label {
+              width: 50px;
+              display: inline-block;
+              font-size: 14px;
+            }
+            input[type="text"] {
+              width: 180px;
+            }
           }
         }
       }
@@ -50,5 +73,13 @@
       .introduction { width: 360px; }
       .slogan, .risk, .status { width: 120px; }
     }
+  }
+}
+#comments-box {
+  background: $light-blue;
+  .reply { overflow: hidden; }
+  .commentor {
+    font-size: 14px;
+    color: red;
   }
 }

@@ -5,6 +5,8 @@ class CreateProjects < ActiveRecord::Migration
       t.integer   :region_id
       t.integer   :user_id
       t.integer   :sponsor_id
+      t.integer   :raised_amount
+      t.datetime  :published_time
       t.integer   :status
 
       t.timestamps

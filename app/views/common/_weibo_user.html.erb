@@ -1,4 +1,7 @@
+<% weibo_user = oauth_retrieve(current_user.weibo_id)
+   weibo_url = weibo_user['id'].blank? ? "" : "http://weibo.com/#{weibo_user['id']}"
+%>
 <span class="weibo-user">
   <%= image_tag(weibo_user['profile_image_url']) %>
-  <%= link_to weibo_user['screen_name'], "http://weibo.com/#{weibo_user['id']}" %>
+  <%= link_to current_user.name, weibo_url %>
 </span>

@@ -1,7 +1,7 @@
 zh-CN:
-  layouts:
-    application:
-      login_with_weibo: "使用微博登录"
+  common:
+    user_nav:
+      sign_in_with_provider: "使用%{provider}登录"
   projects:
     info: '基本'
     reward: '奖励'

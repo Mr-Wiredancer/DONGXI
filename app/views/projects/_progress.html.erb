@@ -1,0 +1,17 @@
+<%
+    progress, target = if (project.amount.nil? || project.amount == 0)
+                         [0, 0]
+                       else
+                         [project.raised_amount, project.amount]
+                       end
+%>
+<div class="row">
+  <%= render_progress_bar(progress, target) %>
+  <br />
+  <div class="pull-right">
+    当前进度：<span><%= progress %> / <%= target %></span>
+  </div>
+  <div>
+    志愿者数：<span id="volunteer_amount"><%= project.volunteer_amount %></span>
+  </div>
+</div>

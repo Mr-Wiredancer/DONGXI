@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<div>
+  <span>捐赠用户: </span>
+  <span><%= @donation.donor_name %></span>
+</div>
+<div>
+  <span>捐赠交易号: </span>
+  <span><%= @donation.trade_no %></span>
+</div>
+<div>
+  <span>捐赠数额: </span>
+  <span><%= @donation.amount || "待补充" %></span>
+</div>
+
+<%= link_to '编辑捐赠记录', edit_cpanel_donation_path(@donation) %> |
+<%= link_to '所有捐赠记录', cpanel_donations_path %>

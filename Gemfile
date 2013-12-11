@@ -24,39 +24,33 @@ gem 'figaro'
 # 第三方 OAuth 登录
 gem 'omniauth'
 gem 'omniauth-weibo-oauth2'
+gem 'omniauth-renren-oauth2'
 
 # 图片上传
 gem 'paperclip', '~> 3.0'
 
-group :development, :test do
-  gem 'better_errors'
+group :development do
   gem 'binding_of_caller', :platform => [:mri_19, :rbx]
-  #gem 'capybara'
+  gem 'better_errors'
+end
+
+group :development, :test do
+  gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'pry-rails'
+  gem 'database_cleaner'
+  gem 'fuubar'
   gem 'capistrano', '~> 2.15'
   gem 'rvm-capistrano'
+  gem 'spork', '~> 1.0rc'
+end
+group :test do
+  gem 'capybara'
 end
 
 group :production do
   gem 'rails_12factor'
 	gem 'unicorn'
 end
-
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
 
 ruby '1.9.3'

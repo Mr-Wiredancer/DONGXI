@@ -3,19 +3,31 @@ development:
   WEIBO_APPKEY:         "1552726334"
   WEIBO_APPSECRET:      "bd6fa1e59dea33a79fbeec2a2a836413"
   WEIBO_ACCESS_TOKEN:   "2.00_aF2OEIDFFhB30536bf8370ZsA6Y"
+  RENREN_APPID:         "245116"
+  RENREN_APPKEY:        "e58d8ccb156744a1bc6abd5c19e753c9"
+  RENREN_APPSECRET:     "dba074433d074746882aa256cc36b4da"
 test:
   WEIBO_APPKEY:         "1552726334"
   WEIBO_APPSECRET:      "bd6fa1e59dea33a79fbeec2a2a836413"
   WEIBO_ACCESS_TOKEN:   "2.00_aF2OEIDFFhB30536bf8370ZsA6Y"
+  RENREN_APPID:         "245116"
+  RENREN_APPKEY:        "e58d8ccb156744a1bc6abd5c19e753c9"
+  RENREN_APPSECRET:     "dba074433d074746882aa256cc36b4da"
 # dongxi_pro: only used in staging/testing machine and production machine
 production:
   WEIBO_APPKEY:         "2645092102"
   WEIBO_APPSECRET:      "3b4aa9e6f485ea33ad17407835e88314"
   WEIBO_ACCESS_TOKEN:   "2.00_aF2OEqRXAtC2fd33143edtCrzSE"
+  RENREN_APPID:         "245118"
+  RENREN_APPKEY:        "e3e18a6461ae4e4b99e9fa9c4269c48b"
+  RENREN_APPSECRET:     "6d0b2e34cf07440e99ee8a1809bf6ec1"
 
 # dongxi_pro_local: only used in local staging machine
 #production:
   #WEIBO_APPKEY:         "1289553392"
   #WEIBO_APPSECRET:      "79c3f41483cb5ed1ab40df853cbf61fb"
   #WEIBO_ACCESS_TOKEN:   "2.00_aF2OEQkpQ6Bcbccd4f0e3BhSN5E"
+  #RENREN_APPID:         "245119"
+  #RENREN_APPKEY:        "18a6f6d8cf074f139f27a105b4659493"
+  #RENREN_APPSECRET:     "981bbaeca7ab48228242542f072984f4"
 

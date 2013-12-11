@@ -6,7 +6,6 @@ class CreateProjectBasicInfos < ActiveRecord::Migration
       t.string    :slogan
       t.integer   :amount
       t.integer   :duration_days
-      t.datetime  :published_time
       t.integer   :raise_type
       t.integer   :project_id
 

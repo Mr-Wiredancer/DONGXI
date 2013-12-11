@@ -1,0 +1,10 @@
+<div>
+	<% @comments.each do |comment| %>
+		<div>
+			<span>用户：<%= comment.author_name %></span>
+			<span>评论内容：<%= comment.body %></span>
+			<span>评论的项目：<%= comment.try(:project).try(:name) %></span>
+		</div>
+		<div><%= link_to "删除评论", cpanel_comment_path(comment), method: :delete, confirm: "确定删除评论?" %></div>
+	<% end %>	
+</div>

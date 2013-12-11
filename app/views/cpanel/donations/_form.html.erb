@@ -1,0 +1,25 @@
+<div class="dx-container">
+  <%= form_for [:cpanel, @donation] do |f| %>
+    <%= render "common/error_messages", target: @donation %>
+    <div>
+      <%= f.label :trade_no %>
+      <%= f.text_field :trade_no %>
+    </div>
+    <div>
+      <%= f.label :amount %>
+      <%= f.text_field :amount %>
+    </div>
+    <div>
+      <%= f.label :project_id %>
+      <%= f.select :project_id, Project.all.collect { |p| [ p.name, p.id ] } %>
+    </div>
+    <div>
+      <%= f.label :user_id %>
+      <%= f.select :user_id, User.all.collect { |u| [ u.name, u.id ] } %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "保存" %>
+    </div>
+  <% end %>
+</div>

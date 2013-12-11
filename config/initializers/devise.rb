@@ -232,6 +232,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :weibo, ENV["WEIBO_APPKEY"], ENV["WEIBO_APPSECRET"]
+  config.omniauth :renren, ENV["RENREN_APPKEY"], ENV["RENREN_APPSECRET"]
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
