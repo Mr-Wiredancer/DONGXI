@@ -1,11 +1,11 @@
 working_directory "<%= current_path %>"
 pid "<%= unicorn_pid %>"
-stderr_path "<%= pid_dir %>/unicorn.stderr.log"
-stdout_path "<%= pid_dir %>/unicorn.stdout.log"
+stderr_path "<%= log_dir %>/unicorn.stderr.log"
+stdout_path "<%= log_dir %>/unicorn.stdout.log"
 
 listen "/tmp/unicorn.<%= application %>.sock", :backlog => 64
 worker_processes <%= unicorn_workers %>
-listen 8080, :tcp_nopush => true
+listen <%= unicorn_port %>, :tcp_nopush => true
 timeout 30
 
 preload_app true

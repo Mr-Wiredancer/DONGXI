@@ -13,6 +13,7 @@ set :user, "deployer"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
+set :nginx_port, 80 # default port for nginx is 80.
 
 set :scm, :git
 set :repository,  "git@github.com:Mr-Wiredancer/DONGXI.git"
@@ -51,13 +52,6 @@ namespace :deploy do
     run "ln -s #{shared_path}/content #{release_path}/public/content"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
-
-  task :mkdir_dot_test, roles: :app do
-    run "mkdir -p /home/#{user}/.test"
-    run "mkdir -p /home/#{user}/.test/pids"
-    run "mkdir -p /home/#{user}/.test/log"
-  end
-  after "deploy:finalize_update", "deploy:mkdir_dot_test"
 
 end
 

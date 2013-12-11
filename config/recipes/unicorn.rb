@@ -2,6 +2,7 @@ set_default(:unicorn_user) { user }
 set_default(:unicorn_pid) { "#{pid_dir}/unicorn.pid" }
 set_default(:unicorn_config) { "#{shared_path}/config/unicorn.rb" }
 set_default(:unicorn_workers, 1)
+set_default(:unicorn_port, 8000)
 
 namespace :unicorn do
   desc "Setup Unicorn initializer and app configuration"

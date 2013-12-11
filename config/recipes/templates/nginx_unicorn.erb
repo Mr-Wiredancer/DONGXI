@@ -1,9 +1,9 @@
-upstream unicorn {
+upstream <%= application %>_server {
   server unix:/tmp/unicorn.<%= application %>.sock fail_timeout=0;
 }
 
 server {
-  listen 80 default deferred;
+  listen <%= nginx_port %> default deferred;
   # server_name example.com;
   root <%= current_path %>/public;
 
@@ -26,10 +26,16 @@ server {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header Host $http_host;
     proxy_redirect off;
-    proxy_pass http://unicorn;
+    proxy_pass http://<%= application %>_server;
   }
 
   error_page 500 502 503 504 /500.html;
+  location = /500.html {
+    #########################################################
+    # This should go to the public folder of your rails app #
+    #########################################################
+    root <%= current_path %>/public;
+  }
   client_max_body_size 4G;
   keepalive_timeout 10;
 }

@@ -9,7 +9,8 @@ namespace :nginx do
 
   task :setup, roles: :web do
     template "nginx_unicorn.erb", "#{shared_path}/system/nginx_unicorn_conf"
-    sudo "mv #{shared_path}/system/nginx_unicorn_conf /etc/nginx/sites-enabled/#{application}"
+    sudo "mv #{shared_path}/system/nginx_unicorn_conf /etc/nginx/sites-available/#{application}"
+    sudo "ln -nfs /etc/nginx/sites-available/#{application} /etc/nginx/sites-enabled/#{application}"
 
     sudo "rm -f /etc/nginx/sites-enabled/default"
 
