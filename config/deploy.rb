@@ -7,6 +7,7 @@ load "config/recipes/nginx"
 load "config/recipes/unicorn"
 load "config/recipes/postgresql"
 load "config/recipes/database"
+load "config/recipes/monit"
 
 set :application, "website"
 set :user, "deployer"
@@ -56,3 +57,4 @@ namespace :deploy do
 end
 
 server "115.29.192.209", :web, :app, :db, primary: true
+server "192.168.1.99", :web, :app, :db, primary: true

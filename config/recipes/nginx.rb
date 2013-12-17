@@ -13,6 +13,7 @@ namespace :nginx do
     sudo "ln -nfs /etc/nginx/sites-available/#{application} /etc/nginx/sites-enabled/#{application}"
 
     sudo "rm -f /etc/nginx/sites-enabled/default"
+    sudo "rm -f /etc/nginx/sites-available/default"
 
     restart
   end

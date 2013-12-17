@@ -2,6 +2,7 @@ set_default(:postgresql_host, "127.0.0.1")
 set_default(:postgresql_user) { Capistrano::CLI.ui.ask("PostgreSQL User: ") }
 set_default(:postgresql_password) { Capistrano::CLI.password_prompt "PostgreSQL Password: " }
 set_default(:postgresql_database) { "#{application}_production" }
+set_default(:postgresql_pid) { "/var/run/postgresql/9.2-main.pid" }
 
 namespace :postgresql do
   desc "Install the latest stable release of PostgreSQL."
